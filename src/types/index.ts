@@ -1,41 +1,15 @@
-export interface TypographyProps {
-  children?: JSX.Element | string;
-  variant?:
-    | "h2"
-    | "h3"
-    | "h5"
-    | "h6"
-    | "body"
-    | "body_2"
-    | "caption"
-    | "label"
-    | "header"
-    | "subheader";
-  textStyle?: string;
-  color?: string;
-}
-
-export interface AnalyticsDataTypes {
-  dateRange: null | string;
-  data: {
-    name: string;
-    uv: number;
-  }[];
-  bgColor: string;
-  textColor: string;
-}
-
-export interface PartyInfoTypes {
-  title?: string;
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export interface InputProps {
   name: string;
-  phone_number: string;
-  whatsapp_number: string;
-  email: string;
   type: string;
-  address: string;
-  id?: any;
+  placeholder: string;
+  register?: any;
+  error?: any;
 }
 
+export interface SubmitButtonProps {
+  onClick: () => void;
+}
 export interface ButtonPropertyTypes {
   onClick?: any;
   bgColor?: string;
@@ -47,4 +21,19 @@ export interface ButtonPropertyTypes {
   iconClassName?: string;
   type?: any;
   isLoading?: boolean;
+}
+export interface UserPayload {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  whatsapp_number: string;
+  email_verified_at: string;
+  scn: string;
+  profile_photo: null | string;
+  token: string;
+  call_to_bar_certificate: string;
+  gender: string;
+  stamp_photo: null | string;
 }

@@ -6,7 +6,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { taskReducer } from "./slices/taskSlice";
+import { authReducer } from "./slices/authReducer";
 
 const persistConfig = {
   key: "root",
@@ -15,14 +15,15 @@ const persistConfig = {
 };
 
 const appReducer = combineReducers({
-  tasksmaster: taskReducer,
+  // all reducers here
+  auths: authReducer,
 });
 
 const persistedAuthReducer = persistReducer(persistConfig, appReducer);
 const rootReducer: Reducer = (state, action) => {
   if (action.type === "auths/reset") {
     storage.removeItem("persist:root");
-
+    // storage.removeItem("persist:message");
     state = {};
   }
   return persistedAuthReducer(state, action);
@@ -31,7 +32,6 @@ const rootReducer: Reducer = (state, action) => {
 export const Store = configureStore({
   reducer: rootReducer,
 });
-
 setupListeners(Store.dispatch);
 export const persistor = persistStore(Store);
 
