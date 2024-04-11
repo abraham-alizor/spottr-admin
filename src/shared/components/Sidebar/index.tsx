@@ -31,12 +31,13 @@ interface SidebarProps {
 }
 
 const Sidebar = (props: SidebarProps) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const Menus = [
     { title: "Dashboard", src: DASHBOARD_WHITE, path: "/dashboard" },
     { title: "Opportunities", src: OPPORTUNITY, path: "/opportunities" },
     { title: "Categories", src: CATEGORIES, path: "/categories" },
     { title: "Transactions", src: TRANSACTIONS, path: "/transactions" },
+    { title: "Performance", src: TRANSACTIONS, path: "/performance" },
     { title: "Tasks", src: TASK, path: "/tasks" },
     { title: "Ad sections", src: AD_SECTIONS, path: "/ad-sections" },
     { title: "Loans", src: LOANS, path: "/loans" },

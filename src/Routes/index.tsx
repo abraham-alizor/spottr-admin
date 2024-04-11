@@ -8,6 +8,7 @@ import Dashboard from "@/features/Dashboard";
 import Help from "@/features/Help";
 import Loans from "@/features/Loans";
 import Opportunities from "@/features/Opportunities";
+import PerformancePage from "@/features/Performance";
 import Settings from "@/features/Settings";
 import Tasks from "@/features/tasks";
 import Transactions from "@/features/Transactions";
@@ -27,6 +28,7 @@ function MainRoutes() {
     { title: "Users", path: "users", component: Users },
     { title: "Help", path: "help", component: Help },
     { title: "Settings", path: "settings", component: Settings },
+    { title: "performance", path: "performance", component: PerformancePage },
   ];
   return (
     <div>

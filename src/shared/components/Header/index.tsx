@@ -1,32 +1,104 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/alt-text */
+import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { BiSearch } from "react-icons/bi";
+import { BsEnvelopeFill } from "react-icons/bs";
+import { FaBell } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 
-import { LOGO } from "@/utils/Exports";
+import { MenuDropdown } from "@/shared/components/dropdown/MenuDropDown";
 
 interface HeaderTypes {
   onMenu?: () => void;
 }
 
 function Header(props: HeaderTypes) {
+  const location = useLocation();
+  const [search, setSearch] = useState("");
+
   return (
-    <div>
-      <div className='flex h-16 w-full flex-row items-center justify-between  border-b border-b-[#E4E7EC] bg-white px-4 lg:h-12 lg:px-8 lg:py-8'>
+    <div className='w-full pt-6 bg-white px-4 12 lg:px-8 '>
+      <div>
+        <div className='w-full flex justify-between items-start'>
+          <div className='flex justify-start gap-10'>
+            <div>
+              <p className='text-brand text-2xl font-semibold'>
+                Dashboard Overview
+              </p>
+              <p className='text-gray-500 text-xs'> Welcome Admin</p>
+            </div>
+            <form>
+              <div className='relative w-60'>
+                <div className='pointer-events-none absolute inset-y-0 right-2 flex items-center pl-3'>
+                  <BiSearch className='text-brand' />
+                </div>
+                <input
+                  className='block h-[44px] w-full rounded-lg border border-[#E1EFFB] bg-white  p-4 pl-10 text-sm text-gray-900 focus:outline-none'
+                  id='default-search'
+                  onChange={(event) => setSearch(event.target.value)}
+                  placeholder='Type a keyword'
+                  required
+                  type='search'
+                  value={search}
+                />
+              </div>
+            </form>
+          </div>
+
+          <div className='flex justify-end items-center gap-4'>
+            <FaBell className='text-2xl text-brand' />
+            <BsEnvelopeFill className='text-2xl text-brand' />
+            <MenuDropdown />
+          </div>
+        </div>
+
         <div className=''>
           <AiOutlineMenu
             className='h-10 text-4xl lg:hidden'
             onClick={props.onMenu}
           />
         </div>
-        <div className='mx-auto flex items-center lg:hidden '>
-          <Link className='flex' to='/'>
-            <img
-              alt=''
-              className='ml-2 cursor-pointer duration-500 rotate-[360deg]'
-              src={LOGO}
-            />
-            <p className='text-brand font-bold'>Spottr</p>
+      </div>
+      <div className='hidden h-16 items-center justify-between  border-b border-b-[#C2E0FF]   px-8 lg:flex'>
+        <div className='flex flex-row items-center gap-4 border-b'>
+          <Link
+            className={`cursor-pointer px-3 py-5 text-base ${location.pathname === "/home" ? "text-brand border-b-2 border-b-brand " : "text-gray-500"}`}
+            to='/home'
+            type='button'
+          >
+            Home
           </Link>
+
+          <Link
+            className={`cursor-pointer px-3 py-5 text-base ${location.pathname === "/userslist" ? "text-brand border-b-2 border-b-brand" : "text-gray-500 "}`}
+            to='/userslist'
+            type='button'
+          >
+            Users List
+          </Link>
+
+          <Link
+            className={`cursor-pointer px-3 py-5 text-base ${location.pathname === "/content-management" ? "text-brand border-b-2 border-b-brand" : "text-gray-500"}`}
+            to='/content-management'
+            type='button'
+          >
+            Content Management
+          </Link>
+
+          <Link
+            className={`cursor-pointer px-3 py-5 text-base ${location.pathname === "/referrals-system" ? "text-brand border-b-2 border-b-brand" : "text-gray-500"}`}
+            to='/referrals-system'
+            type='button'
+          >
+            Referrals System
+          </Link>
+        </div>
+
+        <div className='flex justify-end gap-10'>
+          <a className='text-sm font-bold text-brand'>+ Create task</a>
+          <a className='text-sm font-bold text-brand '>+ add new categories</a>
         </div>
       </div>
     </div>

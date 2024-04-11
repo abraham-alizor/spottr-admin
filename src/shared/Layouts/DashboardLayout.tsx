@@ -38,11 +38,11 @@ export default function DashboardLayout({
       <Sidebar
         {...{ open: isSideNavVisible, onClose: () => setSideNavVisible(false) }}
       />
-      <div className='flex-1 lg:w-[80%]'>
+      <div className='flex-1 lg:w-[80%] bg-[#fbfcfe]'>
         <div className=''>
           <Header onMenu={() => setSideNavVisible(true)} />
         </div>
-        <div className='[@media(max-width:767px)]:scrollbar-hide h-screen overflow-auto bg-[#f9fafb] lg:pb-20'>
+        <div className='[@media(max-width:767px)]:scrollbar-hide h-screen overflow-auto bg-[#fbfcfe] lg:pb-20'>
           {children}
         </div>
       </div>

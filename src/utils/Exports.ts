@@ -1,8 +1,11 @@
 export { default as AD_SECTIONS } from "../assets/icons/adsections.svg";
+export { default as AVATAR } from "../assets/icons/avatar.svg";
 export { default as AWARD } from "../assets/icons/award.svg";
+export { default as BADGE } from "../assets/icons/badge.svg";
 export { default as BAR } from "../assets/icons/bar.svg";
 export { default as BELL } from "../assets/icons/bell.svg";
 export { default as CATEGORIES } from "../assets/icons/categories.svg";
+export { default as COUNT } from "../assets/icons/count.svg";
 export { default as DASHBOARD_WHITE } from "../assets/icons/dasboard-white.svg";
 export { default as FACEBOOK } from "../assets/icons/FACEBOOK.svg";
 export { default as GOOGLE } from "../assets/icons/google.svg";
