@@ -61,6 +61,7 @@ function Header(props: HeaderTypes) {
           />
         </div>
       </div>
+
       <div className='hidden h-16 items-center justify-between  border-b border-b-[#C2E0FF]   px-8 lg:flex'>
         <div className='flex flex-row items-center gap-4 border-b'>
           <Link

@@ -13,6 +13,7 @@ import Settings from "@/features/Settings";
 import Tasks from "@/features/tasks";
 import Transactions from "@/features/Transactions";
 import Users from "@/features/Users";
+import CreateTask from "@/pages/createtask";
 
 import DashboardLayout from "../shared/Layouts/DashboardLayout";
 
@@ -29,6 +30,7 @@ function MainRoutes() {
     { title: "Help", path: "help", component: Help },
     { title: "Settings", path: "settings", component: Settings },
     { title: "performance", path: "performance", component: PerformancePage },
+    { title: "create-task", path: "/tasks/create-task", component: CreateTask },
   ];
   return (
     <div>
