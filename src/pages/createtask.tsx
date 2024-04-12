@@ -37,7 +37,7 @@ const CreateTask = () => {
               </div>
               <div className='absolute right-3 -top-3 flex flex-col justify-center items-center'>
                 <img
-                  alt=''
+                  alt='task'
                   className='rounded-full border-4 border-[#C2E0FF]'
                   height={50}
                   src={TASK_IMAGE}
