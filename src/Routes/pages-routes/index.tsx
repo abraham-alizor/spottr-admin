@@ -1,4 +1,4 @@
-import CreateTask from "@/pages/createtask";
+import CreateTask from "@/features/tasks/createtask";
 
 export const pageRoutes = [
   {

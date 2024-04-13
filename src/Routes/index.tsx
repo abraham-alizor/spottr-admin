@@ -11,9 +11,9 @@ import Opportunities from "@/features/Opportunities";
 import PerformancePage from "@/features/Performance";
 import Settings from "@/features/Settings";
 import Tasks from "@/features/tasks";
+import CreateTask from "@/features/tasks/createtask";
 import Transactions from "@/features/Transactions";
 import Users from "@/features/Users";
-import CreateTask from "@/pages/createtask";
 
 import DashboardLayout from "../shared/Layouts/DashboardLayout";
 
