@@ -1,13 +1,19 @@
+/* eslint-disable unicorn/prevent-abbreviations */
+/* eslint-disable unicorn/prefer-ternary */
+/* eslint-disable no-else-return */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable no-self-compare */
 /* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable consistent-return */
 import React, { useState } from "react";
-import { FaCheckCircle, FaPlus, FaTimes } from "react-icons/fa";
+import { FaCheckCircle, FaPlus, FaTimes, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import { template, users_tasks } from "@/fake_data";
 import ButtonV2 from "@/shared/components/buttonV2";
+import DeleteModal from "@/shared/components/deletemodal";
 import Modal from "@/shared/components/Modal";
 import PageHeader from "@/shared/components/pageheader";
 import TaskComponent from "@/shared/components/taskcomponent";
@@ -41,11 +47,15 @@ const navLinks = [
 
 function Tasks() {
   const navigate = useNavigate();
+  const [taskData, setTaskData] = useState(users_tasks);
   const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
   const [selectedStatus, setSelectedStatus] = useState<string>("new");
+  const [selectorBox, setSelectorkBox] = useState(false);
+  const [selectedBoxes, setSelectedBoxes] = useState<any>([]);
   const [modal, setModal] = useState(false);
-  const filteredTasks = users_tasks.filter((data) =>
-    selectedStatus === "all" ? true : data.status === selectedStatus,
+  const [deleteModal, setDeleteModal] = useState(false);
+  const filteredTasks = taskData.filter(
+    (data) => data.status === selectedStatus,
   );
   const statusUpdate = users_tasks.find((data) => data.status);
   const handleStatusChange = (status: string) => {
@@ -56,6 +66,25 @@ function Tasks() {
     if (selectedTemplate) {
       navigate("/tasks/create-task");
     } else return null;
+  };
+
+  const handleSelector = (id: any) => {
+    setSelectedBoxes((prevSelectedBox: any[]) => {
+      if (prevSelectedBox.includes(id)) {
+        return prevSelectedBox.filter((box_id: any) => box_id !== id);
+      } else {
+        return [...prevSelectedBox, id];
+      }
+    });
+  };
+
+  const handleDeleteTasks = () => {
+    const updatedData = taskData.filter(
+      (task) => !selectedBoxes.includes(task.id),
+    );
+    setTaskData(updatedData);
+    setSelectedBoxes([]);
+    setDeleteModal(false);
   };
 
   return (
@@ -150,25 +179,55 @@ function Tasks() {
           {/* {selectedStatus} */}
         </div>
         <div className='flex gap-10 items-center'>
-          <ButtonV2
-            btnStyle='flex gap-6 items-center border border-[#3670D4] border-opacity-15 rounded-lg py-3 px-5'
-            handleClick={() => setModal(true)}
-            icon={<FaPlus />}
-            iconStyle='text-xs text-[#3670D4]'
-            textStyle='text-sm text-[#3670D4]'
-            title='Create a new task'
-          />
-          <ButtonV2
-            btnStyle='flex gap-6 items-center w-[13vw] border border-[#FF4B3E] border-opacity-15 rounded-lg py-3 px-5'
-            handleClick={() => setModal(true)}
-            icon={<FaTimes />}
-            iconStyle='text-xs text-[#FF4B3E]'
-            textStyle='text-sm text-[#FF4B3E]'
-            title='Delete Task'
-          />
+          {selectorBox ? (
+            <>
+              <ButtonV2
+                btnStyle='flex gap-6 items-center border border-[#FF4B3E]  border-opacity-15 rounded-lg py-3 px-5'
+                handleClick={() => setSelectorkBox(false)}
+                icon={<FaTimes />}
+                iconStyle='text-xs  text-[#FF4B3E] ml-7'
+                textStyle='text-sm text-[#FF4B3E]'
+                title='Cancel'
+              />
+              <ButtonV2
+                btnStyle='flex gap-6 items-center w-[13vw] border border-[#FF4B3E] border-opacity-15 rounded-lg py-3 px-5'
+                handleClick={() => setDeleteModal(true)}
+                icon={<FaTrash />}
+                iconStyle='text-xs text-[#FF4B3E] '
+                textStyle='text-sm text-[#FF4B3E]'
+                title='Delete selected'
+              />
+            </>
+          ) : (
+            <>
+              <ButtonV2
+                btnStyle='flex gap-6 items-center border border-[#3670D4] border-opacity-15 rounded-lg py-3 px-5'
+                handleClick={() => setModal(true)}
+                icon={<FaPlus />}
+                iconStyle='text-xs text-[#3670D4]'
+                textStyle='text-sm text-[#3670D4]'
+                title='Create a new task'
+              />
+              <ButtonV2
+                btnStyle='flex gap-6 items-center w-[13vw] border border-[#FF4B3E] border-opacity-15 rounded-lg py-3 px-5'
+                handleClick={() => setSelectorkBox(true)}
+                icon={<FaTimes />}
+                iconStyle='text-xs text-[#FF4B3E] ml-7'
+                textStyle='text-sm text-[#FF4B3E]'
+                title='Delete Task'
+              />
+            </>
+          )}
         </div>
       </div>
-      <TaskComponent selectedStatus={selectedStatus} taskData={filteredTasks} />
+      <TaskComponent
+        handleSelector={handleSelector}
+        selectedBox={selectedBoxes}
+        selectedStatus={selectedStatus}
+        selectorBox={selectorBox}
+        setSelectedBox={setSelectedBoxes}
+        taskData={filteredTasks}
+      />
       <Modal
         closeBtnColor=''
         isBTnTrue
@@ -236,6 +295,11 @@ function Tasks() {
           />
         </div>
       </Modal>
+      <DeleteModal
+        close={() => setDeleteModal(false)}
+        handleDelete={handleDeleteTasks}
+        open={deleteModal}
+      />
     </main>
   );
 }

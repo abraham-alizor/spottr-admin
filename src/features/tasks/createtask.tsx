@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 
 import ButtonV2 from "@/shared/components/buttonV2";
+// import DeleteModal from "@/shared/components/deletemodal";
 import ModalV2 from "@/shared/components/modalV2";
 import PageHeader from "@/shared/components/pageheader";
 import SuccessModal from "@/shared/components/sucessmodal";
@@ -20,6 +21,7 @@ import {
 const CreateTask = () => {
   const [modal, setModal] = useState(false);
   const [sucess, setSucess] = useState(true);
+
   return (
     <main className='mx-6 mt-5 mb-64'>
       <PageHeader title='Tasks' />
