@@ -24,7 +24,7 @@ const CreateTask = () => {
 
   return (
     <main className='mx-6 mt-5 mb-64'>
-      <PageHeader title='Tasks' />
+      <PageHeader title='Tasks' route='/tasks' />
       <div className='flex gap-5  mt-5'>
         <div className='relative max-w-[350px] h-full'>
           <img alt='' height={350} src={MAP_PIC} width={350} />

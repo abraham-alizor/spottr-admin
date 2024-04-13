@@ -456,3 +456,62 @@ export const template = [
     location: "Lagos, Nigeria",
   },
 ];
+
+export const adsData = [
+  {
+    title: "Map Takeover",
+    img: TASK_IMAGE,
+    pricetag: "N30,000",
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    img: TASK_IMAGE,
+    pricetag: "N30,000",
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    img: TASK_IMAGE,
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    img: TASK_IMAGE,
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    img: TASK_IMAGE,
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    days: "2 days",
+    img: TASK_IMAGE,
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    img: TASK_IMAGE,
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    img: TASK_IMAGE,
+    days: "2 days",
+    time: "48 hours",
+  },
+];

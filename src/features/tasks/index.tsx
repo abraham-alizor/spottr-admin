@@ -90,7 +90,7 @@ function Tasks() {
   return (
     <main className='mx-10 my-5'>
       <div className='flex justify-between items-center'>
-        <PageHeader title='Tasks' />
+        <PageHeader route='/dashboard' title='Tasks' />
 
         <div className='flex gap-6'>
           <input
