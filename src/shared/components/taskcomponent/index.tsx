@@ -1,9 +1,13 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-nested-ternary */
 import React from "react";
+import { FaCheck } from "react-icons/fa";
 
 import { COIN, GRAY_DOT, SLOT_ICON } from "@/utils/Exports";
 
 interface TaskData {
+  id: string | number;
   title: string;
   img: string;
   price_tag: string;
@@ -16,11 +20,22 @@ interface TaskData {
 interface Props {
   taskData: any;
   selectedStatus: string;
+  selectorBox: boolean;
+  selectedBox: any;
+  setSelectedBox: (id: any) => void;
+  handleSelector: (id: any) => void;
 }
-const TaskComponent = ({ taskData, selectedStatus }: Props) => (
-  <main className='grid grid-cols-3 gap-5 mt-5'>
+const TaskComponent = ({
+  taskData,
+  selectedStatus,
+  handleSelector,
+  selectorBox,
+  selectedBox,
+  setSelectedBox,
+}: Props) => (
+  <main className='grid grid-cols-3 gap-5 mt-5 '>
     {taskData.map((data: TaskData) => (
-      <div className='bg-white border-2 rounded-lg' key={data.status}>
+      <div className='bg-white border-2 rounded-lg relative' key={data.status}>
         <div className='flex flex-col gap-3 py-3 px-3'>
           <div className='flex gap-4 border-b-2 pb-1'>
             <div>
@@ -33,6 +48,18 @@ const TaskComponent = ({ taskData, selectedStatus }: Props) => (
                   {data.price_tag}
                 </span>
               </div>
+              {selectorBox && (
+                <div
+                  className='w-5 h-5 rounded-md flex justify-center items-center  border-2 border-darkblue absolute right-0 top-0 cursor-pointer'
+                  onClick={() => handleSelector(data.id)}
+                >
+                  {selectedBox.includes(data.id) ? (
+                    <span className='text-darkblue text-sm z-30'>
+                      <FaCheck />
+                    </span>
+                  ) : null}
+                </div>
+              )}
               <div className='flex justify-between '>
                 <div className='flex gap-3 items-center'>
                   <span className='text-[12px] text-lightgrey'>Coin Eqv:</span>

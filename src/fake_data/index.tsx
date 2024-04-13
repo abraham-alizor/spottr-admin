@@ -3,6 +3,7 @@ import { TASK_IMAGE } from "@/utils/Exports";
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const users_tasks = [
   {
+    id: 1,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -13,6 +14,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 2,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -23,6 +25,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 3,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -33,6 +36,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 4,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -43,6 +47,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 5,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -53,6 +58,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 6,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -63,6 +69,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 7,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -73,6 +80,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 8,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -83,6 +91,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 9,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -93,6 +102,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 10,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -103,6 +113,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 11,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -113,6 +124,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 12,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -123,6 +135,7 @@ export const users_tasks = [
     status: "new",
   },
   {
+    id: 13,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -133,6 +146,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 14,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -143,6 +157,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 15,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -153,6 +168,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 16,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -163,6 +179,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 17,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -173,6 +190,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 18,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -183,6 +201,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 19,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -193,6 +212,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 20,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -203,6 +223,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 21,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -213,6 +234,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 22,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -223,6 +245,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 23,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -233,6 +256,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 24,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -243,6 +267,7 @@ export const users_tasks = [
     status: "active",
   },
   {
+    id: 25,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -253,6 +278,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 26,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -263,6 +289,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 27,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -273,6 +300,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 28,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -283,6 +311,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 29,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -293,6 +322,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 30,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -303,6 +333,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 31,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -313,6 +344,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 32,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -323,6 +355,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 33,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -333,6 +366,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 34,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -343,6 +377,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 35,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -353,6 +388,7 @@ export const users_tasks = [
     status: "completed",
   },
   {
+    id: 36,
     title: "Multi-Colored Children’s Sportwear",
     img: TASK_IMAGE,
     price_tag: "N4,800,000",
@@ -418,5 +454,64 @@ export const template = [
     service: "Food Services",
     company: "Coker & Sons Ltd.",
     location: "Lagos, Nigeria",
+  },
+];
+
+export const adsData = [
+  {
+    title: "Map Takeover",
+    img: TASK_IMAGE,
+    pricetag: "N30,000",
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    img: TASK_IMAGE,
+    pricetag: "N30,000",
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    img: TASK_IMAGE,
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    img: TASK_IMAGE,
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    img: TASK_IMAGE,
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    days: "2 days",
+    img: TASK_IMAGE,
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    img: TASK_IMAGE,
+    days: "2 days",
+    time: "48 hours",
+  },
+  {
+    title: "Map Takeover",
+    pricetag: "N30,000",
+    img: TASK_IMAGE,
+    days: "2 days",
+    time: "48 hours",
   },
 ];

@@ -38,4 +38,7 @@ export { default as TASK } from "../assets/icons/task.svg";
 export { default as TASK_IMAGE } from "../assets/icons/task_inage.svg";
 export { default as TRANSACTIONS } from "../assets/icons/transactions.svg";
 export { default as USERS } from "../assets/icons/users.svg";
+export { default as WALLET_2 } from "../assets/icons/wallet _2.svg";
+export { default as WALLET_1 } from "../assets/icons/wallet_1.svg";
+export { default as WALLET_3 } from "../assets/icons/wallet_3.svg";
 export { default as USER_THREE } from "../assets/icons/yellow_img.svg";
