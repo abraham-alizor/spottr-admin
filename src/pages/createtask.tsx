@@ -20,6 +20,7 @@ import {
 const CreateTask = () => {
   const [modal, setModal] = useState(false);
   const [sucess, setSucess] = useState(true);
+
   return (
     <main className='mx-6 mt-5 mb-64'>
       <PageHeader title='Tasks' />
