@@ -41,7 +41,6 @@ const TaskComponent = ({
         <div
           className='bg-white border-2 rounded-lg relative hover:cursor-pointer'
           key={data.status}
-          onClick={() => navigate(`/tasks/task-review/${data.id}`)}
         >
           <div className='flex flex-col gap-3 py-3 px-3'>
             <div className='flex gap-4 border-b-2 pb-1'>
@@ -77,7 +76,10 @@ const TaskComponent = ({
                       <span className='text-[12px] text-lightgrey'>150</span>
                     </div>
                   </div>
-                  <span className='text-[12px] text-lightgrey'>
+                  <span
+                    className='text-[12px] text-lightgrey'
+                    onClick={() => navigate(`/tasks/task-review/${data.id}`)}
+                  >
                     Hold for more option
                   </span>
                 </div>
