@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        custom: "0px 3px 5px rgba(0, 0, 0, 0.15)",
+        custom: "0px 0px 4px 0px rgba(0, 0, 0, 0.12);",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -14,6 +14,7 @@ module.exports = {
       colors: {
         brand: "#274B89",
         "brand-light": "#edf3fb",
+        branded: "#FF4B3E",
         GRAY: "#929AA7",
         darkblue: "#274B89",
         lightgrey: "#929AA7",
