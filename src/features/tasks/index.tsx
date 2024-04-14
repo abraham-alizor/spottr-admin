@@ -95,7 +95,7 @@ function Tasks() {
       <div className='flex justify-between items-center'>
         <PageHeader route='/dashboard' title='Tasks' />
 
-        <SearchFilterComponent />
+        <SearchFilterComponent title='product' />
       </div>
       <div className='flex gap-5 relative'>
         <div className='flex flex-col items-center gap-2'>

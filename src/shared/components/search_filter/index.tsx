@@ -2,11 +2,11 @@ import React from "react";
 
 import { ARROW_DOWN } from "@/utils/Exports";
 
-const SearchFilterComponent = () => (
+const SearchFilterComponent = ({ title }: { title: string }) => (
   <div className='flex gap-6'>
     <input
       className='w-[433px] bg-[#C4C4C4] bg-opacity-15 placeholder:text-[#929AA7] py-3 px-3 outline-none'
-      placeholder='Search task'
+      placeholder={`Search ${title}`}
       type='search'
     />
     <div className='flex gap-4 items-center'>

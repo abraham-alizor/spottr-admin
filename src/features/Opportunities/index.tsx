@@ -106,7 +106,7 @@ function Opportunities() {
     <main className='mx-8 mt-6 relative'>
       <div className='flex justify-between items-center'>
         <PageHeader route='/dashboard' title='Opportunities' />
-        <SearchFilterComponent />
+        <SearchFilterComponent title='task' />
       </div>
       <div className='mt-24 relative flex justify-between items-center'>
         <SubNav
