@@ -190,6 +190,7 @@ const CreateTask = () => {
         isClose={() => setModal(false)}
         isOpen={modal}
         maxWidth='w-[330px]'
+        edges='rounded-md'
       >
         <div className='flex flex-col gap-5'>
           <span className='text-xl text-darkblue  '>Post Task Now?</span>

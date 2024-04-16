@@ -7,10 +7,11 @@ type ModalProps = {
   // state modal params types
   isOpen: boolean;
   isClose: () => void;
-  closeBtnColor: string;
+
   children: React.ReactNode;
   maxWidth: string;
   isBTnTrue?: boolean;
+  edges: string;
 };
 
 // Modal component reusable in all component
@@ -18,7 +19,7 @@ const Modal = ({
   isOpen,
   isClose,
   children,
-  closeBtnColor,
+  edges,
   maxWidth,
   isBTnTrue,
 }: ModalProps) => (
@@ -47,11 +48,11 @@ const Modal = ({
             leaveTo='translate-y-full'
           >
             <Dialog.Panel
-              className={` ${maxWidth} transform overflow-hidden rounded-md text-center bg-white dark:bg-bg_black lg:p-6 p-3 align-middle shadow-xl transition-all h-full`}
+              className={` ${maxWidth} transform overflow-hidden ${edges} text-center bg-white dark:bg-bg_black lg:p-6 p-3 align-middle shadow-xl transition-all h-full`}
             >
               {isBTnTrue === true ? (
                 <button
-                  className={`flex items-center justify-center float-end bg-darkblue text-white w-7 h-7 rounded-full ${closeBtnColor} hover:scale-90 transition-all `}
+                  className={`flex items-center justify-center float-end bg-darkblue text-white w-7 h-7 rounded-full hover:scale-90 transition-all `}
                   onClick={isClose}
                   type='button'
                 >

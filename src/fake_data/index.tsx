@@ -750,3 +750,147 @@ export const AdsTemplate = [
     location: "Lagos, Nigeria",
   },
 ];
+
+export const TransactionChartData = {
+  "Last 30 days": [
+    {
+      name: "Jan",
+      uv: 4000,
+      pv: 4300,
+    },
+    {
+      name: "Feb",
+      uv: 3000,
+      pv: 4300,
+    },
+    {
+      name: "Mar",
+      uv: 2000,
+      pv: 4300,
+    },
+    {
+      name: "Apr",
+      uv: 2780,
+      pv: 4300,
+    },
+    {
+      name: "May",
+      uv: 1890,
+      pv: 4300,
+    },
+    {
+      name: "Jun",
+      uv: 2390,
+      pv: 4300,
+    },
+    {
+      name: "Jul",
+      uv: 3490,
+      pv: 4300,
+    },
+    {
+      name: "Aug",
+      uv: 3490,
+      pv: 4300,
+    },
+    {
+      name: "Sep",
+      uv: 3490,
+      pv: 4300,
+    },
+    {
+      name: "Oct",
+      uv: 3490,
+      pv: 4300,
+    },
+    {
+      name: "Nov",
+      uv: 3490,
+      pv: 4300,
+    },
+    {
+      name: "Dec",
+      uv: 3490,
+      pv: 4300,
+    },
+  ],
+  "Last 7 days": [
+    {
+      name: "Mon",
+      uv: 700,
+      pv: 250,
+    },
+    {
+      name: "Tue",
+      uv: 300,
+      pv: 250,
+    },
+    {
+      name: "Wed",
+      uv: 200,
+      pv: 250,
+    },
+    {
+      name: "Thu",
+      uv: 278,
+      pv: 250,
+    },
+    {
+      name: "Fri",
+      uv: 180,
+      pv: 100,
+    },
+    {
+      name: "Sat",
+      uv: 290,
+      pv: 100,
+    },
+    {
+      name: "Sun",
+      uv: 500,
+      pv: 300,
+    },
+  ],
+  Today: [
+    {
+      name: new Date(),
+      uv: 700,
+      pv: 250,
+    },
+  ],
+};
+
+export const deposit = [
+  {
+    amount: "500",
+    date: "12/03/20",
+  },
+  {
+    amount: "500",
+    date: "12/03/20",
+  },
+  {
+    amount: "500",
+    date: "12/03/20",
+  },
+  {
+    amount: "500",
+    date: "12/03/20",
+  },
+  {
+    amount: "500",
+    date: "12/03/20",
+  },
+  {
+    amount: "500",
+    date: "12/03/20",
+  },
+  {
+    amount: "500",
+    date: "12/03/20",
+  },
+  {
+    amount: "500",
+    date: "12/03/20",
+  },
+];

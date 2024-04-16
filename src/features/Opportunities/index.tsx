@@ -10,10 +10,10 @@ import { FaCheckCircle, FaTimes } from "react-icons/fa";
 import { AdsTemplate } from "@/fake_data";
 import ActionModal from "@/shared/components/actionmodal";
 import ButtonV2 from "@/shared/components/buttonV2";
-import PageHeader from "@/shared/components/pageheader";
+import DropDownV2 from "@/shared/components/drop-down-2";
 import ProductComponent from "@/shared/components/product-component";
-import SearchFilterComponent from "@/shared/components/search_filter";
 import SubNav from "@/shared/components/sub_nav";
+import SubHeaders from "@/shared/components/subheaders";
 import { ARROW_DOWN } from "@/utils/Exports";
 
 const navLinks = [
@@ -94,21 +94,24 @@ function Opportunities() {
       setSelectorBox(false);
       setAction(false);
       setDropDown(false);
-    } else if (selectedAction === "Decline Ads") {
+    } else if (selectedAction === "Decline ads") {
       performActions();
       setStatusUpdate("decline");
       setSelectorBox(false);
       setAction(false);
       setDropDown(false);
+    } else {
+      return null;
     }
   };
   return (
     <main className='mx-8 mt-6 relative'>
-      <div className='flex justify-between items-center'>
-        <PageHeader route='/dashboard' title='Opportunities' />
-        <SearchFilterComponent title='products' />
-      </div>
-      <div className='mt-24 relative flex justify-between items-center'>
+      <SubHeaders
+        placeholder='products'
+        route='/dashboard'
+        title='Opportunities'
+      />
+      <div className='mt-16 relative flex justify-between items-center'>
         <SubNav
           handleSelected={() => {}}
           navLinks={navLinks}
@@ -150,19 +153,14 @@ function Opportunities() {
           )}
         </div>
         {dropDown && (
-          <div className='bg-white shadow-custom absolute right-0 top-[4rem] px-3 rounded-lg py-2 text-darkblue flex flex-col z-50 gap-3 '>
-            {dropdownlinks.map((links) => (
-              <span
-                className='hover:bg-darkblue hover:text-white rounded-md py-1 px-2 transition-all duration-300 cursor-pointer font-medium'
-                onClick={() => handleSelectedAction(links.label)}
-              >
-                {links.label}
-              </span>
-            ))}
-          </div>
+          <DropDownV2
+            data={dropdownlinks}
+            open={dropDown}
+            setState={handleSelectedAction}
+          />
         )}
       </div>
-      <div className='mt-8'>
+      <div className='mt-8 mb-20'>
         <ProductComponent
           componentStyle='bg-white shadow-lg rounded-lg flex gap-2 py-2 px-3 hover:scale-105 transition-all duration-200 cursor-pointer relative'
           displayStyle='grid-cols-4 gap-4'

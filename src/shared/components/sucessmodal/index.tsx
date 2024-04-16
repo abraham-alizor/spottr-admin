@@ -10,6 +10,7 @@ interface Props {
 const SuccessModal = ({ open, close }: Props) => (
   <ModalV2
     closeBtnColor=''
+    edges='rounded-md'
     isBTnTrue={false}
     isClose={close}
     isOpen={open}

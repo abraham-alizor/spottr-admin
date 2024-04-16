@@ -15,10 +15,9 @@ import { template, users_tasks } from "@/fake_data";
 import ActionModal from "@/shared/components/actionmodal";
 import ButtonV2 from "@/shared/components/buttonV2";
 import Modal from "@/shared/components/Modal";
-import PageHeader from "@/shared/components/pageheader";
 import ProductComponent from "@/shared/components/product-component";
-import SearchFilterComponent from "@/shared/components/search_filter";
 import SubNav from "@/shared/components/sub_nav";
+import SubHeaders from "@/shared/components/subheaders";
 import TaskComponent from "@/shared/components/taskcomponent";
 import {
   FIRST_POSITION,
@@ -92,11 +91,7 @@ function Tasks() {
 
   return (
     <main className='mx-10 my-5'>
-      <div className='flex justify-between items-center'>
-        <PageHeader route='/dashboard' title='Tasks' />
-
-        <SearchFilterComponent title='task' />
-      </div>
+      <SubHeaders placeholder='tasks' route='/dashboard' title='Tasks' />
       <div className='flex gap-5 relative'>
         <div className='flex flex-col items-center gap-2'>
           <img alt='img' src={USER_ONE} />
@@ -204,7 +199,7 @@ function Tasks() {
         taskData={filteredTasks}
       />
       <Modal
-        closeBtnColor=''
+        edges='rounded-md'
         isBTnTrue
         isClose={() => {
           setModal(false);
