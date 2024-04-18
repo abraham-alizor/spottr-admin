@@ -6,41 +6,52 @@ import ModalV2 from "@/shared/components/modalV2";
 interface Props {
   open: boolean;
   close: () => void;
-  handleDelete: () => void;
+  handleAction: () => void;
+  title: string;
+  actionTitle1: string;
+  actionTitle2: string;
+  warningText: string;
 }
-const DeleteModal = ({ open, close, handleDelete }: Props) => (
+const ActionModal = ({
+  open,
+  close,
+  handleAction,
+  title,
+  actionTitle1,
+  actionTitle2,
+  warningText,
+}: Props) => (
   <ModalV2
     closeBtnColor=''
+    edges='rounded-md'
     isBTnTrue={false}
     isClose={close}
     isOpen={open}
-    maxWidth='w-[330px]'
+    maxWidth='w-[300px]'
   >
     <div className='flex flex-col gap-5'>
-      <span className='text-xl text-darkblue  '>Delete Tasks?</span>
+      <span className='text-xl text-darkblue  '>{`${title}?`}</span>
       <hr />
-      <div>
-        <span className='text-sm text-[#4C596F]'>
-          This action cannot be undone
-        </span>
+      <div className='max-w-[200px] flex self-center'>
+        <span className='text-sm text-[#4C596F]'>{warningText}</span>
       </div>
 
       <div className='flex justify-between items-center py-5 px-4'>
         <ButtonV2
           btnStyle='w-full  h-[7vh]'
-          handleClick={handleDelete}
+          handleClick={handleAction}
           textStyle='text-[#FF0000] font-medium'
-          title='Delete'
+          title={actionTitle1}
         />
         <ButtonV2
           btnStyle='w-full bg-darkblue h-[7vh] rounded-md'
           handleClick={close}
           textStyle='text-white font-medium'
-          title='Cancel'
+          title={actionTitle2}
         />
       </div>
     </div>
   </ModalV2>
 );
 
-export default DeleteModal;
+export default ActionModal;

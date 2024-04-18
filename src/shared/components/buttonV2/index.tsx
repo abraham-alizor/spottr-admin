@@ -8,6 +8,7 @@ interface Props {
   iconStyle?: string;
   textStyle: string;
   handleClick: MouseEventHandler<HTMLButtonElement>;
+  image?: any;
 }
 const ButtonV2 = ({
   title,
@@ -16,6 +17,7 @@ const ButtonV2 = ({
   iconStyle,
   textStyle,
   handleClick,
+  image,
 }: Props) => (
   <button
     className={`${btnStyle} hover:scale-105 transition-all duration-300`}
@@ -23,7 +25,11 @@ const ButtonV2 = ({
     type='button'
   >
     <span className={textStyle}>{title}</span>
-    <span className={iconStyle}>{icon}</span>
+    {image ? (
+      <img alt='' src={image} />
+    ) : (
+      <span className={iconStyle}>{icon}</span>
+    )}
   </button>
 );
 

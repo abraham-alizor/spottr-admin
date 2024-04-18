@@ -65,8 +65,8 @@ function Header(props: HeaderTypes) {
       <div className='hidden h-16 items-center justify-between  border-b border-b-[#C2E0FF]   px-8 lg:flex'>
         <div className='flex flex-row items-center gap-4 border-b'>
           <Link
-            className={`cursor-pointer px-3 py-5 text-base ${location.pathname === "/home" ? "text-brand border-b-2 border-b-brand " : "text-gray-500"}`}
-            to='/home'
+            className={`cursor-pointer px-3 py-5 text-base ${location.pathname === "/dashboard" ? "text-brand border-b-2 border-b-brand " : "text-gray-500"}`}
+            to='/dashboard'
             type='button'
           >
             Home

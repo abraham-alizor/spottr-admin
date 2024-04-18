@@ -11,6 +11,7 @@ type ModalProps = {
   children: React.ReactNode;
   maxWidth: string;
   isBTnTrue?: boolean;
+  edges: string;
 };
 
 // Modal component reusable in all component
@@ -21,6 +22,7 @@ const ModalV2 = ({
   closeBtnColor,
   maxWidth,
   isBTnTrue,
+  edges,
 }: ModalProps) => (
   <Transition appear as={Fragment} show={isOpen}>
     <Dialog as='div' className='relative z-50' onClose={isClose}>
@@ -47,7 +49,7 @@ const ModalV2 = ({
             leaveTo='translate-y-full'
           >
             <Dialog.Panel
-              className={` ${maxWidth} transform overflow-hidden rounded-md text-center bg-white dark:bg-bg_black  align-middle shadow-xl transition-all h-full`}
+              className={` ${maxWidth} transform overflow-hidden ${edges} text-center bg-white dark:bg-bg_black  align-middle shadow-xl transition-all h-full`}
             >
               {isBTnTrue === true ? (
                 <button

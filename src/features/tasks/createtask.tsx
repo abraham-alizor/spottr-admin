@@ -4,7 +4,6 @@
 import React, { useState } from "react";
 
 import ButtonV2 from "@/shared/components/buttonV2";
-// import DeleteModal from "@/shared/components/deletemodal";
 import ModalV2 from "@/shared/components/modalV2";
 import PageHeader from "@/shared/components/pageheader";
 import SuccessModal from "@/shared/components/sucessmodal";
@@ -190,6 +189,7 @@ const CreateTask = () => {
         isClose={() => setModal(false)}
         isOpen={modal}
         maxWidth='w-[330px]'
+        edges='rounded-md'
       >
         <div className='flex flex-col gap-5'>
           <span className='text-xl text-darkblue  '>Post Task Now?</span>
