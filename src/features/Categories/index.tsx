@@ -5,8 +5,9 @@
 import { useState } from "react";
 import { FaCheck, FaPlus } from "react-icons/fa";
 
-import { categories } from "@/fake_data";
+import { categories, dropdowndata } from "@/fake_data";
 import ButtonV2 from "@/shared/components/buttonV2";
+import DropDownV3 from "@/shared/components/dropdownV3";
 import Modal from "@/shared/components/Modal";
 import ModalV2 from "@/shared/components/modalV2";
 import SubHeaders from "@/shared/components/subheaders";
@@ -21,6 +22,8 @@ function Categories() {
   const [modal, setModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [check, setCheck] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [dropdown, setDropdown] = useState(false);
   return (
     <main className='mx-7 mt-7 mb-40'>
       <SubHeaders placeholder='tasks' route='/dashboard' title='Categories' />
@@ -117,7 +120,7 @@ function Categories() {
             />
             <span className='text-sm text-darkblue'>Upload images</span>
           </div>
-          <div className='flex flex-col items-start mt-7 gap-5'>
+          <div className='flex flex-col items-start mt-7 gap-5  relative'>
             <div className='w-[496px] h-[54px] bg-input_color flex items-start pt-4 px-12 rounded-md'>
               <input
                 className='bg-transparent w-full outline-none placeholder:text-darkblue'
@@ -125,10 +128,21 @@ function Categories() {
                 type='text'
               />
             </div>
-            <div className='w-[496px] h-[54px] bg-input_color flex justify-between items-center  px-12 rounded-md'>
-              <span className='text-darkblue'>Specify parent catergory</span>
+            <div
+              className='w-[496px] h-[54px] bg-input_color flex justify-between items-center  px-12 rounded-md cursor-pointer'
+              onClick={() => setDropdown((previous) => !previous)}
+            >
+              <span className='text-darkblue'>{`${selectedCategory || " Specify parent catergory"}`}</span>
               <img alt='' src={BLUE_ARROW_DOWN} />
             </div>
+            <DropDownV3
+              classname='top-[7rem]'
+              data={dropdowndata}
+              isClose={() => setDropdown(false)}
+              isOpen={dropdown}
+              setSelected={setSelectedCategory}
+              width='w-[496px]'
+            />
             <div className='flex items-center gap-4'>
               <div
                 className='w-[19px] h-[18px] flex justify-center items-center rounded-md border-darkblue border-2 cursor-pointer'

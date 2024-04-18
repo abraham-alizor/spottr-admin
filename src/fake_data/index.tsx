@@ -1,9 +1,17 @@
 import {
+  AIRPLANE_IMG,
+  BOOK_IMG,
   CAR,
+  CONE_IMG,
   FARM,
   MONITOR,
+  PAINT_IMG,
+  PAN_IMG,
   PHONE,
+  PHOTO_ICON,
   PROFILE_ICON,
+  REPAIR_IMG,
+  SWIM_IMG,
   TAP,
   TASK_IMAGE,
 } from "@/utils/Exports";
@@ -1072,5 +1080,63 @@ export const faketray = [
     id: 5,
     title: "Wallet",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+  },
+];
+
+export const interestData = [
+  {
+    id: 1,
+    img: SWIM_IMG,
+    title: "Swimming",
+  },
+  {
+    id: 2,
+    img: CONE_IMG,
+    title: "Partying",
+  },
+  {
+    id: 3,
+    img: AIRPLANE_IMG,
+    title: "Travelling",
+  },
+  {
+    id: 4,
+    img: REPAIR_IMG,
+    title: "Repairs",
+  },
+  {
+    id: 5,
+    img: PHOTO_ICON,
+    title: "Photography",
+  },
+  {
+    id: 6,
+    img: PAN_IMG,
+    title: "Cooking",
+  },
+  {
+    id: 7,
+    img: BOOK_IMG,
+    title: "Learning",
+  },
+  {
+    id: 8,
+    img: PAINT_IMG,
+    title: "Painting",
+  },
+];
+
+export const dropdowndata = [
+  {
+    id: "1",
+    label: "Hey what up",
+  },
+  {
+    id: "2",
+    label: "Hey what up",
+  },
+  {
+    id: "3",
+    label: "Hey what up",
   },
 ];
