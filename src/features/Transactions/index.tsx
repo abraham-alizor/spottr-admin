@@ -111,6 +111,7 @@ function Transactions() {
             />
           </div>
         </Zoom>
+
         <div className='mt-5 flex flex-col gap-5'>
           <Banner
             clipPayment='789,906'

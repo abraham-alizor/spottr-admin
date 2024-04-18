@@ -1,4 +1,12 @@
-import { PROFILE_ICON, TASK_IMAGE } from "@/utils/Exports";
+import {
+  CAR,
+  FARM,
+  MONITOR,
+  PHONE,
+  PROFILE_ICON,
+  TAP,
+  TASK_IMAGE,
+} from "@/utils/Exports";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const users_tasks = [
@@ -892,5 +900,177 @@ export const deposit = [
   {
     amount: "500",
     date: "12/03/20",
+  },
+];
+
+export const categories = [
+  {
+    id: 1,
+    title: "Farm",
+    img: FARM,
+  },
+  {
+    id: 2,
+    title: "IT Engineer",
+    img: MONITOR,
+  },
+  {
+    id: 3,
+    title: "Phones",
+    img: PHONE,
+  },
+  {
+    id: 4,
+    title: "Motors",
+    img: CAR,
+  },
+  {
+    id: 5,
+    title: "Plumber",
+    img: TAP,
+  },
+
+  {
+    id: 6,
+    title: "Farm",
+    img: FARM,
+  },
+  {
+    id: 7,
+    title: "IT Engineer",
+    img: MONITOR,
+  },
+  {
+    id: 8,
+    title: "Phones",
+    img: PHONE,
+  },
+  {
+    id: 9,
+    title: "Motors",
+    img: CAR,
+  },
+  {
+    id: 10,
+    title: "Plumber",
+    img: TAP,
+  },
+  {
+    id: 7,
+    title: "IT Engineer",
+    img: MONITOR,
+  },
+  {
+    id: 8,
+    title: "Phones",
+    img: PHONE,
+  },
+  {
+    id: 9,
+    title: "Motors",
+    img: CAR,
+  },
+  {
+    id: 10,
+    title: "Plumber",
+    img: TAP,
+  },
+  {
+    id: 7,
+    title: "IT Engineer",
+    img: MONITOR,
+  },
+  {
+    id: 8,
+    title: "Phones",
+    img: PHONE,
+  },
+  {
+    id: 7,
+    title: "IT Engineer",
+    img: MONITOR,
+  },
+  {
+    id: 8,
+    title: "Phones",
+    img: PHONE,
+  },
+  {
+    id: 7,
+    title: "IT Engineer",
+    img: MONITOR,
+  },
+  {
+    id: 8,
+    title: "Phones",
+    img: PHONE,
+  },
+  {
+    id: 7,
+    title: "IT Engineer",
+    img: MONITOR,
+  },
+  {
+    id: 8,
+    title: "Phones",
+    img: PHONE,
+  },
+  {
+    id: 7,
+    title: "IT Engineer",
+    img: MONITOR,
+  },
+  {
+    id: 8,
+    title: "Phones",
+    img: PHONE,
+  },
+  {
+    id: 7,
+    title: "IT Engineer",
+    img: MONITOR,
+  },
+  {
+    id: 8,
+    title: "Phones",
+    img: PHONE,
+  },
+  {
+    id: 7,
+    title: "IT Engineer",
+    img: MONITOR,
+  },
+  {
+    id: 8,
+    title: "Phones",
+    img: PHONE,
+  },
+];
+
+export const faketray = [
+  {
+    id: 1,
+    title: "Wallet",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+  },
+  {
+    id: 2,
+    title: "Profile",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+  },
+  {
+    id: 3,
+    title: "Verification",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+  },
+  {
+    id: 4,
+    title: "Wallet",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+  },
+  {
+    id: 5,
+    title: "Wallet",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
   },
 ];
