@@ -5,6 +5,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 
+import { DebitProvider } from "@/context/useContext";
+
 import App from "./App";
 import { persistor, Store } from "./states/store";
 
@@ -14,9 +16,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <PersistGate persistor={persistor}>
     <Provider store={Store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <DebitProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </DebitProvider>
     </Provider>
   </PersistGate>,
 );

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable unicorn/prefer-spread */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -5,7 +6,9 @@
 import React, { useState } from "react";
 
 import { dropdowndata } from "@/fake_data";
+import { currencyLists } from "@/features/Settings";
 import ButtonV2 from "@/shared/components/buttonV2";
+import CurrencyBox from "@/shared/components/currencybox";
 import DropDownV3 from "@/shared/components/dropdownV3";
 import Modal from "@/shared/components/Modal";
 import ModalV2 from "@/shared/components/modalV2";
@@ -66,7 +69,8 @@ const TransactionsModals = ({
   const [dropDown, setDropDown] = useState(false);
   const [selectedPaymentType, setSelectedPaymentType] = useState("");
   const [amount, setAmount] = useState("200");
-
+  const [currencydrop, setCurrencyDrop] = useState(false);
+  const [selectedCurrency, setSelectedCurrency] = useState("NGN");
   const handlePinChange = (event_: React.ChangeEvent<HTMLInputElement>) => {
     const enteredpin = event_.target.value;
     setPin(enteredpin);
@@ -144,13 +148,25 @@ const TransactionsModals = ({
         maxWidth='w-[377px]'
       >
         <>
-          <div className='flex flex-col px-10 pt-3 '>
+          <div className='flex flex-col px-10 pt-3 relative'>
             <div className='flex justify-between '>
               <span className='text-sm text-darkblue'>Select wallet</span>
               <div className='flex gap-1'>
-                <span className='text-sm text-darkblue'>NGN</span>
-                <img alt='' src={BLUE_ARROW_DOWN} />
+                <span className='text-sm text-darkblue'>
+                  {selectedCurrency}
+                </span>
+                <img
+                  alt=''
+                  onClick={() => setCurrencyDrop((previous) => !previous)}
+                  src={BLUE_ARROW_DOWN}
+                />
               </div>
+              <CurrencyBox
+                close={() => setCurrencyDrop(false)}
+                data={currencyLists}
+                open={currencydrop}
+                setSelected={setSelectedCurrency}
+              />
             </div>
             <div className='mt-[3rem] flex flex-col gap-6'>
               <div

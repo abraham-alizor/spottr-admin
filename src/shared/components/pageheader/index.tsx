@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { GO_BACK } from "@/utils/Exports";
 
 interface Props {
-  title: string;
+  title?: string;
   route: string;
   isSubtitle?: boolean;
   subtitle?: string;

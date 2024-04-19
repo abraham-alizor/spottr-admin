@@ -1,3 +1,5 @@
+const { url } = require("inspector");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
@@ -7,9 +9,7 @@ module.exports = {
         custom: "0px 0px 4px 0px rgba(0, 0, 0, 0.12);",
       },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        pattern: "url('./assets/icons/pattern.svg')",
       },
       colors: {
         brand: "#274B89",

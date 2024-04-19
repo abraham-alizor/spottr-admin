@@ -1140,3 +1140,41 @@ export const dropdowndata = [
     label: "Hey what up",
   },
 ];
+export const BanksData = [
+  {
+    id: "1",
+    label: "Access bank",
+  },
+  {
+    id: "2",
+    label: "Guarantee Trust Bank",
+  },
+  {
+    id: "3",
+    label: "FCMB bank",
+  },
+  {
+    id: "4",
+    label: "Union bank",
+  },
+  {
+    id: "4",
+    label: "Union bank",
+  },
+  {
+    id: "4",
+    label: "Union bank",
+  },
+  {
+    id: "4",
+    label: "Union bank",
+  },
+  {
+    id: "4",
+    label: "Union bank",
+  },
+  {
+    id: "4",
+    label: "Union bank",
+  },
+];
