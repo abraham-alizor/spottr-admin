@@ -4,6 +4,7 @@ import React, { MouseEventHandler } from "react";
 interface Props {
   title: string;
   btnStyle: string;
+  disabled?: any;
   icon?: any;
   iconStyle?: string;
   textStyle: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 const ButtonV2 = ({
   title,
+  disabled,
   btnStyle,
   icon,
   iconStyle,
@@ -21,6 +23,7 @@ const ButtonV2 = ({
 }: Props) => (
   <button
     className={`${btnStyle} hover:scale-105 transition-all duration-300`}
+    disabled={disabled}
     onClick={handleClick}
     type='button'
   >

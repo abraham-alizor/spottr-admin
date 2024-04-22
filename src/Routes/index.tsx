@@ -11,7 +11,6 @@ import Loans from "@/features/Loans";
 import Opportunities from "@/features/Opportunities";
 import PerformancePage from "@/features/Performance";
 import ReferralsSystem from "@/features/referrals-system";
-import Settings from "@/features/Settings";
 import Tasks from "@/features/tasks";
 import CreateTask from "@/features/tasks/createtask";
 import ViewTask from "@/features/tasks/viewtask";
@@ -32,7 +31,7 @@ function MainRoutes() {
     { title: "Loans", path: "loans", component: Loans },
     { title: "Users", path: "users", component: Users },
     { title: "Help", path: "help", component: Help },
-    { title: "Settings", path: "settings", component: Settings },
+    // { title: "Settings", path: "settings", component: Settings },
     { title: "performance", path: "performance", component: PerformancePage },
     { title: "create-task", path: "/tasks/create-task", component: CreateTask },
     { title: "view-task", path: "/tasks/task-review/:id", component: ViewTask },

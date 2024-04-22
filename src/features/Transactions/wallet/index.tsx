@@ -25,6 +25,7 @@ import {
 
 const Wallet = () => {
   const navigate = useNavigate();
+
   const [settlementModal, setsettlementModal] = useState(false);
   const [walletModal, setWalletModal] = useState(false);
   const [sendModal, setSendModal] = useState(false);

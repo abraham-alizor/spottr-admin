@@ -1,9 +1,13 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-sort-props */
 /* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 
+import { dropdowndata } from "@/fake_data";
 import ButtonV2 from "@/shared/components/buttonV2";
+import DropDownV3 from "@/shared/components/dropdownV3";
 import ModalV2 from "@/shared/components/modalV2";
 import PageHeader from "@/shared/components/pageheader";
 import SuccessModal from "@/shared/components/sucessmodal";
@@ -20,6 +24,12 @@ import {
 const CreateTask = () => {
   const [modal, setModal] = useState(false);
   const [sucess, setSucess] = useState(true);
+  const [dropdown1, setDropDown1] = useState(false);
+  const [dropdown2, setDropDown2] = useState(false);
+  const [dropdown3, setDropDown3] = useState(false);
+  const [selected1, setSelected1] = useState("");
+  const [selected2, setSelected2] = useState("");
+  const [selected3, setSelected3] = useState("");
 
   return (
     <main className='mx-6 mt-5 mb-64'>
@@ -140,20 +150,60 @@ const CreateTask = () => {
               <span>Complete Task info</span>
               <span>Cancel</span>
             </div>
-            <div className='mt-5 gap-4 flex flex-col'>
-              <div className='bg-[#ECF7FF] w-full flex justify-between p-4 rounded-md'>
-                <span className='text-[#C4C4C4]'>Task Type</span>
+            <div className='mt-5 gap-4 flex flex-col relative'>
+              <div
+                className='bg-[#ECF7FF] w-full flex justify-between p-4 rounded-md cursor-pointer'
+                onClick={() => setDropDown1((previous) => !previous)}
+              >
+                <span className='text-[#C4C4C4]'>
+                  {selected1 || "Task Type"}
+                </span>
                 <img alt='' height={10} src={GRAY_POLYGON} width={10} />
               </div>
-              <div className='bg-[#ECF7FF] w-full flex justify-between p-4 rounded-md'>
-                <span className='text-[#C4C4C4]'>Set max participant</span>
+              <DropDownV3
+                isOpen={dropdown1}
+                setSelected={setSelected1}
+                data={dropdowndata}
+                width='w-full'
+                isClose={() => setDropDown1(false)}
+                classname='top-[3rem]'
+              />
+              <div
+                className='bg-[#ECF7FF] w-full flex justify-between p-4 cursor-pointer rounded-md'
+                onClick={() => setDropDown2((previous) => !previous)}
+              >
+                <span className='text-[#C4C4C4]'>
+                  {selected2 || "Set max participant"}
+                </span>
                 <img alt='' height={10} src={GRAY_POLYGON} width={10} />
               </div>
-              <div className='bg-[#ECF7FF] w-full flex justify-between p-4 rounded-md'>
-                <span className='text-[#C4C4C4]'>Set Location</span>
+              <DropDownV3
+                isOpen={dropdown2}
+                setSelected={setSelected2}
+                data={dropdowndata}
+                width='w-full'
+                isClose={() => setDropDown2(false)}
+                classname='top-[3rem]'
+              />
+              <div
+                className='bg-[#ECF7FF] w-full flex justify-between cursor-pointer p-4 rounded-md'
+                onClick={() => setDropDown3((previous) => !previous)}
+              >
+                <span className='text-[#C4C4C4]'>
+                  {selected3 || "Set Location"}
+                </span>
                 <img alt='' height={10} src={GRAY_POLYGON} width={10} />
               </div>
+              <DropDownV3
+                isOpen={dropdown3}
+                setSelected={setSelected3}
+                data={dropdowndata}
+                width='w-full'
+                isClose={() => setDropDown3(false)}
+                classname='top-[11.5rem] '
+              />
             </div>
+
             <div className='mt-2'>
               <span className='text-sm font-medium text-darkblue '>
                 For how many days?

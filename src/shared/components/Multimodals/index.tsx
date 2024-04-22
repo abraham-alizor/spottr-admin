@@ -1,10 +1,15 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable unicorn/prefer-spread */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from "react";
 
+import { dropdowndata } from "@/fake_data";
+import { currencyLists } from "@/features/Settings";
 import ButtonV2 from "@/shared/components/buttonV2";
+import CurrencyBox from "@/shared/components/currencybox";
+import DropDownV3 from "@/shared/components/dropdownV3";
 import Modal from "@/shared/components/Modal";
 import ModalV2 from "@/shared/components/modalV2";
 import {
@@ -40,6 +45,7 @@ interface MultiModalProps {
   handleSend: () => void;
   handleConfirm: () => void;
 }
+
 const TransactionsModals = ({
   settleModal,
   walletModal,
@@ -60,7 +66,11 @@ const TransactionsModals = ({
   handleConfirm,
 }: MultiModalProps) => {
   const [pin, setPin] = useState("");
-
+  const [dropDown, setDropDown] = useState(false);
+  const [selectedPaymentType, setSelectedPaymentType] = useState("");
+  const [amount, setAmount] = useState("200");
+  const [currencydrop, setCurrencyDrop] = useState(false);
+  const [selectedCurrency, setSelectedCurrency] = useState("NGN");
   const handlePinChange = (event_: React.ChangeEvent<HTMLInputElement>) => {
     const enteredpin = event_.target.value;
     setPin(enteredpin);
@@ -70,6 +80,7 @@ const TransactionsModals = ({
     pin.length > 0
       ? "*".repeat(pin.length)
       : "*           *           *           *";
+
   return (
     <>
       <Modal
@@ -80,7 +91,7 @@ const TransactionsModals = ({
         maxWidth='w-[672px]'
       >
         <>
-          <div className='mt-7 flex flex-col items-start px-16 gap-5'>
+          <div className='mt-7 flex flex-col items-start px-16 gap-5 relative'>
             <span className='text-xl font-medium text-darkblue text-'>
               Make Settlement
             </span>
@@ -92,10 +103,21 @@ const TransactionsModals = ({
                   type='text'
                 />
               </div>
-              <div className='w-[496px] bg-[#ECF7FF]  flex h-[54px] p-4 justify-between rounded-md'>
-                <span className='text-[#C4C4C4]'>Select payment method</span>
+              <div
+                className='w-[496px] bg-[#ECF7FF]  flex h-[54px] p-4 justify-between rounded-md cursor-pointer'
+                onClick={() => setDropDown((previous) => !previous)}
+              >
+                <span className='text-[#C4C4C4]'>{`${selectedPaymentType || " Select payment method"} `}</span>
                 <img alt='' src={BLUE_ARROW_DOWN} />
               </div>
+              <DropDownV3
+                classname='top-[10.5rem]'
+                data={dropdowndata}
+                isClose={() => setDropDown(false)}
+                isOpen={dropDown}
+                setSelected={setSelectedPaymentType}
+                width='w-[496px]'
+              />
               <div className='flex items-start  gap-3 text-darkblue'>
                 <div className='mt-1'>
                   <img alt='' height={20} src={ALERT_ICON} width={20} />{" "}
@@ -126,13 +148,25 @@ const TransactionsModals = ({
         maxWidth='w-[377px]'
       >
         <>
-          <div className='flex flex-col px-10 pt-3 '>
+          <div className='flex flex-col px-10 pt-3 relative'>
             <div className='flex justify-between '>
               <span className='text-sm text-darkblue'>Select wallet</span>
               <div className='flex gap-1'>
-                <span className='text-sm text-darkblue'>NGN</span>
-                <img alt='' src={BLUE_ARROW_DOWN} />
+                <span className='text-sm text-darkblue'>
+                  {selectedCurrency}
+                </span>
+                <img
+                  alt=''
+                  onClick={() => setCurrencyDrop((previous) => !previous)}
+                  src={BLUE_ARROW_DOWN}
+                />
               </div>
+              <CurrencyBox
+                close={() => setCurrencyDrop(false)}
+                data={currencyLists}
+                open={currencydrop}
+                setSelected={setSelectedCurrency}
+              />
             </div>
             <div className='mt-[3rem] flex flex-col gap-6'>
               <div
@@ -208,7 +242,15 @@ const TransactionsModals = ({
             </div>
             <div className='flex justify-center items-center flex-col mt-5 gap-4'>
               <div className='flex gap-4 items-end'>
-                <span className='font-medium text-5xl '>200</span>
+                {/* <span className='font-medium text-5xl '>200</span> */}
+                <input
+                  className='outline-none bg-transparent text-5xl font-medium w-[6vw]'
+                  onChange={(event_: React.ChangeEvent<HTMLInputElement>) =>
+                    setAmount(event_.target.value)
+                  }
+                  type='text'
+                  value={amount}
+                />
                 <div className='flex items-center gap-2'>
                   <>
                     {selectedWallet === "clip-token" ? (
