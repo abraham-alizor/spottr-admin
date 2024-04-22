@@ -12,7 +12,7 @@ function Count(props: CountTypes) {
     <div className='relative w-full'>
       <img
         alt=''
-        className='mt-3 aspect-[1.03] w-[58px] mx-auto'
+        className='mt-3 aspect-[1.03] w-[30px] mx-auto'
         loading='lazy'
         src={COUNT}
       />
