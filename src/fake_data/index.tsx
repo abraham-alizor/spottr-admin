@@ -2481,18 +2481,49 @@ export const highlitedata = [
 
 export const Adsdata = [
   {
+    id: "1",
     analysis: "5769",
     tags: "Account reached",
     percentage: "-63.8",
   },
   {
+    id: "2",
     analysis: "30",
     tags: "Account reached",
     percentage: "-63.8",
   },
   {
+    id: "3",
     analysis: "30",
     tags: "Profile clicked",
     percentage: "8",
+  },
+];
+
+export const productsListed = [
+  {
+    img: TASK_IMAGE,
+    name: "Medplus Surulere",
+    username: "@adedamola456",
+  },
+  {
+    img: TASK_IMAGE,
+    name: "Medplus Surulere",
+    username: "@adedamola456",
+  },
+  {
+    img: TASK_IMAGE,
+    name: "Medplus Surulere",
+    username: "@adedamola456",
+  },
+  {
+    img: TASK_IMAGE,
+    name: "Medplus Surulere",
+    username: "@adedamola456",
+  },
+  {
+    img: TASK_IMAGE,
+    name: "Medplus Surulere",
+    username: "@adedamola456",
   },
 ];

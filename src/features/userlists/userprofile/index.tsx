@@ -1,11 +1,15 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from "react";
 import { BsStarFill } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 
-import { Adsdata, highlitedata } from "@/fake_data";
+import { Adsdata, highlitedata, productsListed } from "@/fake_data";
 import Barcharts from "@/shared/components/Barchart";
+import Modal from "@/shared/components/Modal";
 import PageHeader from "@/shared/components/pageheader";
 import SubNav from "@/shared/components/sub_nav";
+import ToggleSwitch from "@/shared/components/toggle_switch";
 import {
   BADGE,
   BLUE_ARROW_LEFT,
@@ -17,8 +21,9 @@ import {
   GOOGLE,
   MESSAGE_ICON,
   NIGERIA_FLAG,
+  RED_ARROW,
   TAG,
-  VERIFIED_STATUS,
+  USER_VERIFIED,
 } from "@/utils/Exports";
 
 const subnavLinks = [
@@ -56,6 +61,7 @@ const barchartData = [
 ];
 function UserProfile() {
   const [selected, setSelected] = useState("profile");
+  const [modal, setModal] = useState(false);
   const data = useLocation()?.state.data;
   return (
     <main className='mt-7 mx-7 mb-20'>
@@ -74,13 +80,13 @@ function UserProfile() {
               <div className='relative'>
                 <img
                   alt=''
-                  className='border-[5px]  rounded-full border-[#C2E0FF] w-14 h-14'
+                  className='border-[3.5px]  rounded-full border-[#C2E0FF] w-14 h-14'
                   src={data.img}
                 />
                 <img
                   alt=''
-                  className='absolute top-0 right-0'
-                  src={VERIFIED_STATUS}
+                  className='absolute top-0 right-0 w-4 h-4'
+                  src={USER_VERIFIED}
                 />
               </div>
               <span className='text-[22px] font-[700] text-darkblue'>C</span>
@@ -332,7 +338,7 @@ function UserProfile() {
             </div>
           </div>
         </div>
-        <div className='w-[350px]'>
+        <div className='w-[350px] pl-3'>
           <div className='flex flex-col gap-6'>
             <span className='text-xl font-semibold text-darkblue'>
               Highlights
@@ -358,7 +364,7 @@ function UserProfile() {
               </div>
             ))}
           </div>
-          <div className='flex flex-col gap-6 mt-8'>
+          <div className='flex flex-col gap-6 mt-8 border-b pb-3'>
             <span className='text-xl font-semibold text-darkblue'>Ads</span>
 
             {Adsdata.map((data_) => (
@@ -368,7 +374,7 @@ function UserProfile() {
                     {data_.analysis}
                   </span>
                   <span
-                    className={`text-xs mt-1 text-[#3B3B3BB2] text-opacity-[70%] ${data_.tags === "Top category" ? "" : "ml-5"} `}
+                    className={`text-xs mt-1 text-[#3B3B3BB2] text-opacity-[70%] ${data_.id === "1" ? "" : "ml-5"} `}
                   >
                     {data_.tags}
                   </span>
@@ -381,10 +387,66 @@ function UserProfile() {
               </div>
             ))}
           </div>
-          <div>3</div>
-          <div>4</div>
+          <div
+            className='flex justify-between py-3 items-center border-b cursor-pointer'
+            onClick={() => setModal(true)}
+          >
+            <span className='text-[16px] font-[700] text-darkblue'>
+              See Products Posted
+            </span>
+            <img
+              alt=''
+              className='scale-x-[-1] w-4 h-4'
+              src={BLUE_ARROW_LEFT}
+            />
+          </div>
+          <div className='flex justify-between py-3 items-center border-b'>
+            <span className='text-[16px] font-[700] text-branded'>
+              Blacklist this user
+            </span>
+            <img alt='' className=' w-4 h-4' src={RED_ARROW} />
+          </div>
         </div>
       </div>
+      <Modal
+        edges='rounded-sm '
+        isClose={() => setModal(false)}
+        isOpen={modal}
+        maxWidth='w-[599px]'
+      >
+        <div className='flex flex-col gap-6 px-7'>
+          {productsListed.map((data_) => (
+            <div className='border-b-2 border-[#E7E7E7] pb-3 flex justify-between'>
+              <div className='flex gap-3 items-center'>
+                <div>
+                  <img
+                    alt=''
+                    className='w-16 h-16 rounded-full border-[4.37px] border-[#C2E0FF]'
+                    src={data_.img}
+                  />
+                </div>
+                <div className='flex flex-col items-start'>
+                  <span className='font-normal text-[20px] '>{data_.name}</span>
+                  <span className='text-[#C4C4C4] text-[16px] font-normal'>
+                    {data_.username}
+                  </span>
+                </div>
+              </div>
+              <div className='flex flex-col items-end '>
+                <ToggleSwitch />
+                <div className='flex items-center gap-4'>
+                  <span className='text-[14px] text-lightgrey font-semibold'>
+                    No of products:
+                  </span>
+                  <span className='text-[14px] text-lightgrey font-normal'>
+                    10
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Modal>
     </main>
   );
 }
