@@ -16,6 +16,8 @@ import CreateTask from "@/features/tasks/createtask";
 import ViewTask from "@/features/tasks/viewtask";
 import Transactions from "@/features/Transactions";
 import Wallet from "@/features/Transactions/wallet";
+import UserLists from "@/features/userlists";
+import UserProfile from "@/features/userlists/userprofile";
 import Users from "@/features/Users";
 
 import DashboardLayout from "../shared/Layouts/DashboardLayout";
@@ -49,6 +51,16 @@ function MainRoutes() {
       title: "content-management",
       path: "/content-management",
       component: ContentManagement,
+    },
+    {
+      title: "user_list",
+      path: "/userslist",
+      component: UserLists,
+    },
+    {
+      title: "user_list",
+      path: "/userslist/user-profile",
+      component: UserProfile,
     },
   ];
   return (

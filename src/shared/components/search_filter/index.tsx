@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { filterData } from "@/fake_data";
 import { FilterBox } from "@/features/Performance/layout";
+import { userListsFilters } from "@/features/userlists";
 import { ARROW_DOWN } from "@/utils/Exports";
 
 const SearchFilterComponent = ({ title }: { title: string }) => {
   const [selectedFilter, setSelectedFilter] = useState("");
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <div className='flex gap-6'>
@@ -28,7 +31,9 @@ const SearchFilterComponent = ({ title }: { title: string }) => {
 
         <FilterBox
           close={() => setOpen(false)}
-          data={filterData}
+          data={
+            location.pathname === "/userslist" ? userListsFilters : filterData
+          }
           handleSelected={setSelectedFilter}
           open={open}
           styling='mt-[15rem] right-0'

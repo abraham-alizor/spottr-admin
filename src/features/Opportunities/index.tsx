@@ -113,6 +113,7 @@ function Opportunities() {
       />
       <div className='mt-16 relative flex justify-between items-center'>
         <SubNav
+          gutter='gap-[4rem]'
           handleSelected={() => {}}
           navLinks={navLinks}
           selected={selected}

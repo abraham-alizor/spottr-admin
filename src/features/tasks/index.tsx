@@ -144,6 +144,7 @@ function Tasks() {
       </div>
       <div className='mt-7 relative flex justify-between items-center'>
         <SubNav
+          gutter='gap-[4rem]'
           handleSelected={handleStatusChange}
           navLinks={navLinks}
           selected={selectedStatus}
