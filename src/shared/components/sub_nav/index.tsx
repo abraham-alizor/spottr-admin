@@ -8,13 +8,21 @@ interface Props {
   navLinks: NavLinksProps[];
   selected: any;
   handleSelected: (value: string) => void;
+  gutter: string;
+  textsize?: string;
 }
-const SubNav = ({ navLinks, selected, handleSelected }: Props) => (
-  <div className='flex gap-[4rem] border-b px-5 border-[#C2E0FF]'>
+const SubNav = ({
+  navLinks,
+  selected,
+  handleSelected,
+  gutter,
+  textsize,
+}: Props) => (
+  <div className={`flex ${gutter} border-b px-5 border-[#C2E0FF]`}>
     {navLinks.map((links) => (
       <div>
         <button
-          className={` text-[#274B89] text-base  py-3 px-5  ${selected === links.state && "border-b-2 relative border-darkblue"} transition-all duration-500`}
+          className={` text-[#274B89] ${textsize}  py-3 px-5  ${selected === links.state && "border-b-2 relative border-darkblue"} transition-all duration-500`}
           key={links.state}
           onClick={() => handleSelected(links.state)}
           type='button'

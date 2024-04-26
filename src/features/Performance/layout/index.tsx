@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Transition } from "@headlessui/react";
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { filterData } from "@/fake_data";
 import ButtonV2 from "@/shared/components/buttonV2";
@@ -19,32 +20,35 @@ interface FilterProps {
   styling: string;
 }
 
-export const FilterBox = (props: FilterProps) => (
-  <Transition
-    as='div'
-    className={`absolute bg-white flex flex-col gap-2 items-start  rounded-md px-2  ${props.styling} z-50  w-fit pt-4 h-[200px] shadow-custom`}
-    enter='ease-out duration-300'
-    enterFrom='opacity-0 scale-95'
-    enterTo='opacity-100 scale-100'
-    leave='ease-in duration-200'
-    leaveFrom='opacity-100 scale-100'
-    leaveTo='opacity-0 scale-95'
-    show={props.open}
-  >
-    {props.data.map((filters: any) => (
-      <span
-        className='border-b pb-2 cursor-pointer hover:text-darkblue font-medium text-sm'
-        key={filters.id}
-        onClick={() => {
-          props.handleSelected(filters.list);
-          props.close();
-        }}
-      >
-        {filters.list}
-      </span>
-    ))}
-  </Transition>
-);
+export const FilterBox = (props: FilterProps) => {
+  const location = useLocation();
+  return (
+    <Transition
+      as='div'
+      className={`absolute bg-white flex flex-col gap-2 items-start  rounded-md px-2  ${props.styling} z-50  w-fit pt-4 ${location.pathname === "/userslist" ? "h-[250px] -top-[12rem]" : "h-[200px]"}  shadow-custom`}
+      enter='ease-out duration-300'
+      enterFrom='opacity-0 scale-95'
+      enterTo='opacity-100 scale-100'
+      leave='ease-in duration-200'
+      leaveFrom='opacity-100 scale-100'
+      leaveTo='opacity-0 scale-95'
+      show={props.open}
+    >
+      {props.data.map((filters: any) => (
+        <span
+          className='border-b pb-2 cursor-pointer hover:text-darkblue font-medium text-sm'
+          key={filters.id}
+          onClick={() => {
+            props.handleSelected(filters.list);
+            props.close();
+          }}
+        >
+          {filters.list}
+        </span>
+      ))}
+    </Transition>
+  );
+};
 const BoxHeaders = (props: Props) => {
   const [selectedFilter, setSelectedFilter] = useState("");
   const [filters, setFilters] = useState(false);
