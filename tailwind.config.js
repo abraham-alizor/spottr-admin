@@ -25,6 +25,7 @@ module.exports = {
         lightblue: "#274B89",
         skyblue: "#1569FA",
         input_color: "#E1EFFB",
+        textcolor: "#3B3B3BB2",
       },
     },
   },

@@ -73,7 +73,7 @@ function Header(props: HeaderTypes) {
           </Link>
 
           <Link
-            className={`cursor-pointer px-3 py-5 text-base ${location.pathname === "/userslist" || "/userslist/user-profile" ? "text-brand border-b-2 border-b-brand" : "text-gray-500 "}`}
+            className={`cursor-pointer px-3 py-5 text-base ${location.pathname === "/userslist" || location.pathname === "/userslist/user-profile" ? "text-brand border-b-2 border-b-brand" : "text-gray-500 "}`}
             to='/userslist'
             type='button'
           >

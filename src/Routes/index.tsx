@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable react/no-array-index-key */
 import React from "react";
 import { Route, Routes } from "react-router-dom";
@@ -9,6 +10,9 @@ import Dashboard from "@/features/Dashboard";
 import Help from "@/features/Help";
 import Loans from "@/features/Loans";
 import Opportunities from "@/features/Opportunities";
+import AllCheckins from "@/features/Opportunities/all_checkins";
+import AllDeals from "@/features/Opportunities/all_deals";
+import AllLists from "@/features/Opportunities/all_lists";
 import PerformancePage from "@/features/Performance";
 import ReferralsSystem from "@/features/referrals-system";
 import Tasks from "@/features/tasks";
@@ -17,8 +21,9 @@ import ViewTask from "@/features/tasks/viewtask";
 import Transactions from "@/features/Transactions";
 import Wallet from "@/features/Transactions/wallet";
 import UserLists from "@/features/userlists";
+import TransactionActivities from "@/features/userlists/transaction_act";
+import UserActivities from "@/features/userlists/user_act";
 import UserProfile from "@/features/userlists/userprofile";
-import Users from "@/features/Users";
 
 import DashboardLayout from "../shared/Layouts/DashboardLayout";
 
@@ -31,7 +36,7 @@ function MainRoutes() {
     { title: "Tasks", path: "tasks", component: Tasks },
     { title: "Ad sections", path: "ad-sections", component: AdSections },
     { title: "Loans", path: "loans", component: Loans },
-    { title: "Users", path: "users", component: Users },
+    { title: "Users", path: "users", component: UserLists },
     { title: "Help", path: "help", component: Help },
     // { title: "Settings", path: "settings", component: Settings },
     { title: "performance", path: "performance", component: PerformancePage },
@@ -62,6 +67,31 @@ function MainRoutes() {
       path: "/userslist/user-profile",
       component: UserProfile,
     },
+    {
+      title: "user_list",
+      path: "/userslist/user-transactions",
+      component: TransactionActivities,
+    },
+    {
+      title: "user_list",
+      path: "/userslist/user-activities",
+      component: UserActivities,
+    },
+    {
+      title: "all_lists",
+      path: "/opportunities/all-lists",
+      component: AllLists,
+    },
+    {
+      title: "all_deals",
+      path: "/opportunities/all-deals",
+      component: AllDeals,
+    },
+    {
+      title: "all_chekins",
+      path: "/opportunities/all-check-ins",
+      component: AllCheckins,
+    },
   ];
   return (
     <div>
@@ -69,6 +99,7 @@ function MainRoutes() {
         <Routes>
           {Menus.map((item) => (
             <Route
+              // @ts-ignore
               element={<item.component />}
               key={item.title}
               path={item.path}

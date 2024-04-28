@@ -9,8 +9,8 @@ import { DENIED_ICON, STOP_ICON } from "@/utils/Exports";
 interface Props {
   product: any;
   displayStyle: string;
-  selected: any;
-  setSelected: (id: any) => void;
+  selected?: any;
+  setSelected?: (id: any) => void;
   componentStyle: string;
   gutter: string;
   fontWeight?: string;
@@ -38,6 +38,8 @@ const ProductComponent = ({
     {product.map((data: any) => (
       <div
         className={`${componentStyle} ${selected === data.id ? "scale-110" : ""}`}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         onClick={() => setSelected(data.id)}
       >
         <div>

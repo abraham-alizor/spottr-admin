@@ -6,8 +6,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from "react";
 import { FaCheckCircle, FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 import { AdsTemplate } from "@/fake_data";
+import RoutesDrop from "@/features/Opportunities/routesdrop";
 import ActionModal from "@/shared/components/actionmodal";
 import ButtonV2 from "@/shared/components/buttonV2";
 import DropDownV2 from "@/shared/components/drop-down-2";
@@ -45,6 +47,20 @@ const dropdownlinks = [
   { id: 3, label: "Decline ads" },
 ];
 
+const sublinks = [
+  {
+    route: "/opportunities/all-deals",
+    label: "All deals",
+  },
+  {
+    route: "/opportunities/all-lists",
+    label: "All lists",
+  },
+  {
+    route: "/opportunities/all-check-ins",
+    label: "All check-ins",
+  },
+];
 function Opportunities() {
   const [action, setAction] = useState(false);
   const [selectorBox, setSelectorBox] = useState(false);
@@ -54,6 +70,8 @@ function Opportunities() {
   const [dropDown, setDropDown] = useState(false);
   const [adsData, setAdsData] = useState(AdsTemplate);
   const [statusUpdate, setStatusUpdate] = useState<string | null>(null);
+  const [routes, setRoutes] = useState(false);
+  const navigate = useNavigate();
 
   const handleSelectedAction = (act: string) => {
     if (act) {
@@ -107,10 +125,15 @@ function Opportunities() {
   return (
     <main className='mx-8 mt-6 relative'>
       <SubHeaders
+        isthereroutes
         placeholder='products'
         route='/dashboard'
+        showRoutes={() => setRoutes((previous) => !previous)}
         title='Opportunities'
       />
+
+      <RoutesDrop data={sublinks} open={routes} setState={navigate} />
+
       <div className='mt-16 relative flex justify-between items-center'>
         <SubNav
           gutter='gap-[4rem]'
