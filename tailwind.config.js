@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       boxShadow: {
         custom: "0px 0px 4px 0px rgba(0, 0, 0, 0.12);",
+        blur: "0px 4px 20px 0px #00000012",
       },
       backgroundImage: {
         pattern: "url('./assets/icons/pattern.svg')",

@@ -10,7 +10,7 @@ interface Props {
 }
 function CreateBox(props: Props) {
   return (
-    <div className='mt-6 w-[417px] h-[430px]  bg-white rounded-xl shadow-md'>
+    <div className='mt-6 w-[417px] h-[430px]  bg-white rounded-xl shadow-blur'>
       <div className='flex flex-col items-center py-6'>
         <span className='text-[16px] text-center text-darkblue font-semibold'>
           {props.title}

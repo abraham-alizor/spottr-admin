@@ -556,7 +556,7 @@ const TransactionsModals = ({
                 </div>
               ))}
               {isCopied && (
-                <span className='absolute right-0 bg-white rounded-md p-2 shadow-custom'>
+                <span className='absolute text-[#39B54A] right-0 bg-white rounded-md p-2 shadow-custom'>
                   copied to clipboard
                 </span>
               )}

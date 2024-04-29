@@ -2,6 +2,7 @@ import {
   AIRPLANE_IMG,
   BITCOIN,
   BOOK_IMG,
+  BOY_BACKGRD,
   CAR,
   CONE_IMG,
   ETH_COIN,
@@ -10,13 +11,16 @@ import {
   MONITOR,
   PAINT_IMG,
   PAN_IMG,
+  PARTY_BACKGRD,
   PHONE,
   PHOTO_ICON,
   PROFILE_ICON,
   REPAIR_IMG,
+  SUYA_BACKGROUND,
   SWIM_IMG,
   TAP,
   TASK_IMAGE,
+  WATER_BACKGRD,
 } from "@/utils/Exports";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -2767,5 +2771,49 @@ export const userActivities = [
       "user sold Multi-Colored Children’s Sportwear. Quantity: 10  N4,800,000  ref: ",
     link: "https;//spottradmin.8783/uynbunbjahn",
     date: "12 Aug.",
+  },
+];
+
+export const listingsdata = [
+  {
+    bg_image: PARTY_BACKGRD,
+    title: "Top shows in lagos",
+    location: "Lagos Dec ‘23",
+  },
+  {
+    bg_image: PARTY_BACKGRD,
+    title: "Top shows in lagos",
+    location: "Lagos Dec ‘23",
+  },
+  {
+    bg_image: WATER_BACKGRD,
+    title: "Water sport activities",
+    location: "Lagos",
+  },
+  {
+    bg_image: WATER_BACKGRD,
+    title: " Water sport activities",
+    location: "Lagos",
+  },
+
+  {
+    bg_image: BOY_BACKGRD,
+    title: "Mens party wears",
+    location: "Lagos ",
+  },
+  {
+    bg_image: BOY_BACKGRD,
+    title: "Mens party wears",
+    location: "Lagos ",
+  },
+  {
+    bg_image: SUYA_BACKGROUND,
+    title: "Suya spots",
+    location: "Abuja",
+  },
+  {
+    bg_image: SUYA_BACKGROUND,
+    title: "Suya spots",
+    location: "Abuja",
   },
 ];

@@ -79,11 +79,11 @@ function AllDeals() {
           />
         </div>
       </div>
-      <div className='flex gap-10 items-start'>
+      <div className='flex gap-20 items-start'>
         <div className='w-[650px] mt-8'>
           <div className='grid grid-cols-2 gap-3'>
             {template.map((data) => (
-              <div className='w-[316px] h-[120px] px-2 py-3 bg-white rounded-sm shadow-custom flex gap-3'>
+              <div className='w-[316px] h-[120px] px-2 py-3 bg-white rounded-sm shadow-blur flex gap-3'>
                 <div>
                   <img alt='' src={data.img} />
                 </div>
