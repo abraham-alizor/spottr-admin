@@ -9,6 +9,7 @@ import ContentManagement from "@/features/content-management";
 import Dashboard from "@/features/Dashboard";
 import Help from "@/features/Help";
 import Loans from "@/features/Loans";
+import NotificationCenter from "@/features/notifications";
 import Opportunities from "@/features/Opportunities";
 import AllCheckins from "@/features/Opportunities/all_checkins";
 import AllDeals from "@/features/Opportunities/all_deals";
@@ -91,6 +92,11 @@ function MainRoutes() {
       title: "all_chekins",
       path: "/opportunities/all-check-ins",
       component: AllCheckins,
+    },
+    {
+      title: "notification_center",
+      path: "/notification-center",
+      component: NotificationCenter,
     },
   ];
   return (

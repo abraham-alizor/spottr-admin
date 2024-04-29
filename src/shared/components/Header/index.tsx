@@ -6,9 +6,12 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { BsEnvelopeFill } from "react-icons/bs";
 import { FaBell } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import { dummyMessage } from "@/fake_data";
 import { MenuDropdown } from "@/shared/components/dropdown/MenuDropDown";
+import NotificationBox from "@/shared/components/noticationbox";
+import { INDICATOR } from "@/utils/Exports";
 
 interface HeaderTypes {
   onMenu?: () => void;
@@ -17,9 +20,13 @@ interface HeaderTypes {
 function Header(props: HeaderTypes) {
   const location = useLocation();
   const [search, setSearch] = useState("");
+  const [openMessagePopup, setMessagePopUp] = useState(false);
+  const [openFeedBackPopup, setFeedBackPopUp] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
-    <div className='w-full pt-6 bg-white px-4 12 lg:px-8 '>
+    <div className='w-full pt-6 bg-white px-4 12 lg:px-8 relative'>
       <div>
         <div className='w-full flex justify-between items-start'>
           <div className='flex justify-start gap-10'>
@@ -47,12 +54,68 @@ function Header(props: HeaderTypes) {
             </form>
           </div>
 
-          <div className='flex justify-end items-center gap-4'>
-            <FaBell className='text-2xl text-brand' />
-            <BsEnvelopeFill className='text-2xl text-brand' />
+          <div className='flex justify-end items-center gap-4 relative'>
+            <div className='relative'>
+              <FaBell
+                className='text-2xl text-brand cursor-pointer'
+                onClick={() => {
+                  setFeedBackPopUp((previous) => !previous);
+                }}
+              />
+              {dummyMessage.length > 0 && (
+                <img
+                  alt=''
+                  className='absolute  right-0 -top-1 w-3 h-3'
+                  src={INDICATOR}
+                />
+              )}
+            </div>
+
+            <div className='relative'>
+              <BsEnvelopeFill
+                className='text-2xl text-brand cursor-pointer'
+                onClick={() => {
+                  setMessagePopUp((previous) => !previous);
+                }}
+              />
+              {dummyMessage.length > 0 && (
+                <>
+                  <img
+                    alt=''
+                    className='absolute  -right-3 -top-3 w-6 h-6'
+                    src={INDICATOR}
+                  />
+                  <span className='text-[11.1px] text-white -top-2 -right-[5px] z-50 font-semibold absolute'>
+                    {dummyMessage.length}
+                  </span>
+                </>
+              )}
+            </div>
             <MenuDropdown />
           </div>
         </div>
+        <NotificationBox
+          data={dummyMessage}
+          handleClick={() => {
+            navigate("/notification-center");
+            setMessagePopUp(false);
+          }}
+          newMessageLength='2'
+          open={openMessagePopup}
+          style='right-[9rem] z-40 '
+          title='Feedback'
+        />
+        <NotificationBox
+          data={dummyMessage}
+          handleClick={() => {
+            navigate("/notification-center");
+            setFeedBackPopUp(false);
+          }}
+          newMessageLength='2'
+          open={openFeedBackPopup}
+          style='right-[11rem] z-40 '
+          title='Notifcations'
+        />
 
         <div className=''>
           <AiOutlineMenu

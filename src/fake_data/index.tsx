@@ -2817,3 +2817,66 @@ export const listingsdata = [
     location: "Abuja",
   },
 ];
+
+export const dummyMessage = [
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+];

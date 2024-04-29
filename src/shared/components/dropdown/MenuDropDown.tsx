@@ -69,11 +69,36 @@ export function MenuDropdown() {
                   <button
                     className={`${
                       active ? "bg-brand text-white" : "text-gray-900"
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    } group flex w-full flex-col  items-start gap-3 rounded-md px-2 py-2 text-sm  font-bold`}
                     onClick={() => navigate("#")}
                     type='button'
                   >
-                    Adewale Adedamola
+                    {currentUser?.photoUri === null ||
+                    currentUser?.photoUri === undefined ? (
+                      <>
+                        {colors && (
+                          <div
+                            className='w-[24px] h-[24px]  border-4  rounded-full flex justify-center items-center text-white font-bold'
+                            style={{
+                              backgroundColor: colors,
+                            }}
+                          >
+                            A
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <img
+                        alt=''
+                        className='w-[24px] h-[24px] z-30 rounded-full'
+                        src={currentUser?.photoUri}
+                      />
+                    )}
+                    <span
+                      className={`${active ? "text-white" : "text-darkblue"} `}
+                    >
+                      Adewale Adedamola
+                    </span>
                   </button>
                 )}
               </Menu.Item>
@@ -112,11 +137,11 @@ export function MenuDropdown() {
                   <button
                     className={`${
                       active ? "bg-brand text-white" : "text-gray-900"
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm text-branded `}
                     onClick={() => dispatch(reset())}
                     type='button'
                   >
-                    logout
+                    <span className='font-bold text-branded'> logout</span>
                   </button>
                 )}
               </Menu.Item>
