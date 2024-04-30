@@ -7,13 +7,22 @@ const SubHeaders = ({
   route,
   title,
   placeholder,
+  isthereroutes,
+  showRoutes,
 }: {
   route: string;
   title: string;
   placeholder: string;
+  isthereroutes?: boolean;
+  showRoutes?: () => void;
 }) => (
   <div className='flex justify-between items-center'>
-    <PageHeader route={route} title={title} />
+    <PageHeader
+      multiroutes={isthereroutes}
+      route={route}
+      setRoutes={showRoutes}
+      title={title}
+    />
     <SearchFilterComponent title={placeholder} />
   </div>
 );

@@ -1,19 +1,26 @@
 import {
   AIRPLANE_IMG,
+  BITCOIN,
   BOOK_IMG,
+  BOY_BACKGRD,
   CAR,
   CONE_IMG,
+  ETH_COIN,
   FARM,
+  LITE_COINS,
   MONITOR,
   PAINT_IMG,
   PAN_IMG,
+  PARTY_BACKGRD,
   PHONE,
   PHOTO_ICON,
   PROFILE_ICON,
   REPAIR_IMG,
+  SUYA_BACKGROUND,
   SWIM_IMG,
   TAP,
   TASK_IMAGE,
+  WATER_BACKGRD,
 } from "@/utils/Exports";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -2481,18 +2488,395 @@ export const highlitedata = [
 
 export const Adsdata = [
   {
+    id: "1",
     analysis: "5769",
     tags: "Account reached",
     percentage: "-63.8",
   },
   {
+    id: "2",
     analysis: "30",
     tags: "Account reached",
     percentage: "-63.8",
   },
   {
+    id: "3",
     analysis: "30",
     tags: "Profile clicked",
     percentage: "8",
+  },
+];
+
+export const productsListed = [
+  {
+    img: TASK_IMAGE,
+    name: "Medplus Surulere",
+    username: "@adedamola456",
+  },
+  {
+    img: TASK_IMAGE,
+    name: "Medplus Surulere",
+    username: "@adedamola456",
+  },
+  {
+    img: TASK_IMAGE,
+    name: "Medplus Surulere",
+    username: "@adedamola456",
+  },
+  {
+    img: TASK_IMAGE,
+    name: "Medplus Surulere",
+    username: "@adedamola456",
+  },
+  {
+    img: TASK_IMAGE,
+    name: "Medplus Surulere",
+    username: "@adedamola456",
+  },
+];
+
+export const cryptoLists = [
+  {
+    id: "1",
+    name: "BTC",
+    address: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    img: BITCOIN,
+  },
+  {
+    id: "2",
+    name: "ETH",
+    address: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    img: ETH_COIN,
+  },
+  {
+    id: "3",
+    name: "LTC",
+    address: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    img: LITE_COINS,
+  },
+];
+
+export const usertransactions = [
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+  {
+    username: "@adedamola456",
+    transaction_id: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+    date: "12/03/20",
+    amount: "500",
+  },
+];
+
+export const userActivities = [
+  {
+    title: "SUSD Purchased",
+    details: "User purchased $567 from spottr ref:",
+    link: "https;//spottradmin.8783/uynbunbjahn",
+    date: "12 Aug.",
+  },
+  {
+    title: "Fiat Deposited",
+    details: "User purchased $567 from spottr ref:",
+    link: "https;//spottradmin.8783/uynbunbjahn",
+    date: "12 Aug.",
+  },
+  {
+    title: "Phone number verified",
+    details: "Phone number verified",
+
+    date: "12 Aug.",
+  },
+  {
+    title: "Password changed",
+    details: "User updated  profile settings",
+
+    date: "12 Aug.",
+  },
+  {
+    title: "Withdreew Referral",
+    details: "user withdrew $567 from referral system",
+
+    date: "12 Aug.",
+  },
+  {
+    title: "Item Sold",
+    details:
+      "user sold Multi-Colored Children’s Sportwear. Quantity: 10  N4,800,000  ref: ",
+    link: "https;//spottradmin.8783/uynbunbjahn",
+    date: "12 Aug.",
+  },
+  {
+    title: "Item Sold",
+    details:
+      "user sold Multi-Colored Children’s Sportwear. Quantity: 10  N4,800,000  ref: ",
+    link: "https;//spottradmin.8783/uynbunbjahn",
+    date: "12 Aug.",
+  },
+];
+
+export const listingsdata = [
+  {
+    bg_image: PARTY_BACKGRD,
+    title: "Top shows in lagos",
+    location: "Lagos Dec ‘23",
+  },
+  {
+    bg_image: PARTY_BACKGRD,
+    title: "Top shows in lagos",
+    location: "Lagos Dec ‘23",
+  },
+  {
+    bg_image: WATER_BACKGRD,
+    title: "Water sport activities",
+    location: "Lagos",
+  },
+  {
+    bg_image: WATER_BACKGRD,
+    title: " Water sport activities",
+    location: "Lagos",
+  },
+
+  {
+    bg_image: BOY_BACKGRD,
+    title: "Mens party wears",
+    location: "Lagos ",
+  },
+  {
+    bg_image: BOY_BACKGRD,
+    title: "Mens party wears",
+    location: "Lagos ",
+  },
+  {
+    bg_image: SUYA_BACKGROUND,
+    title: "Suya spots",
+    location: "Abuja",
+  },
+  {
+    bg_image: SUYA_BACKGROUND,
+    title: "Suya spots",
+    location: "Abuja",
+  },
+];
+
+export const dummyMessage = [
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
+  },
+  {
+    userimg: TASK_IMAGE,
+    username: "Obinna Samuel",
+    companyname: "Multi-colored children sportswear",
+    message: "Lorem ipsum dolor sit amet, consectetur ",
   },
 ];

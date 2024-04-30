@@ -8,10 +8,17 @@ import { BsStarFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import { usersLists } from "@/fake_data";
+import ButtonV2 from "@/shared/components/buttonV2";
+import Modal from "@/shared/components/Modal";
 import SubHeaders from "@/shared/components/subheaders";
 import TableComponent from "@/shared/components/Tablecomponent";
 import ToggleSwitch from "@/shared/components/toggle_switch";
-import { ARROW_DOWN, BLUE_ARROW_DOWN, THREE_DOTS } from "@/utils/Exports";
+import {
+  ALERT_ICON,
+  ARROW_DOWN,
+  BLUE_ARROW_DOWN,
+  THREE_DOTS,
+} from "@/utils/Exports";
 
 export const userListsFilters = [
   {
@@ -41,6 +48,7 @@ export const userListsFilters = [
 ];
 function UserLists() {
   const [currentUserType, setCurrentUserType] = useState("first_type");
+  const [modal, setModal] = useState(false);
 
   const usertype: any = {
     first_type: "Regular Users",
@@ -228,7 +236,13 @@ function UserLists() {
                 >
                   Open profile
                 </span>
-                <span className='border-b pb-1 hover:text-darkblue cursor-pointer'>
+                <span
+                  className='border-b pb-1 hover:text-darkblue cursor-pointer'
+                  onClick={() => {
+                    setModal(true);
+                    setDropDown(false);
+                  }}
+                >
                   Assign referral code
                 </span>
                 <span className='border-b pb-1 hover:text-darkblue cursor-pointer'>
@@ -297,6 +311,46 @@ function UserLists() {
           selectedbox={undefined}
         />
       </div>
+      <Modal
+        edges='rounded-sm'
+        isBTnTrue
+        isClose={() => setModal(false)}
+        isOpen={modal}
+        maxWidth='w-[672px]'
+      >
+        <div className='flex items-start flex-col gap-6 px-10 pt-9 pb-8'>
+          <span className='text-[20px] font-semibold text-darkblue'>
+            Generate and assign referral code
+          </span>
+          <form action='' className='flex flex-col gap-5'>
+            <input
+              className='w-[496px] h-full py-4 px-4 rounded-md bg-[#F8F8F8] placeholder:text-[#C4C4C4] font-normal placeholder:text-[16.86px]'
+              placeholder='type username with @'
+              type='text'
+            />
+            <input
+              className='w-[496px] h-full py-4 px-4 rounded-md bg-[#F8F8F8] placeholder:text-[#C4C4C4] font-normal placeholder:text-[16.86px]'
+              placeholder='2Y388GFD'
+              type='text'
+            />
+          </form>
+
+          <div className='flex justify-start items-center gap-3'>
+            <img alt='' src={ALERT_ICON} />
+            <span className='text-[14px] text-darkblue font-normal text-start  '>
+              Lorem impsum donor sit a met short information about the chosen
+              role impsum donor sit a met short information about the chosen
+              role
+            </span>
+          </div>
+        </div>
+        <ButtonV2
+          btnStyle='bg-darkblue w-[252px] h-[53px] rounded-md mt-5 mb-4'
+          handleClick={() => {}}
+          textStyle='text-white'
+          title='Finish'
+        />
+      </Modal>
     </main>
   );
 }

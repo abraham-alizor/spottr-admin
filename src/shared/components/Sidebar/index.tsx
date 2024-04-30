@@ -41,7 +41,7 @@ const Sidebar = (props: SidebarProps) => {
     { title: "Tasks", src: TASK, path: "/tasks" },
     { title: "Ad sections", src: AD_SECTIONS, path: "/ad-sections" },
     { title: "Loans", src: LOANS, path: "/loans" },
-    { title: "Users", src: USERS, path: "/users" },
+    { title: "Users", src: USERS, path: "/userslist" },
     { title: "Help", src: HELP, path: "/help" },
     { title: "Settings", src: SETTINGS, path: "/settings" },
   ];
