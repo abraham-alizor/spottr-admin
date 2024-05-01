@@ -2880,3 +2880,129 @@ export const dummyMessage = [
     message: "Lorem ipsum dolor sit amet, consectetur ",
   },
 ];
+
+export const feedbackdata = [
+  {
+    userimag: TASK_IMAGE,
+    name: "Adewale Adedamola",
+    username: "@adedamola456",
+    feedback: "Website",
+  },
+  {
+    userimag: TASK_IMAGE,
+    name: "Adewale Adedamola",
+    username: "@adedamola456",
+    feedback: "App",
+  },
+  {
+    userimag: TASK_IMAGE,
+    name: "Adewale Adedamola",
+    username: "@adedamola456",
+    feedback: "Blog",
+  },
+  {
+    userimag: TASK_IMAGE,
+    name: "Adewale Adedamola",
+    username: "@adedamola456",
+    feedback: "Website",
+  },
+  {
+    userimag: TASK_IMAGE,
+    name: "Adewale Adedamola",
+    username: "@adedamola456",
+    feedback: "Other",
+  },
+  {
+    userimag: TASK_IMAGE,
+    name: "Adewale Adedamola",
+    username: "@adedamola456",
+    feedback: "Website",
+  },
+  {
+    userimag: TASK_IMAGE,
+    name: "Adewale Adedamola",
+    username: "@adedamola456",
+    feedback: "Website",
+  },
+];
+
+export const pushNotificationData = [
+  {
+    title: "Notification for Lorem Imspum",
+    text: "Lorem imspum dornor sit amet imspum dornor sit amet dornor sit amet dornor sit amet dornor sit amet",
+    location: "Lagos, Nigeria",
+    color: "Green",
+    bg_color: "#4DC38C",
+  },
+  {
+    title: "Notification for Lorem Imspum",
+    text: "Lorem imspum dornor sit amet imspum dornor sit amet dornor sit amet dornor sit amet dornor sit amet",
+    location: "Lagos, Nigeria",
+    color: "Green",
+    bg_color: "#4DC38C",
+  },
+  {
+    title: "Notification for Lorem Imspum",
+    text: "Lorem imspum dornor sit amet imspum dornor sit amet dornor sit amet dornor sit amet dornor sit amet",
+    location: "Lagos, Nigeria",
+    color: "Green",
+    bg_color: "#4DC38C",
+  },
+  {
+    title: "Notification for Lorem Imspum",
+    text: "Lorem imspum dornor sit amet imspum dornor sit amet dornor sit amet dornor sit amet dornor sit amet",
+    location: "Lagos, Nigeria",
+    color: "Green",
+    bg_color: "#4DC38C",
+  },
+  {
+    title: "Notification for Lorem Imspum",
+    text: "Lorem imspum dornor sit amet imspum dornor sit amet dornor sit amet dornor sit amet dornor sit amet",
+    location: "Lagos, Nigeria",
+    color: "Green",
+    bg_color: "#4DC38C",
+  },
+  {
+    title: "Notification for Lorem Imspum",
+    text: "Lorem imspum dornor sit amet imspum dornor sit amet dornor sit amet dornor sit amet dornor sit amet",
+    location: "Lagos, Nigeria",
+    color: "Green",
+    bg_color: "#4DC38C",
+  },
+  {
+    title: "Notification for Lorem Imspum",
+    text: "Lorem imspum dornor sit amet imspum dornor sit amet dornor sit amet dornor sit amet dornor sit amet",
+    location: "Lagos, Nigeria",
+    color: "Green",
+    bg_color: "#4DC38C",
+  },
+  {
+    title: "Notification for Lorem Imspum",
+    text: "Lorem imspum dornor sit amet imspum dornor sit amet dornor sit amet dornor sit amet dornor sit amet",
+    location: "Lagos, Nigeria",
+    color: "Green",
+    bg_color: "#4DC38C",
+  },
+  {
+    title: "Notification for Lorem Imspum",
+    text: "Lorem imspum dornor sit amet imspum dornor sit amet dornor sit amet dornor sit amet dornor sit amet",
+    location: "Lagos, Nigeria",
+    color: "Green",
+    bg_color: "#4DC38C",
+  },
+];
+
+export const sortbyfilters = [
+  {
+    id: "1",
+    filter: "Date",
+  },
+  {
+    id: "2",
+    filter: "Time",
+  },
+  {
+    id: "3",
+    filter: "Name",
+  },
+];

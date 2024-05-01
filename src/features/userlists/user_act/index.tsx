@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { userActivities } from "@/fake_data";
 
@@ -13,9 +15,13 @@ function UserActivities() {
               <div className='text-xs font-semibold w-[500px]'>
                 <span>{data_.details}</span>
                 {"  "}
-                <span className='text-darkblue underline'>
+                <Link
+                  className='text-darkblue underline'
+                  // @ts-ignore
+                  to={data_.link}
+                >
                   {data_.link ?? ""}
-                </span>
+                </Link>
               </div>
             </div>
             <span className='text-xs'>{data_.date}</span>

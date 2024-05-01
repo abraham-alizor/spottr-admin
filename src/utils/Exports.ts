@@ -1,3 +1,4 @@
+export { default as ACTIVE_STATUS } from "../assets/icons/active_status.svg";
 export { default as AD_SECTIONS } from "../assets/icons/adsections.svg";
 export { default as AIRPLANE_IMG } from "../assets/icons/airplane_img.svg";
 export { default as ALERT_ICON } from "../assets/icons/alert-circle.svg";
@@ -41,6 +42,7 @@ export { default as SECOND_POSITION } from "../assets/icons/dashicons_awards _2n
 export { default as FIRST_POSITION } from "../assets/icons/dashicons_awards_1st.svg";
 export { default as THIRD_POSITION } from "../assets/icons/dashicons_awards_3rd.svg";
 export { default as DENIED_ICON } from "../assets/icons/denied.png";
+export { default as DOTS_ICON } from "../assets/icons/dots_icon.svg";
 export { default as DOUBLE_CIRCLE } from "../assets/icons/double_circle.svg";
 export { default as EDIT_ICON } from "../assets/icons/edit_icon.svg";
 export { default as EMAIL_ICON } from "../assets/icons/email_icon.svg";
@@ -73,6 +75,7 @@ export { default as MEDIA_ICON } from "../assets/icons/media_icon.svg";
 export { default as MESSAGE_ICON } from "../assets/icons/message_icon.svg";
 export { default as MONITOR } from "../assets/icons/monitor.svg";
 export { default as NIGERIA_FLAG } from "../assets/icons/nigeria_flag.svg";
+export { default as NON_ACTIVE_STATUS } from "../assets/icons/non_active_status.svg";
 export { default as OPPORTUNITY } from "../assets/icons/opportunities.svg";
 export { default as PAINT_IMG } from "../assets/icons/paint_img.svg";
 export { default as PARTY_BACKGRD } from "../assets/icons/party_image.svg";
@@ -90,6 +93,7 @@ export { default as RED_ARROW } from "../assets/icons/red_arrow.svg";
 export { default as RED_ARROW_RIGHT } from "../assets/icons/red_arrow_right.svg";
 export { default as USER_ONE } from "../assets/icons/red_image.svg";
 export { default as REPORT_ICON } from "../assets/icons/report_icon.svg";
+export { default as RESOLVE_BUTTON } from "../assets/icons/resolve_button.svg";
 export { default as BLUE_RIGHT_ARROW } from "../assets/icons/right_blue_arrow.svg";
 export { default as ROUND_BLUE_ARROW } from "../assets/icons/round_arrow.svg";
 export { default as ROUND_ARROW_DOWN } from "../assets/icons/round_arrow_down.svg";
