@@ -15,7 +15,6 @@ import ToggleSwitch from "@/shared/components/toggle_switch";
 import {
   BLUE_ARROW_DOWN,
   BLUE_ARROW_LEFT,
-  BLUE_BARS,
   CHAT_ICON,
   GO_BACK,
   ROUND_BLUE,
@@ -58,9 +57,9 @@ function Settings() {
   return (
     <main className='bg-[#fbfcfe] h-full w-[100vw] py-10 px-24'>
       <div className='flex justify-between items-center'>
-        <div className='bg-white w-[30px] h-[30px] rounded-full shadow-md flex justify-center items-center p-[0.45rem]'>
+        {/* <div className='bg-white w-[30px] h-[30px] rounded-full shadow-md flex justify-center items-center p-[0.45rem]'>
           <img alt='' src={BLUE_BARS} />
-        </div>
+        </div> */}
         <div className='flex gap-6'>
           <div className='w-[262px] bg-white flex items-center justify-between h-[44px] px-3 border-[0.68px] border-[#E1EFFB]'>
             <input
@@ -94,7 +93,7 @@ function Settings() {
             </div>
           </div>
         </div>
-        <div className='flex  items-center gap-8'>
+        <div className='flex  items-center gap-8 mr-6'>
           <FaBell className='text-xl text-brand' />
           <div className='flex items-center gap-3'>
             <img alt='' src={CHAT_ICON} />

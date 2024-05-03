@@ -16,6 +16,7 @@ import AllDeals from "@/features/Opportunities/all_deals";
 import AllLists from "@/features/Opportunities/all_lists";
 import PerformancePage from "@/features/Performance";
 import ReferralsSystem from "@/features/referrals-system";
+import Settings from "@/features/Settings";
 import Tasks from "@/features/tasks";
 import CreateTask from "@/features/tasks/createtask";
 import ViewTask from "@/features/tasks/viewtask";
@@ -97,6 +98,11 @@ function MainRoutes() {
       title: "notification_center",
       path: "/notification-center",
       component: NotificationCenter,
+    },
+    {
+      title: "settings",
+      path: "/settings",
+      component: Settings,
     },
   ];
   return (

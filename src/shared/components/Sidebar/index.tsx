@@ -15,8 +15,6 @@ import {
   BAR,
   CATEGORIES,
   DASHBOARD_WHITE,
-  HELP,
-  LOANS,
   LOGO,
   OPPORTUNITY,
   SETTINGS,
@@ -40,9 +38,9 @@ const Sidebar = (props: SidebarProps) => {
     { title: "Performance", src: TRANSACTIONS, path: "/performance" },
     { title: "Tasks", src: TASK, path: "/tasks" },
     { title: "Ad sections", src: AD_SECTIONS, path: "/ad-sections" },
-    { title: "Loans", src: LOANS, path: "/loans" },
+    // { title: "Loans", src: LOANS, path: "/loans" },
     { title: "Users", src: USERS, path: "/userslist" },
-    { title: "Help", src: HELP, path: "/help" },
+    // { title: "Help", src: HELP, path: "/help" },
     { title: "Settings", src: SETTINGS, path: "/settings" },
   ];
   const isMobileView = useMediaQuery("(max-width: 640px)");
