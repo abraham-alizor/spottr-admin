@@ -143,7 +143,12 @@ const ContentManagement = () => {
               <span className='text-darkblue'>+</span>
             </div>
             <img alt='' src={LINE} />
-            <span className='text-black text-opacity-70 text-sm'>Add new</span>
+            {/* <span className='text-black text-opacity-70 text-sm'>Add new</span> */}
+            <input
+              className='text-black text-opacity-70 text-sm outline-none bg-transparent'
+              placeholder='Add new'
+              type='text'
+            />
           </div>
           {interestTab ? (
             <div className='mt-4 flex flex-col gap-5'>

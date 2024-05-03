@@ -7,6 +7,8 @@ interface Props {
   customwidth: string;
   customheight: string;
   textSize: string;
+  styling?: string;
+  unit?: string;
 }
 function Progress(props: Props) {
   const [count, setCount] = useState(0);
@@ -16,9 +18,13 @@ function Progress(props: Props) {
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (props.totalCount / 100) * circumference;
   return (
-    <div className={`relative  ${props.customwidth} ${props.customheight}`}>
+    <div
+      className={`relative  ${props.customwidth} ${props.customheight} ${props.styling} `}
+    >
       <div className='absolute inset-0 flex justify-center items-center'>
-        <span className={props.textSize}>{props.totalCount}</span>
+        <span
+          className={props.textSize}
+        >{`${props.totalCount}${props.unit}`}</span>
       </div>
       <svg className='w-full h-full' viewBox='0 0 32 32'>
         <circle
