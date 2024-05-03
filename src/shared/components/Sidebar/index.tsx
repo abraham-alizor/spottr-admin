@@ -108,7 +108,7 @@ const Sidebar = (props: SidebarProps) => {
             } bg-brand-light h-screen   pt-8 relative duration-300`}
           >
             <BiChevronRight
-              className={`font-bold text-brand absolute cursor-pointer -right-3 top-9 w-7 h-7 border-brand
+              className={`font-bold text-brand absolute cursor-pointer -right-3 top-9 w-7 h-7 border-brand z-50
            border-2 rounded-full  ${!open && "rotate-180 hidden"}`}
               onClick={() => setOpen(!open)}
             />
