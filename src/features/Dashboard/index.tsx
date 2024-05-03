@@ -5,9 +5,9 @@ import { Zoom } from "react-awesome-reveal";
 import { BiDotsHorizontal } from "react-icons/bi";
 import { BsBarChartFill, BsStarFill } from "react-icons/bs";
 
-import Count from "@/shared/components/count";
 import DropDown from "@/shared/components/dropdown/Dropdown";
 import MainChart from "@/shared/components/mainChart";
+import Progress from "@/shared/components/progress";
 import { AVATAR, BADGE } from "@/utils/Exports";
 
 function Dashboard() {
@@ -215,7 +215,15 @@ function Dashboard() {
               <div className='flex flex-col w-[48%] lg:w-[24%] max-md:ml-0 max-md:w-full'>
                 <div className='flex flex-col grow items-center text-center py-5 w-full font-semibold text-blue-900 bg-white rounded-xl shadow-2xl shadow-brand-light  max-md:mt-2'>
                   <div className='self-stretch text-sm'>Corporate accounts</div>
-                  <Count text='6m' />
+                  {/* <Count text='6m' /> */}
+                  <Progress
+                    customheight='h-8'
+                    customwidth='w-8'
+                    styling='mt-3'
+                    textSize='text-sm'
+                    totalCount={6}
+                    unit='m'
+                  />
                   <div className='mt-3 text-xs whitespace-nowrap'>
                     <span className='text-green-500 '>45 </span>
                     <span className=''>new accounts &gt;</span>
@@ -223,9 +231,17 @@ function Dashboard() {
                 </div>
               </div>
               <div className='flex flex-col  w-[48%] lg:w-[24%]'>
-                <div className='flex flex-col grow text-center py-5 w-full font-semibold text-blue-900 bg-white rounded-xl shadow-2xl shadow-brand-light  max-md:px-5 max-md:mt-2'>
+                <div className='flex flex-col grow text-center py-5 w-full font-semibold text-blue-900 bg-white rounded-xl shadow-2xl shadow-brand-light  max-md:px-5 max-md:mt-2 items-center'>
                   <div className='text-sm'>Business accounts</div>
-                  <Count text='6m' />
+                  {/* <Count text='6m' /> */}
+                  <Progress
+                    customheight='h-8'
+                    customwidth='w-8'
+                    styling='mt-3'
+                    textSize='text-sm'
+                    totalCount={6}
+                    unit='m'
+                  />
                   <div className='mt-3 text-xs whitespace-nowrap'>
                     <span className='text-green-500 '>45 </span>
                     <span className=''>new accounts &gt;</span>
@@ -233,9 +249,17 @@ function Dashboard() {
                 </div>
               </div>
               <div className='flex flex-col  w-[48%] lg:w-[24%]'>
-                <div className='flex flex-col grow text-center py-5 w-full font-semibold text-blue-900 bg-white rounded-xl shadow-2xl  shadow-brand-light max-md:px-5 max-md:mt-2'>
+                <div className='flex flex-col grow text-center py-5 w-full font-semibold text-blue-900 bg-white rounded-xl shadow-2xl  shadow-brand-light max-md:px-5 max-md:mt-2 items-center'>
                   <div className='text-sm'>Check-ins</div>
-                  <Count text='3k' />
+                  {/* <Count text='3k' /> */}
+                  <Progress
+                    customheight='h-8'
+                    customwidth='w-8'
+                    styling='mt-3'
+                    textSize='text-sm'
+                    totalCount={3}
+                    unit='k'
+                  />
                   <div className='mt-3 text-xs whitespace-nowrap'>
                     <span className='text-green-500 '>45k </span>
                     <span className=''> all time &gt;</span>
@@ -245,7 +269,15 @@ function Dashboard() {
               <div className='flex flex-col  w-[48%] lg:w-[24%]'>
                 <div className='flex flex-col grow items-center text-center py-4 w-full font-semibold text-blue-900 bg-white rounded-xl shadow-2xl shadow-brand-light max-md:px-5 max-md:mt-2'>
                   <div className='text-sm'>Ads</div>
-                  <Count text='20k' />
+                  {/* <Count text='20k' /> */}
+                  <Progress
+                    customheight='h-8'
+                    customwidth='w-8'
+                    styling='mt-3'
+                    textSize='text-sm'
+                    totalCount={20}
+                    unit='k'
+                  />
                   <div className='self-stretch mt-3 text-xs whitespace-nowrap'>
                     <span className='text-green-500 '>45</span>
                     <span className=''> new ads running &gt;</span>
