@@ -12,6 +12,7 @@ module.exports = {
       },
       backgroundImage: {
         pattern: "url('./assets/icons/pattern.svg')",
+        ring: "url('./assets/icons/green_ring.svg')",
       },
       colors: {
         brand: "#274B89",

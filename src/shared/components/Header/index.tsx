@@ -9,9 +9,10 @@ import { FaBell } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { dummyMessage } from "@/fake_data";
+import ButtonV2 from "@/shared/components/buttonV2";
 import { MenuDropdown } from "@/shared/components/dropdown/MenuDropDown";
 import NotificationBox from "@/shared/components/noticationbox";
-import { INDICATOR } from "@/utils/Exports";
+import { INDICATOR, WHITE_PLUS } from "@/utils/Exports";
 
 interface HeaderTypes {
   onMenu?: () => void;
@@ -159,11 +160,24 @@ function Header(props: HeaderTypes) {
             Referrals System
           </Link>
         </div>
-
-        <div className='flex justify-end gap-10'>
-          <a className='text-sm font-bold text-brand'>+ Create task</a>
-          <a className='text-sm font-bold text-brand '>+ add new categories</a>
-        </div>
+        {location.pathname === "/settings" ? (
+          <div>
+            <ButtonV2
+              btnStyle='bg-brand flex gap-2 flex-row-reverse items-center py-2 px-2 rounded-md '
+              handleClick={() => {}}
+              image={WHITE_PLUS}
+              textStyle='text-white text-xs'
+              title='Add new'
+            />
+          </div>
+        ) : (
+          <div className='flex justify-end gap-10'>
+            <a className='text-sm font-bold text-brand'>+ Create task</a>
+            <a className='text-sm font-bold text-brand '>
+              + add new categories
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

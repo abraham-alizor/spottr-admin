@@ -234,7 +234,7 @@ function Profile() {
             </span>
           </div>
           <div className='mr-8 mt-6'>
-            <Barcharts data={barchartData} />
+            <Barcharts data={barchartData} height={175} width={398} />
 
             <div className='flex gap-10'>
               <div className='flex gap-2 items-center'>

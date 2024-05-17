@@ -9,10 +9,18 @@ import {
   YAxis,
 } from "recharts";
 
-function Barcharts({ data }: any) {
+function Barcharts({
+  data,
+  height,
+  width,
+}: {
+  data: any;
+  height: number;
+  width: number;
+}) {
   return (
     <div>
-      <BarChart data={data} height={175} width={398}>
+      <BarChart data={data} height={height} width={width}>
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='name' />
         <YAxis />
