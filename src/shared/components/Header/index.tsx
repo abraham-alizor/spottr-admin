@@ -172,10 +172,18 @@ function Header(props: HeaderTypes) {
           </div>
         ) : (
           <div className='flex justify-end gap-10'>
-            <a className='text-sm font-bold text-brand'>+ Create task</a>
-            <a className='text-sm font-bold text-brand '>
-              + add new categories
-            </a>
+            <ButtonV2
+              btnStyle=''
+              handleClick={() => {}}
+              textStyle='text-sm font-bold text-brand'
+              title='+ Create task'
+            />
+            <ButtonV2
+              btnStyle=''
+              handleClick={() => {}}
+              textStyle='text-sm font-bold text-brand'
+              title='  + add new categories'
+            />
           </div>
         )}
       </div>

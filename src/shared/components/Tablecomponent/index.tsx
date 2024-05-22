@@ -121,6 +121,7 @@ function TableComponent({
           ))}
           {pageOptions.length > 3 ? (
             <button
+              className={canNextPage ? "text-darkblue" : "text-lightgrey"}
               disabled={!canNextPage}
               onClick={() => nextPage()}
               type='button'
