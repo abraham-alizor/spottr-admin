@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import TransactionActivities from "@/features/userlists/transaction_act";
 import UserActivities from "@/features/userlists/user_act";
@@ -27,7 +26,7 @@ const subnavLinks = [
 function UserProfile() {
   const [selected, setSelected] = useState("user-profile");
   const [modal, setModal] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const sections =
     selected === "user-profile" ? (

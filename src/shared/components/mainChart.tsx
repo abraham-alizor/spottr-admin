@@ -11,8 +11,6 @@ import {
   YAxis,
 } from "recharts";
 
-import { useMediaQuery } from "@/hooks";
-
 export interface MainChartTypes {
   data: {
     name: string;
@@ -20,25 +18,25 @@ export interface MainChartTypes {
   }[];
 }
 
-const CustomBar = (props: any) => {
-  const { x, y, width, height, fill } = props;
-  return (
-    <g>
-      <path
-        d={`M${x},${y + height} 
-				 L${x},${y + 8} 
-				 Q${x},${y} ${x + 8},${y} 
-				 L${x + width - 8},${y} 
-				 Q${x + width},${y} ${x + width},${y + 8} 
-				 L${x + width},${y + height} Z`}
-        fill={fill}
-      />
-    </g>
-  );
-};
+// const CustomBar = (props: any) => {
+//   const { x, y, width, height, fill } = props;
+//   return (
+//     <g>
+//       <path
+//         d={`M${x},${y + height}
+// 				 L${x},${y + 8}
+// 				 Q${x},${y} ${x + 8},${y}
+// 				 L${x + width - 8},${y}
+// 				 Q${x + width},${y} ${x + width},${y + 8}
+// 				 L${x + width},${y + height} Z`}
+//         fill={fill}
+//       />
+//     </g>
+//   );
+// };
 function MainChart({ data }: MainChartTypes) {
-  const isMobileView = useMediaQuery("(max-width: 640px)");
-  const isTabletView = useMediaQuery("(max-width: 840px)");
+  // const isMobileView = useMediaQuery("(max-width: 640px)");
+  // const isTabletView = useMediaQuery("(max-width: 840px)");
 
   return (
     <Zoom>

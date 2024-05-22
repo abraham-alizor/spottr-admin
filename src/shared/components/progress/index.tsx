@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // this is specially made by me
 
@@ -11,8 +11,6 @@ interface Props {
   unit?: string;
 }
 function Progress(props: Props) {
-  const [count, setCount] = useState(0);
-
   // const percentage = (count / props.totalCount) * 100;
   const radius = 10;
   const circumference = 2 * Math.PI * radius;

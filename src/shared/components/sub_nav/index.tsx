@@ -6,7 +6,7 @@ interface NavLinksProps {
 }
 interface Props {
   navLinks: NavLinksProps[];
-  selected: any;
+  selected?: any;
   handleSelected: (value: string) => void;
   gutter: string;
   textsize?: string;

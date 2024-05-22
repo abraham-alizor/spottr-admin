@@ -21,6 +21,7 @@ function App() {
           path='/*'
         />
       </Routes>
+
       <Toaster position='top-right' reverseOrder={false} />
     </>
   );

@@ -81,7 +81,7 @@ const Sidebar = (props: SidebarProps) => {
               </div>
 
               <ul className={`pt-6  `}>
-                {Menus.map((Menu, index) => (
+                {Menus.map((Menu) => (
                   <li
                     className={`flex flex-row px-5 rounded-md mt-2 p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4  ${location.pathname === Menu?.path ? "bg-brand text-white" : "text-gray-600"} `}
                     key={Menu.title}

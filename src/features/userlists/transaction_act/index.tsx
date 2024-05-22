@@ -23,12 +23,12 @@ function TransactionActivities({
 }) {
   const navigate = useNavigate();
   const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
-  const [settlementModal, setsettlementModal] = useState(false);
+
   const [walletModal, setWalletModal] = useState(false);
   const [sendModal, setSendModal] = useState(false);
   const [selectedWallet, setSelectedWallet] = useState("");
   const [setPinModal, setSetPinModal] = useState(false);
-  const [dropdown, setDropDown] = useState(false);
+
   const [inProgressModal, setInProgressModal] = useState(false);
 
   const handleProceed = () => {
@@ -209,7 +209,6 @@ function TransactionActivities({
         sendModal={sendModal}
         setPinModal={setPinModal}
         setProcessModal={() => setInProgressModal(false)}
-        setSelectedWallet={setSelectedWallet}
         setSendModal={() => setSendModal(false)}
         setSetPinModal={() => setSetPinModal(false)}
         setSettleModal={() => setModal(false)}

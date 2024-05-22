@@ -1,10 +1,12 @@
 import "./index.css";
 
 import ReactDOM from "react-dom/client";
+import { QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 
+import { queryClient } from "@/config";
 import { DebitProvider } from "@/context/useContext";
 
 import App from "./App";
@@ -17,9 +19,11 @@ root.render(
   <PersistGate persistor={persistor}>
     <Provider store={Store}>
       <DebitProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </QueryClientProvider>
       </DebitProvider>
     </Provider>
   </PersistGate>,

@@ -233,7 +233,6 @@ const Wallet = () => {
         sendModal={sendModal}
         setPinModal={setPinModal}
         setProcessModal={() => setInProgressModal(false)}
-        setSelectedWallet={setSelectedWallet}
         setSendModal={() => setSendModal(false)}
         setSetPinModal={() => setSetPinModal(false)}
         setSettleModal={() => setsettlementModal(false)}

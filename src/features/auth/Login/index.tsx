@@ -2,15 +2,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { BsArrowLeft } from "react-icons/bs";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
+import { useAppDispatch } from "@/hooks";
+import { LoginApi } from "@/services/auth/auth.service";
 import Button from "@/shared/components/button";
 import Input from "@/shared/components/form/Input";
 import AuthLayout from "@/shared/Layouts/AuthLayout";
+import { setToken, setUser } from "@/states/slices/authReducer";
 import { FACEBOOK, GOOGLE } from "@/utils/Exports";
 
 interface FormData {
@@ -32,11 +37,34 @@ const Login: React.FC = () => {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
+  const loginMutation = useMutation(LoginApi);
   const navigate = useNavigate();
-  const submitForm = (data: FormData) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
-    navigate("/dashboard");
+  const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const submitForm = async (data: FormData) => {
+    setLoading(true);
+    try {
+      const response = await loginMutation.mutateAsync(data);
+
+      if (response) {
+        toast.success(response.message, {
+          duration: 7000, // Duration for which the toast is displayed (in milliseconds)
+        });
+
+        // eslint-disable-next-line no-console
+        setLoading(false);
+
+        dispatch(setUser(response.data.admin));
+
+        dispatch(setToken(response.data.token));
+        navigate("/dashboard");
+      }
+    } catch (error: any) {
+      setLoading(false);
+      toast.error(error?.response?.data?.message, {
+        duration: 10_000,
+      });
+    }
   };
 
   return (
@@ -98,11 +126,11 @@ const Login: React.FC = () => {
         <Button
           bgColor='bg-brand'
           className=' mb-2  mt-12 w-full py-4 rounded-lg'
+          isLoading={loading}
           onClick={handleSubmit(submitForm)}
           textColor='text-white'
           title='Continue'
           type='button'
-          // isLoading={isLoading}
         />
       </form>
     </AuthLayout>

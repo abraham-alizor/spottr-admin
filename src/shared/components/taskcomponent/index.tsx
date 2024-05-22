@@ -35,6 +35,13 @@ const TaskComponent = ({
   setSelectedBox,
 }: Props) => {
   const navigate = useNavigate();
+
+  // eslint-disable-next-line no-console
+  console.log(selectedStatus);
+
+  // eslint-disable-next-line no-console
+  console.log(setSelectedBox);
+
   return (
     <main className='grid grid-cols-3 gap-5 mt-5 '>
       {taskData.map((data: TaskData) => (

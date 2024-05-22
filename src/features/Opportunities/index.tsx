@@ -122,6 +122,10 @@ function Opportunities() {
       return null;
     }
   };
+
+  const handleSelected = (parameter: any) => {
+    setSelected(parameter);
+  };
   return (
     <main className='mx-8 mt-6 relative'>
       <SubHeaders
@@ -137,7 +141,7 @@ function Opportunities() {
       <div className='mt-16 relative flex justify-between items-center'>
         <SubNav
           gutter='gap-[4rem]'
-          handleSelected={() => {}}
+          handleSelected={handleSelected}
           navLinks={navLinks}
           selected={selected}
         />

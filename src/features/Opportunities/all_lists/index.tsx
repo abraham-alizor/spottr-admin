@@ -65,6 +65,7 @@ function AllLists() {
 
     reader.readAsDataURL(imageFile);
   };
+  console.log(selectedImage);
 
   return (
     <main className='mx-8 mt-6 relative mb-20'>

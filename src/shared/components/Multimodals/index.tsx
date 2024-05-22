@@ -44,7 +44,7 @@ interface MultiModalProps {
   setProcessModal: () => void;
   handleClick: () => void;
   selectedWallet: string;
-  setSelectedWallet: (string_: string) => void;
+  // setSelectedWallet: (string_: string) => void;
   handleSelectWallet: (string_: string) => void;
   handleBack: () => void;
   handleSend: () => void;
@@ -64,7 +64,6 @@ const TransactionsModals = ({
   setSendModal,
   handleClick,
   selectedWallet,
-  setSelectedWallet,
   handleSelectWallet,
   handleBack,
   handleSend,

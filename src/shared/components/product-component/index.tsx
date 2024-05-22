@@ -18,7 +18,7 @@ interface Props {
   handleSelector?: any;
   selectedBox?: any;
   performedAction?: string;
-  selectedAction?: string;
+  // selectedAction?: string;
 }
 const ProductComponent = ({
   product,
@@ -32,7 +32,6 @@ const ProductComponent = ({
   selectedBox,
   handleSelector,
   performedAction,
-  selectedAction,
 }: Props) => (
   <div className={`grid ${displayStyle} relative`}>
     {product.map((data: any) => (

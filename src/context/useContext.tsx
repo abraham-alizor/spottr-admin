@@ -1,7 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 
-"use client";
-
 import React, { createContext, useContext, useState } from "react";
 
 interface Props {

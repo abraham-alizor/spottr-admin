@@ -258,7 +258,7 @@ const ReferralsSystem = () => {
         },
       },
     ],
-    [],
+    [selectedBox],
   );
 
   return (

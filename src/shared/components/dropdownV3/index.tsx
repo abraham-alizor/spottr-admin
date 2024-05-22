@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Transition } from "@headlessui/react";
-import React, { useState } from "react";
+import React from "react";
 
 interface DropDownV3Types {
   isOpen: boolean;
@@ -13,8 +13,6 @@ interface DropDownV3Types {
   setSelected: (string: string) => void;
 }
 function DropDownV3(props: DropDownV3Types) {
-  const [state, setState] = useState("");
-
   return (
     <Transition
       as='div'

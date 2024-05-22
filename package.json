@@ -1,5 +1,5 @@
 {
-  "name": "rvs-court",
+  "name": "spottr-admin",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +19,7 @@
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "autosuggest-highlight": "^3.3.4",
-    "axios": "^1.4.0",
+    "axios": "^1.7.2",
     "dompurify": "^3.0.5",
     "dotenv": "^16.1.4",
     "jwt-decode": "^3.1.2",
