@@ -9,9 +9,11 @@
 /* eslint-disable consistent-return */
 import React, { useState } from "react";
 import { FaPlus, FaTimes, FaTrash } from "react-icons/fa";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 import { template, users_tasks } from "@/fake_data";
+import { TaskApi } from "@/services/tasks/task.service";
 import ActionModal from "@/shared/components/actionmodal";
 import ButtonV2 from "@/shared/components/buttonV2";
 import Modal from "@/shared/components/Modal";
@@ -58,6 +60,11 @@ function Tasks() {
   const filteredTasks = taskData.filter(
     (data) => data.status === selectedStatus,
   );
+  const { data: allTasks, isLoading, refetch } = useQuery("tasks", TaskApi);
+
+  // eslint-disable-next-line no-console
+  console.log(allTasks);
+
   // const statusUpdate = users_tasks.find((data) => data.status);
   const handleStatusChange = (status: string) => {
     setSelectedStatus(status);
@@ -197,7 +204,7 @@ function Tasks() {
         selectedStatus={selectedStatus}
         selectorBox={selectorBox}
         setSelectedBox={setSelectedBoxes}
-        taskData={filteredTasks}
+        taskData={allTasks}
       />
       <Modal
         edges='rounded-md'

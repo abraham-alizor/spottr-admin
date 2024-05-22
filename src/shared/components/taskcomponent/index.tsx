@@ -5,19 +5,9 @@ import React from "react";
 import { FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-import { COIN, GRAY_DOT, SLOT_ICON } from "@/utils/Exports";
+import { Task } from "@/services/tasks/types";
+import { COIN, GRAY_DOT, SLOT_ICON, TASK_IMAGE } from "@/utils/Exports";
 
-interface TaskData {
-  id: string | number;
-  title: string;
-  img: string;
-  price_tag: string;
-  slot_left: string;
-  time: string;
-  location: string;
-  pending: string;
-  status: string;
-}
 interface Props {
   taskData: any;
   selectedStatus: string;
@@ -44,21 +34,21 @@ const TaskComponent = ({
 
   return (
     <main className='grid grid-cols-3 gap-5 mt-5 '>
-      {taskData.map((data: TaskData) => (
+      {taskData?.map((data: Task) => (
         <div
           className='bg-white border-2 rounded-lg relative hover:cursor-pointer'
-          key={data.status}
+          key={data.id}
         >
           <div className='flex flex-col gap-3 py-3 px-3'>
             <div className='flex gap-4 border-b-2 pb-1'>
               <div>
-                <img alt='' height={80} src={data.img} width={80} />
+                <img alt='' height={80} src={TASK_IMAGE} width={80} />
               </div>
               <div className='flex flex-col gap-5'>
                 <div className='flex flex-col items-start'>
                   <span className='font-semibold'>{data.title}</span>
                   <span className='text-[10px] bg-[#ECF7FF] p-1 rounded-md'>
-                    {data.price_tag}
+                    {data.rewardFee}
                   </span>
                 </div>
                 {selectorBox && (
@@ -97,25 +87,27 @@ const TaskComponent = ({
               <div className='flex items-center gap-2'>
                 <img alt='' height={10} src={SLOT_ICON} width={10} />
                 <span className='text-[10px] text-lightgrey'>
-                  {data.slot_left}
+                  {data?.slotsLeft}
                 </span>
                 <img alt='' height={5} src={GRAY_DOT} width={5} />
-                <span className='text-[10px] text-lightgrey'>{data.time}</span>
+                <span className='text-[10px] text-lightgrey'>
+                  {data?.duration}
+                </span>
                 <img alt='' height={5} src={GRAY_DOT} width={5} />
                 <span className='text-[10px] text-lightgrey'>
-                  {data.location}
+                  Lagos, Nigeria
                 </span>
               </div>
               <div>
-                {data.status === "new" ? (
+                {data.status === "New" ? (
                   <span className='text-[#FF4B3E] text-sm font-medium'>
                     02:33min left
                   </span>
-                ) : data.status === "active" ? (
+                ) : data.status === "Active" ? (
                   <span className='text-brown bg-lightbrown bg-opacity-15 text-sm p-2 rounded-lg'>
                     Active
                   </span>
-                ) : data.status === "completed" ? (
+                ) : data.status === "Completed" ? (
                   <span className='text-dimgreen bg-lightergreen bg-opacity-15 text-sm p-1 rounded-lg'>
                     Completed
                   </span>
