@@ -9,8 +9,7 @@ import { usePagination, useTable } from "react-table";
 
 function TableComponent({
   data,
-  handleSelectedBox,
-  selectedbox,
+
   COLUNMS,
 }: {
   data: any;
@@ -18,7 +17,6 @@ function TableComponent({
   COLUNMS: any;
   handleSelectedBox: (id: any) => void;
 }) {
-  const [boxes, setBoxes] = useState(false);
   const columns = useMemo(() => COLUNMS, [COLUNMS]);
 
   const {
@@ -123,6 +121,7 @@ function TableComponent({
           ))}
           {pageOptions.length > 3 ? (
             <button
+              className={canNextPage ? "text-darkblue" : "text-lightgrey"}
               disabled={!canNextPage}
               onClick={() => nextPage()}
               type='button'

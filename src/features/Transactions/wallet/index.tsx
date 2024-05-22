@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from "react";
-import { FaArrowDown, FaArrowUp, FaEye } from "react-icons/fa";
+import { FaArrowDown, FaArrowUp, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import { deposit } from "@/fake_data";
@@ -33,7 +33,7 @@ const Wallet = () => {
   const [setPinModal, setSetPinModal] = useState(false);
   const [dropdown, setDropDown] = useState(false);
   const [inProgressModal, setInProgressModal] = useState(false);
-
+  const [showdigits, setShowDigits] = useState(true);
   const handleProceed = () => {
     setsettlementModal(false);
     setWalletModal(true);
@@ -198,10 +198,20 @@ const Wallet = () => {
               <div className='flex flex-col gap-3'>
                 <span className='text-white'>Current Balance</span>
                 <span className='font-semibold text-white text-xl'>
-                  N3,847,895
+                  {showdigits ? " N3,847,895" : "******"}
                 </span>
               </div>
-              <FaEye className='text-sm text-white' />
+              {showdigits ? (
+                <FaEye
+                  className='text-sm text-white cursor-pointer'
+                  onClick={() => setShowDigits(false)}
+                />
+              ) : (
+                <FaEyeSlash
+                  className='text-sm text-white cursor-pointer'
+                  onClick={() => setShowDigits(true)}
+                />
+              )}
             </div>
             <div className='flex flex-col gap-3 justify-center items-center'>
               <ButtonV2

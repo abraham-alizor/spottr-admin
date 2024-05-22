@@ -355,7 +355,9 @@ const TransactionsModals = ({
               <span className='text-sm text-darkblue'>
                 Select payment method
               </span>
-              <span className='text-darkblue font-[700] text-[12px]'>Back</span>
+              <span className='text-darkblue font-[700] text-[12px] cursor-pointer'>
+                Back
+              </span>
             </div>
             <div className='flex flex-col gap-6'>
               <div className='flex justify-between border-b pb-4 cursor-pointer'>
@@ -399,7 +401,7 @@ const TransactionsModals = ({
                 Bank Transfer
               </span>
               <span
-                className='font-[700] text-[12px] text-darkblue'
+                className='font-[700] text-[12px] text-darkblue cursor-pointer'
                 onClick={() => {
                   setTransferModal(false);
                   setPaymentMethodModal(true);
@@ -435,7 +437,7 @@ const TransactionsModals = ({
               />
 
               {isCopied && (
-                <span className='absolute right-0 bg-white rounded-md p-2 shadow-custom'>
+                <span className='absolute right-0 bg-white text-green-400 rounded-md p-2 shadow-custom'>
                   copied to clipboard
                 </span>
               )}

@@ -120,27 +120,27 @@ function PushNotification() {
         </div>
         <form action='' className='flex flex-col gap-5 mt-4'>
           <input
-            className='w-full bg-[#F8F8F8] rounded-md px-3 py-5 placeholder:text-[12px] placeholder:text-[#C4C4C4]'
+            className='w-full bg-[#F8F8F8] outline-none  rounded-md px-3 py-5 placeholder:text-[12px] placeholder:text-[#C4C4C4]'
             placeholder='Announcement text'
             type='text'
           />
           <input
-            className='w-full bg-[#F8F8F8] rounded-md px-3 py-5 placeholder:text-[12px] placeholder:text-[#C4C4C4]'
+            className='w-full bg-[#F8F8F8] outline-none  rounded-md px-3 py-5 placeholder:text-[12px] placeholder:text-[#C4C4C4]'
             placeholder='Highlight text'
             type='text'
           />
           <input
-            className='w-full bg-[#F8F8F8] rounded-md px-3 py-5 placeholder:text-[12px] placeholder:text-[#C4C4C4]'
+            className='w-full bg-[#F8F8F8]  outline-none rounded-md px-3 py-5 placeholder:text-[12px] placeholder:text-[#C4C4C4]'
             placeholder='Announcement category'
             type='text'
           />
           <input
-            className='w-full bg-[#F8F8F8] rounded-md px-3 py-5 placeholder:text-[12px] placeholder:text-[#C4C4C4]'
+            className='w-full bg-[#F8F8F8]  outline-none rounded-md px-3 py-5 placeholder:text-[12px] placeholder:text-[#C4C4C4]'
             placeholder='Target page link'
             type='text'
           />
           <input
-            className='w-full bg-[#F8F8F8] rounded-md px-3 py-5 placeholder:text-[12px] placeholder:text-[#C4C4C4]'
+            className='w-full bg-[#F8F8F8] outline-none  rounded-md px-3 py-5 placeholder:text-[12px] placeholder:text-[#C4C4C4]'
             placeholder='Publish location'
             type='text'
           />
