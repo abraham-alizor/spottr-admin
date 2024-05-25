@@ -5,10 +5,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from "react";
+import { useQuery } from "react-query";
 
 import { cryptoLists, dropdowndata } from "@/fake_data";
 import { currencyLists } from "@/features/Settings";
 import useCopyToClipboard from "@/hooks/CopyHook";
+import { GetFiatAllCurencies } from "@/services/fiat-currencies/fiat.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import CurrencyBox from "@/shared/components/currencybox";
 import DropDownV3 from "@/shared/components/dropdownV3";
@@ -79,6 +81,14 @@ const TransactionsModals = ({
   const [TransferModal, setTransferModal] = useState(false);
   const [isCopied, copyToClipboard] = useCopyToClipboard();
   const [cliptokensModal, setClipTokensModal] = useState(false);
+  const {
+    data: allfiatcurrencies,
+    isLoading,
+    refetch,
+  } = useQuery("fiat-curencies", GetFiatAllCurencies);
+
+  // eslint-disable-next-line no-console
+  console.log(allfiatcurrencies);
 
   const handlecryptosModal = () => {
     setSetPinModal();
