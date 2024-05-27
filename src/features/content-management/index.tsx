@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 /* eslint-disable no-console */
 /* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable unused-imports/no-unused-vars */
@@ -74,33 +75,42 @@ const ContentManagement = () => {
     isLoading,
     refetch,
   } = useQuery("interests", GetInterestApi);
+
+  console.log(interests);
+
   const postInterest = useMutation(CreateInterestApi);
 
+  const parseUrlToOriginalState = (url: string) => {
+    const urlString = new URL(url);
+    return decodeURIComponent(urlString.pathname.slice(1));
+  };
+
   const handleImageChange = (event: any) => {
-    // onchange for the image upload
     const imageFile = event.target.files[0];
-    setSelectedImage(imageFile);
-
-    const reader = new FileReader();
-
-    reader.addEventListener("load", () => {
-      if (typeof reader.result === "string") {
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setSelectedImage(base64String);
         // @ts-ignore
-        setPreviewImage(reader.result);
-      }
-    });
-
-    reader.readAsDataURL(imageFile);
+        setPreviewImage(base64String);
+      };
+      reader.readAsDataURL(imageFile);
+    }
   };
 
   const handleCreateInterest = async () => {
+    const formatAsUrl = (string_: string) =>
+      `https://example.com/${encodeURIComponent(string_)}`;
+
     const formdata = new FormData();
 
-    formdata.append("name", name);
+    formdata.append("name", formatAsUrl(name));
 
-    formdata.append("description", description);
+    formdata.append("description", formatAsUrl(description));
+
     // @ts-ignore
-    formdata.append("displayImage", selectedImage);
+    formdata.append("displayImage", formatAsUrl(selectedImage));
     try {
       const response = await postInterest.mutateAsync(formdata);
       if (response) {
@@ -110,11 +120,7 @@ const ContentManagement = () => {
     } catch (error: any) {
       toast.error(error?.response?.data?.message);
     }
-
-    console.log(formdata);
   };
-
-  // console.log(selectedImage);
 
   const handleSelector = (id: any) => {
     setSelectedBox((prevboxes: any[]) => {
