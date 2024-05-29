@@ -12,7 +12,6 @@ import toast from "react-hot-toast";
 import { FaCheck, FaPlus, FaTimes } from "react-icons/fa";
 import { useMutation, useQuery } from "react-query";
 
-import { interestData } from "@/fake_data";
 import {
   Informationals,
   Onboarding,
@@ -21,6 +20,7 @@ import {
 } from "@/features/content-management/contents";
 import {
   CreateInterestApi,
+  DeleteInterestApi,
   GetInterestApi,
 } from "@/services/interest/interest.service";
 import ButtonV2 from "@/shared/components/buttonV2";
@@ -64,10 +64,9 @@ const ContentManagement = () => {
   const [modal, setModal] = useState(false);
   const [selectorBox, setSelectorBox] = useState(false);
   const [selectedBox, setSelectedBox] = useState<any>([]);
-  const [data, setData] = useState(interestData);
   const [deleteModal, setDeleteModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [previewImage, setPreviewImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<any>([]);
+  // const [previewImage, setPreviewImage] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const {
@@ -75,27 +74,47 @@ const ContentManagement = () => {
     isLoading,
     refetch,
   } = useQuery("interests", GetInterestApi);
+  const [data, setData] = useState(interests);
 
   console.log(interests);
 
   const postInterest = useMutation(CreateInterestApi);
+  const deleteInterest = useMutation(DeleteInterestApi);
 
   const parseUrlToOriginalState = (url: string) => {
     const urlString = new URL(url);
     return decodeURIComponent(urlString.pathname.slice(1));
   };
 
-  const handleImageChange = (event: any) => {
-    const imageFile = event.target.files[0];
-    if (imageFile) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setSelectedImage(base64String);
-        // @ts-ignore
-        setPreviewImage(base64String);
-      };
-      reader.readAsDataURL(imageFile);
+  // const handleImageChange = (event: any) => {
+  //   const imageFile = event.target.files[0];
+  //   if (imageFile) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       const base64String = reader.result as string;
+  //       setSelectedImage(base64String);
+  //       // @ts-ignore
+  //       setPreviewImage(base64String);
+  //     };
+  //     reader.readAsDataURL(imageFile);
+  //   }
+  // };
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files && event.target.files[0];
+
+    if (selectedFile) {
+      // VALIDATING ABOVE 1MB
+
+      if (selectedFile.size > 1_000_000) {
+        setSelectedImage([]);
+      } else {
+        setSelectedImage([
+          Object.assign(selectedFile, {
+            preview: URL.createObjectURL(selectedFile),
+          }),
+        ]);
+      }
     }
   };
 
@@ -110,7 +129,7 @@ const ContentManagement = () => {
     formdata.append("description", formatAsUrl(description));
 
     // @ts-ignore
-    formdata.append("displayImage", formatAsUrl(selectedImage));
+    formdata.append("displayImage", selectedImage[0]);
     try {
       const response = await postInterest.mutateAsync(formdata);
       if (response) {
@@ -122,6 +141,10 @@ const ContentManagement = () => {
     }
   };
 
+  const previewimage = selectedImage.map((item: any) => (
+    <img alt='' src={item?.preview} />
+  ));
+
   const handleSelector = (id: any) => {
     setSelectedBox((prevboxes: any[]) => {
       if (prevboxes.includes(id)) {
@@ -131,14 +154,34 @@ const ContentManagement = () => {
     });
   };
 
-  const handleDelete = () => {
-    const updatedData = data.filter((_data) => !selectedBox.includes(_data.id));
+  const handleDelete = async () => {
+    try {
+      // wait for all the delete API calls to complete
+      await Promise.all(
+        selectedBox.map(async (id: string) => {
+          const response = await deleteInterest.mutateAsync(id);
 
-    setData(updatedData);
-    setSelectedBox([]);
-    setSelectorBox(false);
-    setDeleteModal(false);
+          if (response) {
+            toast.success(response?.message);
+          }
+        }),
+      );
+
+      // Filter out deleted items from the data
+      const updatedData = data?.filter(
+        (_data: any) => !selectedBox.includes(_data.id),
+      );
+      setData(updatedData);
+
+      // Clear selection and other states
+      setSelectedBox([]);
+      setSelectorBox(false);
+      setDeleteModal(false);
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
   };
+
   const handleTitleSelect = (title_: string) => {
     setSelectedTab(title_);
 
@@ -471,13 +514,13 @@ const ContentManagement = () => {
             onClick={() => document.querySelector(".image-input").click()}
           >
             <div className='flex flex-col justify-center items-center w-[50px] h-[50px] rounded-md border border-darkblue'>
-              {previewImage ? (
-                <img alt='' height={20} src={previewImage} width={20} />
+              {selectedImage.length > 0 ? (
+                previewimage
               ) : (
                 <img alt='' height={20} src={UPLOAG_IMAGE_ICON} width={20} />
               )}
             </div>
-            {!previewImage && (
+            {selectedImage.length === 0 && (
               <span className='text-sn font-normal text-darkblue'>
                 Upload icon
               </span>
