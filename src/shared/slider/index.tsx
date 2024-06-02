@@ -11,12 +11,18 @@ function calculateValue(value: number) {
   return value; // Since we're using days directly, no need for calculations
 }
 
-export default function NonLinearSlider() {
-  const [value, setValue] = React.useState<number>(1); // Initial value set to 1 day
+interface NonLinearSliderProps {
+  duration: number;
+  setDuration: (value: number) => void;
+}
 
+const NonLinearSlider: React.FC<NonLinearSliderProps> = ({
+  duration,
+  setDuration,
+}: NonLinearSliderProps) => {
   const handleChange = (event: Event, newValue: number | number[]) => {
     if (typeof newValue === "number") {
-      setValue(newValue);
+      setDuration(newValue);
     }
   };
 
@@ -28,7 +34,7 @@ export default function NonLinearSlider() {
         id='non-linear-slider'
         sx={{ fontSize: "3rem", fontWeight: 600 }}
       >
-        {valueLabelFormat(value)}
+        {valueLabelFormat(duration)}
       </Typography>
       <Slider
         aria-labelledby='non-linear-slider'
@@ -38,10 +44,12 @@ export default function NonLinearSlider() {
         onChange={handleChange}
         scale={calculateValue}
         step={1}
-        value={value}
+        value={duration}
         valueLabelDisplay='auto'
         valueLabelFormat={valueLabelFormat}
       />
     </Box>
   );
-}
+};
+
+export default NonLinearSlider;

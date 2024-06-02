@@ -1,11 +1,14 @@
+/* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-sort-props */
 /* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 import { dropdowndata } from "@/fake_data";
+import { CreateTaskApi } from "@/services/tasks/task.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import DropDownV3 from "@/shared/components/dropdownV3";
 import ModalV2 from "@/shared/components/modalV2";
@@ -21,15 +24,98 @@ import {
   TASK_IMAGE,
 } from "@/utils/Exports";
 
+const participantsdata = [
+  {
+    id: "1",
+    label: 1,
+  },
+  {
+    id: "2",
+    label: 2,
+  },
+  {
+    id: "3",
+    label: 3,
+  },
+  {
+    id: "3",
+    label: 4,
+  },
+  {
+    id: "3",
+    label: 5,
+  },
+  {
+    id: "3",
+    label: 6,
+  },
+  {
+    id: "3",
+    label: 7,
+  },
+  {
+    id: "3",
+    label: 8,
+  },
+  {
+    id: "3",
+    label: 9,
+  },
+  {
+    id: "3",
+    label: 10,
+  },
+];
+const typedata = [
+  {
+    id: "1",
+    label: "Basic",
+  },
+  {
+    id: "2",
+    label: "Premium",
+  },
+  {
+    id: "3",
+    label: "VIP",
+  },
+];
 const CreateTask = () => {
   const [modal, setModal] = useState(false);
   const [sucess, setSucess] = useState(true);
   const [dropdown1, setDropDown1] = useState(false);
   const [dropdown2, setDropDown2] = useState(false);
   const [dropdown3, setDropDown3] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [selected1, setSelected1] = useState("");
   const [selected2, setSelected2] = useState("");
   const [selected3, setSelected3] = useState("");
+  const [duration, setDuration] = useState(0);
+
+  const handleCreateTask = async () => {
+    try {
+      const taskdata = {
+        title,
+        description,
+        rewardFee: 100,
+        type: selected1,
+        duration,
+        productId: "e1309df8-0e7e-4331-8734-75ecd2a17103",
+        maxParticipants: selected2,
+        transactionPin: "1234",
+      };
+
+      const response = await CreateTaskApi(taskdata);
+      if (response) {
+        toast.success(response?.message, {
+          duration: 7000,
+        });
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   return (
     <main className='mx-6 mt-5 mb-64'>
@@ -98,6 +184,11 @@ const CreateTask = () => {
                 className='w-full h-[54px] bg-[#F8F8F8] px-3 rounded-md outline-none placeholder:text-lg placeholder:text-[#C4C4C4]'
                 placeholder='Type a good name'
                 type='text'
+                name='title'
+                onChange={(event_: React.ChangeEvent<HTMLInputElement>) =>
+                  setTitle(event_.target.value)
+                }
+                value={title}
               />
             </div>
 
@@ -113,7 +204,11 @@ const CreateTask = () => {
               <textarea
                 className='outline-none bg-[#F8F8F8] w-full p-5 placeholder:text-lg placeholder:text-[#C4C4C4] rounded-md'
                 cols={30}
-                name=''
+                name='description'
+                value={description}
+                onChange={(event_: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setDescription(event_.target.value)
+                }
                 placeholder='Write something...'
                 rows={10}
               />
@@ -163,7 +258,7 @@ const CreateTask = () => {
               <DropDownV3
                 isOpen={dropdown1}
                 setSelected={setSelected1}
-                data={dropdowndata}
+                data={typedata}
                 width='w-full'
                 isClose={() => setDropDown1(false)}
                 classname='top-[3rem]'
@@ -180,7 +275,7 @@ const CreateTask = () => {
               <DropDownV3
                 isOpen={dropdown2}
                 setSelected={setSelected2}
-                data={dropdowndata}
+                data={participantsdata}
                 width='w-full'
                 isClose={() => setDropDown2(false)}
                 classname='top-[3rem]'
@@ -209,7 +304,10 @@ const CreateTask = () => {
                 For how many days?
               </span>
               <div className='flex justify-center items-center mt-7'>
-                <NonLinearSlider />
+                <NonLinearSlider
+                  duration={duration}
+                  setDuration={setDuration}
+                />
               </div>
             </div>
           </div>
@@ -259,7 +357,7 @@ const CreateTask = () => {
             />
             <ButtonV2
               btnStyle='w-full bg-darkblue h-[7vh]'
-              handleClick={() => {}}
+              handleClick={handleCreateTask}
               textStyle='text-white font-medium'
               title='Yes'
             />

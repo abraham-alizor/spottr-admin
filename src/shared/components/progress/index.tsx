@@ -22,7 +22,7 @@ function Progress(props: Props) {
       <div className='absolute inset-0 flex justify-center items-center'>
         <span
           className={props.textSize}
-        >{`${props.totalCount}${props.unit}`}</span>
+        >{`${props.totalCount}${props.unit || ""}`}</span>
       </div>
       <svg className='w-full h-full' viewBox='0 0 32 32'>
         <circle

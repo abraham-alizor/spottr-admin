@@ -1,10 +1,16 @@
+/* eslint-disable no-new */
+/* eslint-disable no-console */
+/* eslint-disable unicorn/consistent-function-scoping */
+/* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Transition } from "@headlessui/react";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { FaCheck, FaPlus, FaTimes } from "react-icons/fa";
+import { useMutation, useQuery } from "react-query";
 
 import { interestData } from "@/fake_data";
 import {
@@ -13,6 +19,10 @@ import {
   TermsAndCondition,
   Trays,
 } from "@/features/content-management/contents";
+import {
+  CreateInterestApi,
+  GetInterestApi,
+} from "@/services/interest/interest.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import Modal from "@/shared/components/Modal";
 import ModalV2 from "@/shared/components/modalV2";
@@ -56,6 +66,61 @@ const ContentManagement = () => {
   const [selectedBox, setSelectedBox] = useState<any>([]);
   const [data, setData] = useState(interestData);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const {
+    data: interests,
+    isLoading,
+    refetch,
+  } = useQuery("interests", GetInterestApi);
+
+  console.log(interests);
+
+  const postInterest = useMutation(CreateInterestApi);
+
+  const parseUrlToOriginalState = (url: string) => {
+    const urlString = new URL(url);
+    return decodeURIComponent(urlString.pathname.slice(1));
+  };
+
+  const handleImageChange = (event: any) => {
+    const imageFile = event.target.files[0];
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setSelectedImage(base64String);
+        // @ts-ignore
+        setPreviewImage(base64String);
+      };
+      reader.readAsDataURL(imageFile);
+    }
+  };
+
+  const handleCreateInterest = async () => {
+    const formatAsUrl = (string_: string) =>
+      `https://example.com/${encodeURIComponent(string_)}`;
+
+    const formdata = new FormData();
+
+    formdata.append("name", formatAsUrl(name));
+
+    formdata.append("description", formatAsUrl(description));
+
+    // @ts-ignore
+    formdata.append("displayImage", formatAsUrl(selectedImage));
+    try {
+      const response = await postInterest.mutateAsync(formdata);
+      if (response) {
+        toast.success(response?.message);
+        setModal(false);
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   const handleSelector = (id: any) => {
     setSelectedBox((prevboxes: any[]) => {
@@ -74,11 +139,11 @@ const ContentManagement = () => {
     setSelectorBox(false);
     setDeleteModal(false);
   };
-  const handleTitleSelect = (title: string) => {
-    setSelectedTab(title);
+  const handleTitleSelect = (title_: string) => {
+    setSelectedTab(title_);
 
     const renderedConponent = contents.find(
-      (item) => item.title === title,
+      (item) => item.title === title_,
     )?.component;
     // @ts-ignore
     setSelectedComponent(renderedConponent || null);
@@ -152,7 +217,7 @@ const ContentManagement = () => {
           </div>
           {interestTab ? (
             <div className='mt-4 flex flex-col gap-5'>
-              {data.map((data_) => (
+              {interests?.data?.map((data_: any) => (
                 <div
                   className='flex gap-5 items-center border-b pb-3'
                   key={data_.id}
@@ -170,10 +235,15 @@ const ContentManagement = () => {
                     </div>
                   )}
                   <div className='w-[31px] h-[31px] bg-[#ECF7FF] rounded-full flex justify-center items-center'>
-                    <img alt='' height={20} src={data_.img} width={20} />
+                    <img
+                      alt=''
+                      height={20}
+                      src={data_.displayImage}
+                      width={20}
+                    />
                   </div>
                   <span className='font-medium text-darkblue'>
-                    {data_.title}
+                    {data_.name}
                   </span>
                 </div>
               ))}
@@ -401,21 +471,31 @@ const ContentManagement = () => {
             onClick={() => document.querySelector(".image-input").click()}
           >
             <div className='flex flex-col justify-center items-center w-[50px] h-[50px] rounded-md border border-darkblue'>
-              <img alt='' height={20} src={UPLOAG_IMAGE_ICON} width={20} />
+              {previewImage ? (
+                <img alt='' height={20} src={previewImage} width={20} />
+              ) : (
+                <img alt='' height={20} src={UPLOAG_IMAGE_ICON} width={20} />
+              )}
             </div>
-            <span className='text-sn font-normal text-darkblue'>
-              Upload icon
-            </span>
+            {!previewImage && (
+              <span className='text-sn font-normal text-darkblue'>
+                Upload icon
+              </span>
+            )}
             <input
               accept='*/image/*'
-              className='image-input'
-              hidden
+              className='image-input sr-only'
+              onChange={handleImageChange}
               type='file'
             />
           </div>
           <div>
             <input
-              className='w-full px-4 placeholder:text-darkblue text-sm bg-input_color mt-5 py-4 rounded-md'
+              className='w-full px-4 outline-none placeholder:text-darkblue text-sm bg-input_color mt-5 py-4 rounded-md'
+              name='name'
+              onChange={(event_: React.ChangeEvent<HTMLInputElement>) =>
+                setName(event_.target.value)
+              }
               placeholder='New interest name'
               type='text'
             />
@@ -423,7 +503,7 @@ const ContentManagement = () => {
           <div>
             <ButtonV2
               btnStyle='bg-darkblue w-[252px] h-[53px] my-12 rounded-md'
-              handleClick={() => {}}
+              handleClick={handleCreateInterest}
               textStyle='text-white'
               title='Add interest'
             />
