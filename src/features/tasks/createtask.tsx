@@ -4,10 +4,14 @@
 /* eslint-disable react/jsx-sort-props */
 /* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from "react";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useQuery } from "react-query";
+import { useSearchParams } from "react-router-dom";
 
 import { dropdowndata } from "@/fake_data";
+import { ProductByIdApi } from "@/services/product/service";
 import { CreateTaskApi } from "@/services/tasks/task.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import DropDownV3 from "@/shared/components/dropdownV3";
@@ -21,51 +25,9 @@ import {
   MAP_PIC,
   POLYGON,
   RING_BLUE,
-  TASK_IMAGE,
 } from "@/utils/Exports";
+import { formatCurrency } from "@/utils/functions";
 
-const participantsdata = [
-  {
-    id: "1",
-    label: 1,
-  },
-  {
-    id: "2",
-    label: 2,
-  },
-  {
-    id: "3",
-    label: 3,
-  },
-  {
-    id: "3",
-    label: 4,
-  },
-  {
-    id: "3",
-    label: 5,
-  },
-  {
-    id: "3",
-    label: 6,
-  },
-  {
-    id: "3",
-    label: 7,
-  },
-  {
-    id: "3",
-    label: 8,
-  },
-  {
-    id: "3",
-    label: 9,
-  },
-  {
-    id: "3",
-    label: 10,
-  },
-];
 const typedata = [
   {
     id: "1",
@@ -84,14 +46,28 @@ const CreateTask = () => {
   const [modal, setModal] = useState(false);
   const [sucess, setSucess] = useState(true);
   const [dropdown1, setDropDown1] = useState(false);
-  const [dropdown2, setDropDown2] = useState(false);
+
   const [dropdown3, setDropDown3] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selected1, setSelected1] = useState("");
-  const [selected2, setSelected2] = useState("");
+
   const [selected3, setSelected3] = useState("");
+  const [participants, setParticipants] = useState("");
   const [duration, setDuration] = useState(0);
+  const [urlParams] = useSearchParams();
+  const productId = urlParams.get("idref");
+
+  const { data: product, refetch: productRefetch } = useQuery(
+    ["productsID", productId],
+    () => ProductByIdApi(productId),
+  );
+
+  useEffect(() => {
+    if (productId) {
+      productRefetch();
+    }
+  }, [productId]);
 
   const handleCreateTask = async () => {
     try {
@@ -101,8 +77,8 @@ const CreateTask = () => {
         rewardFee: 100,
         type: selected1,
         duration,
-        productId: "e1309df8-0e7e-4331-8734-75ecd2a17103",
-        maxParticipants: selected2,
+        productId: product?.id,
+        maxParticipants: participants,
         transactionPin: "1234",
       };
 
@@ -120,61 +96,65 @@ const CreateTask = () => {
   return (
     <main className='mx-6 mt-5 mb-64'>
       <PageHeader title='Tasks' route='/tasks' />
-      <div className='flex gap-5  mt-5'>
-        <div className='relative max-w-[350px] h-full'>
-          <img alt='' height={350} src={MAP_PIC} width={350} />
-          <div className='bg-white w-[21vw] h-[20vh] shadow-lg absolute right-7 top-0 mt-[8rem] rounded-md p-4 '>
-            <div className='border-b py-3'>
-              <div className='flex gap-2'>
-                <img alt='' height={30} src={RING_BLUE} width={30} />
-                <div className='flex flex-col gap-1'>
-                  <span className='text-sm font-medium'>Camry</span>
-                  <span className='text-[10px] text-lightgrey'>Searches</span>
+      <div className='md:flex gap-5  mt-5'>
+        {product !== undefined && (
+          <div className='relative max-w-[350px] h-full'>
+            <img alt='' height={350} src={MAP_PIC} width={350} />
+            <div className='bg-white max-w-[350px]   h-[20vh] shadow-lg absolute right-3 md:right-7 top-0 mt-[8rem] rounded-md p-4 '>
+              <div className='border-b py-3'>
+                <div className='flex gap-2'>
+                  <img alt='' height={30} src={RING_BLUE} width={30} />
+                  <div className='flex flex-col gap-1'>
+                    <span className='text-sm font-medium'>{product?.name}</span>
+                    <span className='text-[10px] text-lightgrey'>Searches</span>
+                  </div>
+                </div>
+                <div className='absolute right-3 -top-3 flex flex-col justify-center items-center'>
+                  <img
+                    alt='task'
+                    className='rounded-full border-4 border-[#C2E0FF]'
+                    height={50}
+                    src={product.images[0]}
+                    width={50}
+                  />
+                  <span className='text-xs'>Godstime John</span>
                 </div>
               </div>
-              <div className='absolute right-3 -top-3 flex flex-col justify-center items-center'>
-                <img
-                  alt='task'
-                  className='rounded-full border-4 border-[#C2E0FF]'
-                  height={50}
-                  src={TASK_IMAGE}
-                  width={50}
-                />
-                <span className='text-xs'>Godstime John</span>
+              <div className='flex gap-1 mt-1 items-center'>
+                <span className='text-[10px] text-lightgrey'>
+                  {product?.address}
+                </span>
+                <img alt='' height={5} src={GRAY_DOT} width={5} />
+
+                <span className='text-[10px] text-lightgrey'>
+                  {moment(product.updatedAt).format("Do MMM, YYYY |  HH:MM A ")}
+                </span>
+
+                <span className='text-darkblue text-[10px] bg-[#274B893D] p-1 ml-4 rounded-md'>
+                  Accepted
+                </span>
               </div>
             </div>
-            <div className='flex gap-1 mt-1 items-center'>
-              <span className='text-[10px] text-lightgrey'>Lagos, Nigeria</span>
-              <img alt='' height={5} src={GRAY_DOT} width={5} />
-
-              <span className='text-[10px] text-lightgrey'>
-                03 Aug 2020 : 01:05PM
-              </span>
-
-              <span className='text-darkblue text-[10px] bg-[#274B893D] p-1 ml-4 rounded-md'>
-                Accepted
-              </span>
+            <div className='mt-36 flex justify-center items-center flex-col'>
+              <div className='flex items-center'>
+                <span className='text-3xl text-darkblue font-medium'>
+                  {formatCurrency({
+                    iso: "en-ng",
+                    slug: product?.currency,
+                  }).format(product?.amount || 0)}
+                </span>
+                <span className='text-sm text-lightgrey'>/ Kg</span>
+              </div>
+              <div className='mt-6'>
+                <span className='text-xs font-medium'>Description:</span>
+                <p className='mt-7 text-sm text-lightgrey'>
+                  {product?.description}
+                </p>
+              </div>
             </div>
           </div>
-          <div className='mt-36 flex justify-center items-center flex-col'>
-            <div className='flex items-center'>
-              <span className='text-3xl text-darkblue font-medium'>
-                N4,800,000
-              </span>
-              <span className='text-sm text-lightgrey'>/ Kg</span>
-            </div>
-            <div className='mt-6'>
-              <span className='text-xs font-medium'>Description:</span>
-              <p className='mt-7 text-sm text-lightgrey'>
-                For regular goods for good exchange, the exchange area shows a
-                list of goods that have been indicated for trading and then any
-                user who has a new good to be traded for another comes to the
-                exchange and indicates their good.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className='bg-white border border-[#E1EFFB] w-full h-full p-7 rounded-md'>
+        )}
+        <div className='bg-white border border-[#E1EFFB] w-full h-full mt-4 md:mt-0 p-7 rounded-md'>
           <form action='' className='flex flex-col gap-7'>
             <div className='flex flex-col gap-6'>
               <label className='text-xs text-darkblue' htmlFor='text'>
@@ -220,7 +200,7 @@ const CreateTask = () => {
             </span>
           </form>
         </div>
-        <div className='bg-white border border-[#E1EFFB] w-full p-7 rounded-md flex flex-col gap-6 '>
+        <div className='bg-white border border-[#E1EFFB] w-full p-7 mt-4 md:mt-0 rounded-md flex flex-col gap-6 '>
           <span className='text-xs text-darkblue'>Input task reward fee</span>
           <div className='mt-6 flex justify-center items-center flex-col  gap-10'>
             <div className='flex justify-center items-end  gap-5'>
@@ -250,7 +230,7 @@ const CreateTask = () => {
                 className='bg-[#ECF7FF] w-full flex justify-between p-4 rounded-md cursor-pointer'
                 onClick={() => setDropDown1((previous) => !previous)}
               >
-                <span className='text-[#C4C4C4]'>
+                <span className='text-[#959595]'>
                   {selected1 || "Task Type"}
                 </span>
                 <img alt='' height={10} src={GRAY_POLYGON} width={10} />
@@ -263,28 +243,22 @@ const CreateTask = () => {
                 isClose={() => setDropDown1(false)}
                 classname='top-[3rem]'
               />
-              <div
-                className='bg-[#ECF7FF] w-full flex justify-between p-4 cursor-pointer rounded-md'
-                onClick={() => setDropDown2((previous) => !previous)}
-              >
-                <span className='text-[#C4C4C4]'>
-                  {selected2 || "Set max participant"}
-                </span>
-                <img alt='' height={10} src={GRAY_POLYGON} width={10} />
-              </div>
-              <DropDownV3
-                isOpen={dropdown2}
-                setSelected={setSelected2}
-                data={participantsdata}
-                width='w-full'
-                isClose={() => setDropDown2(false)}
-                classname='top-[3rem]'
+
+              <input
+                className='w-full h-[54px] text-[#959595] bg-[#ECF7FF]  px-3 rounded-md outline-none placeholder:text-lg placeholder:text-[#C4C4C4]'
+                placeholder='Set max participant'
+                type='number'
+                name='title'
+                onChange={(event_: React.ChangeEvent<HTMLInputElement>) =>
+                  setParticipants(event_.target.value)
+                }
+                value={participants}
               />
               <div
                 className='bg-[#ECF7FF] w-full flex justify-between cursor-pointer p-4 rounded-md'
                 onClick={() => setDropDown3((previous) => !previous)}
               >
-                <span className='text-[#C4C4C4]'>
+                <span className='text-[#959595]'>
                   {selected3 || "Set Location"}
                 </span>
                 <img alt='' height={10} src={GRAY_POLYGON} width={10} />
@@ -315,7 +289,7 @@ const CreateTask = () => {
       </div>
       <div className='float-end my-6 flex gap-4'>
         <ButtonV2
-          btnStyle='border border-[#3670D4] rounded-md py-3 px-6  w-[8vw]'
+          btnStyle='border border-[#3670D4] rounded-md py-3 px-6  lg:w-40'
           handleClick={() => {}}
           icon={undefined}
           iconStyle=''
@@ -323,7 +297,7 @@ const CreateTask = () => {
           title='Cancel'
         />
         <ButtonV2
-          btnStyle='bg-darkblue  rounded-md py-3 px-6 w-[8vw]'
+          btnStyle='bg-darkblue  rounded-md py-3 px-6 lg:w-40'
           handleClick={() => setModal(true)}
           icon={undefined}
           iconStyle=''

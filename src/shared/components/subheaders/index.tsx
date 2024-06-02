@@ -16,7 +16,7 @@ const SubHeaders = ({
   isthereroutes?: boolean;
   showRoutes?: () => void;
 }) => (
-  <div className='flex justify-between items-center'>
+  <div className='lg:flex justify-between items-center'>
     <PageHeader
       multiroutes={isthereroutes}
       route={route}

@@ -24,7 +24,7 @@ const SubNav = ({
     {navLinks.map((links) => (
       <div>
         <button
-          className={` text-[#274B89] ${textsize}  py-3 px-5  ${selected === links.state && "border-b-2 relative border-darkblue"} transition-all duration-500`}
+          className={` text-[#274B89] ${textsize}  py-3 px-0 lg:px-5  ${selected === links.state && "border-b-2 relative border-darkblue"} transition-all duration-500`}
           key={links.state}
           onClick={() => {
             handleSelected(links.state);

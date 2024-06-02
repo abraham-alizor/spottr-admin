@@ -12,7 +12,8 @@ import { FaPlus, FaTimes, FaTrash } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
-import { template, users_tasks } from "@/fake_data";
+import { users_tasks } from "@/fake_data";
+import { ProductApi } from "@/services/product/service";
 import { TaskApi } from "@/services/tasks/task.service";
 import ActionModal from "@/shared/components/actionmodal";
 import ButtonV2 from "@/shared/components/buttonV2";
@@ -61,9 +62,10 @@ function Tasks() {
     (data) => data.status === selectedStatus,
   );
   const { data: allTasks, isLoading, refetch } = useQuery("tasks", TaskApi);
-
-  // eslint-disable-next-line no-console
-  console.log(allTasks);
+  const { data: allProducts, refetch: productRefetch } = useQuery(
+    "products",
+    ProductApi,
+  );
 
   // const statusUpdate = users_tasks.find((data) => data.status);
   const handleStatusChange = (status: string) => {
@@ -72,7 +74,7 @@ function Tasks() {
 
   const handleNavigate = () => {
     if (selectedTemplate) {
-      navigate("/tasks/create-task");
+      navigate(`/tasks/create-task?idref=${selectedTemplate}`);
     } else return null;
   };
 
@@ -97,9 +99,9 @@ function Tasks() {
   };
 
   return (
-    <main className='mx-10 my-5'>
+    <main className='px-4 lg:px-10 my-5 overflow-hidden'>
       <SubHeaders placeholder='tasks' route='/dashboard' title='Tasks' />
-      <div className='flex gap-5 relative'>
+      <div className='mt-3 lg:mt-0 flex gap-5 relative overflow-x-auto'>
         <div className='flex flex-col items-center gap-2'>
           <img alt='img' src={USER_ONE} />
           <img
@@ -149,18 +151,18 @@ function Tasks() {
           </div>
         </div>
       </div>
-      <div className='mt-7 relative flex justify-between items-center'>
+      <div className='mt-7 relative lg:flex justify-between items-center'>
         <SubNav
           gutter='gap-[4rem]'
           handleSelected={handleStatusChange}
           navLinks={navLinks}
           selected={selectedStatus}
         />
-        <div className='flex gap-10 items-center'>
+        <div className='flex gap-2 lg:gap-10 items-center mt-4 lg:mt-0'>
           {selectorBox ? (
             <>
               <ButtonV2
-                btnStyle='flex gap-6 items-center border border-[#FF4B3E]  border-opacity-15 rounded-lg py-3 px-5'
+                btnStyle='flex gap-6 items-center border border-[#FF4B3E]  border-opacity-15 rounded-lg py-3 px-3 lg:px-5'
                 handleClick={() => setSelectorkBox(false)}
                 icon={<FaTimes />}
                 iconStyle='text-xs  text-[#FF4B3E] ml-7'
@@ -168,18 +170,18 @@ function Tasks() {
                 title='Cancel'
               />
               <ButtonV2
-                btnStyle='flex gap-6 items-center w-[13vw] border border-[#FF4B3E] border-opacity-15 rounded-lg py-3 px-5'
+                btnStyle='flex gap-6 items-center lg:w-[13vw] border border-[#FF4B3E] border-opacity-15 rounded-lg py-3 px-3 lg:px-5'
                 handleClick={() => setDeleteModal(true)}
                 icon={<FaTrash />}
                 iconStyle='text-xs text-[#FF4B3E] '
-                textStyle='text-sm text-[#FF4B3E]'
+                textStyle='text-xs lg:text-sm text-[#FF4B3E]'
                 title='Delete selected'
               />
             </>
           ) : (
             <>
               <ButtonV2
-                btnStyle='flex gap-6 items-center border border-[#3670D4] border-opacity-15 rounded-lg py-3 px-5'
+                btnStyle='flex  gap-6 items-center border border-[#3670D4] border-opacity-15 rounded-lg py-3 px-3 lg:px-5'
                 handleClick={() => setModal(true)}
                 icon={<FaPlus />}
                 iconStyle='text-xs text-[#3670D4]'
@@ -187,10 +189,10 @@ function Tasks() {
                 title='Create a new task'
               />
               <ButtonV2
-                btnStyle='flex gap-6 items-center w-[13vw] border border-[#FF4B3E] border-opacity-15 rounded-lg py-3 px-5'
+                btnStyle='flex gap-6  items-center lg:w-[13vw] border border-[#FF4B3E] border-opacity-15 rounded-lg py-3 px-3 lg:px-5'
                 handleClick={() => setSelectorkBox(true)}
                 icon={<FaTimes />}
-                iconStyle='text-xs text-[#FF4B3E] ml-7'
+                iconStyle='text-xs text-[#FF4B3E] lg:ml-7'
                 textStyle='text-sm text-[#FF4B3E]'
                 title='Delete Task'
               />
@@ -220,14 +222,16 @@ function Tasks() {
           <span className='text-xl font-medium text-lightblue'>
             Choose Available Products
           </span>
+
           <ProductComponent
             componentStyle='bg-white shadow-lg rounded-lg flex gap-4 p-2 hover:scale-110 transition-all duration-200 cursor-pointer'
             displayStyle='grid-cols-2 gap-7'
             gutter='gap-[6rem]'
-            product={template}
+            product={allProducts}
             selected={selectedTemplate}
             setSelected={setSelectedTemplate}
           />
+
           <ButtonV2
             btnStyle='rounded-md bg-darkblue w-[20vw] p-4 mt-10'
             handleClick={handleNavigate}

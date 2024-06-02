@@ -5,12 +5,13 @@ import React from "react";
 import { FaCheck, FaCheckCircle } from "react-icons/fa";
 
 import { DENIED_ICON, STOP_ICON } from "@/utils/Exports";
+import { formatCurrency } from "@/utils/functions";
 
 interface Props {
   product: any;
   displayStyle: string;
   selected?: any;
-  setSelected?: (id: any) => void;
+  setSelected: ((id: any) => void) | any;
   componentStyle: string;
   gutter: string;
   fontWeight?: string;
@@ -34,15 +35,13 @@ const ProductComponent = ({
   performedAction,
 }: Props) => (
   <div className={`grid ${displayStyle} relative`}>
-    {product.map((data: any) => (
+    {product?.map((data: any) => (
       <div
         className={`${componentStyle} ${selected === data.id ? "scale-110" : ""}`}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         onClick={() => setSelected(data.id)}
       >
         <div>
-          <img alt='' height={65} src={data.img} width={65} />
+          <img alt='' height={65} src={data.images[0]} width={65} />
         </div>
         {selectorBox === true ? (
           <div
@@ -79,20 +78,22 @@ const ProductComponent = ({
         </div>
 
         <div className='flex flex-col items-start'>
-          <span className=' font-semibold text-[#061E48]'>{data.title}</span>
+          <span className=' font-semibold text-[#061E48]'>{data.name}</span>
           <div className='flex flex-col items-start'>
             <span className={`text-[10px] text-skyblue font-${fontWeight} `}>
-              {data.service}
+              Food Service
             </span>
-            <span className='text-[10px]'>{data.company}</span>
+            <span className='text-[10px]'>Coker & Sons Ltd.</span>
           </div>
           <div className={`mt-5 flex ${gutter} `}>
             <span className={`text-[10px] text-[#AAB4C3] font-${fontWeight} `}>
-              {data.location}
+              {data?.address}
             </span>
             <span className={`text-[10px] font-${fontWeight} `}>
               <span className='bg-[#DDE6F6] text-darkblue p-1 rounded-md'>
-                {data.price_tag}{" "}
+                {formatCurrency({ iso: "en-ng", slug: data?.currency }).format(
+                  data?.amount || 0,
+                )}
               </span>
               <span className='text-[#AAB4C3] ml-[2px]'> {" / day"}</span>
             </span>

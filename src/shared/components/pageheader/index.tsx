@@ -27,7 +27,7 @@ const PageHeader = ({
   return (
     <div className='flex gap-5 items-center'>
       <button
-        className='flex gap-6 items-center'
+        className=' hidden lg:flex gap-6 items-center'
         onClick={() => navigate(route)}
         type='button'
       >
