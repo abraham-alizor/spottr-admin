@@ -4,7 +4,9 @@ import React, { useState } from "react";
 import { Zoom } from "react-awesome-reveal";
 import { BiDotsHorizontal } from "react-icons/bi";
 import { BsBarChartFill, BsStarFill } from "react-icons/bs";
+import { useQuery } from "react-query";
 
+import { DashboardApi } from "@/services/dashboard/service";
 import DropDown from "@/shared/components/dropdown/Dropdown";
 import MainChart from "@/shared/components/mainChart";
 import Progress from "@/shared/components/progress";
@@ -12,6 +14,10 @@ import { AVATAR, BADGE } from "@/utils/Exports";
 
 function Dashboard() {
   const [data, setData] = useState<string>("Last 30 days");
+  const { data: dashboardData, refetch } = useQuery("DASHBOARD", DashboardApi);
+
+  // eslint-disable-next-line no-console
+  console.log(dashboardData);
 
   const chartData = {
     "Last 30 days": [

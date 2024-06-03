@@ -34,21 +34,23 @@ const ProductComponent = ({
   handleSelector,
   performedAction,
 }: Props) => (
-  <div className={`grid ${displayStyle} relative`}>
+  <div className={`md:grid ${displayStyle} relative`}>
     {product?.map((data: any) => (
       <div
-        className={`${componentStyle} ${selected === data.id ? "scale-110" : ""}`}
-        onClick={() => setSelected(data.id)}
+        className={`${componentStyle} ${selected === data?.id ? "scale-110" : ""} `}
+        onClick={() => setSelected(data?.id)}
       >
-        <div>
-          <img alt='' height={65} src={data.images[0]} width={65} />
-        </div>
+        {data?.images?.length > 0 && (
+          <div>
+            <img alt='' height={65} src={data?.images[0]} width={65} />
+          </div>
+        )}
         {selectorBox === true ? (
           <div
             className='w-5 h-5 rounded-md flex justify-center items-center  border-2 border-darkblue absolute right-0 top-0 cursor-pointer z-30'
-            onClick={() => handleSelector(data.id)}
+            onClick={() => handleSelector(data?.id)}
           >
-            {selectedBox.includes(data.id) ? (
+            {selectedBox.includes(data?.id) ? (
               <span className='text-darkblue text-sm z-30'>
                 <FaCheck />
               </span>
@@ -65,20 +67,21 @@ const ProductComponent = ({
         )}
 
         <div className='absolute right-1'>
-          {performedAction === "approve" && selectedBox.includes(data.id) ? (
+          {performedAction === "approve" && selectedBox.includes(data?.id) ? (
             <span className='text-green-500'>
               {" "}
               <FaCheckCircle />
             </span>
-          ) : performedAction === "stop" && selectedBox.includes(data.id) ? (
+          ) : performedAction === "stop" && selectedBox.includes(data?.id) ? (
             <img alt='' height={20} src={STOP_ICON} width={20} />
-          ) : performedAction === "decline" && selectedBox.includes(data.id) ? (
+          ) : performedAction === "decline" &&
+            selectedBox.includes(data?.id) ? (
             <img alt='' height={20} src={DENIED_ICON} width={20} />
           ) : null}
         </div>
 
         <div className='flex flex-col items-start'>
-          <span className=' font-semibold text-[#061E48]'>{data.name}</span>
+          <span className=' font-semibold text-[#061E48]'>{data?.name}</span>
           <div className='flex flex-col items-start'>
             <span className={`text-[10px] text-skyblue font-${fontWeight} `}>
               Food Service
@@ -90,11 +93,14 @@ const ProductComponent = ({
               {data?.address}
             </span>
             <span className={`text-[10px] font-${fontWeight} `}>
-              <span className='bg-[#DDE6F6] text-darkblue p-1 rounded-md'>
-                {formatCurrency({ iso: "en-ng", slug: data?.currency }).format(
-                  data?.amount || 0,
-                )}
-              </span>
+              {data?.currency && (
+                <span className='bg-[#DDE6F6] text-darkblue p-1 rounded-md'>
+                  {formatCurrency({
+                    iso: "en-ng",
+                    slug: data?.currency,
+                  }).format(data?.amount || 0)}
+                </span>
+              )}
               <span className='text-[#AAB4C3] ml-[2px]'> {" / day"}</span>
             </span>
           </div>

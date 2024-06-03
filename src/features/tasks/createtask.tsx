@@ -26,7 +26,6 @@ import {
   POLYGON,
   RING_BLUE,
 } from "@/utils/Exports";
-import { formatCurrency } from "@/utils/functions";
 
 const typedata = [
   {
@@ -74,12 +73,12 @@ const CreateTask = () => {
       const taskdata = {
         title,
         description,
-        rewardFee: 100,
+        rewardFee: 340_000,
         type: selected1,
         duration,
         productId: product?.id,
         maxParticipants: participants,
-        transactionPin: "1234",
+        // transactionPin: "1234",
       };
 
       const response = await CreateTaskApi(taskdata);
@@ -138,10 +137,10 @@ const CreateTask = () => {
             <div className='mt-36 flex justify-center items-center flex-col'>
               <div className='flex items-center'>
                 <span className='text-3xl text-darkblue font-medium'>
-                  {formatCurrency({
+                  {/* {formatCurrency({
                     iso: "en-ng",
-                    slug: product?.currency,
-                  }).format(product?.amount || 0)}
+                    slug: product?.currency || "NGN",
+                  }).format(product?.amount || 0)} */}
                 </span>
                 <span className='text-sm text-lightgrey'>/ Kg</span>
               </div>

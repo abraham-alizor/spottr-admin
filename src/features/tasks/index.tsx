@@ -219,19 +219,20 @@ function Tasks() {
         maxWidth='w-[850px]'
       >
         <div className='my-8 flex flex-col gap-3 items-center'>
-          <span className='text-xl font-medium text-lightblue'>
+          <span className=' text-xl font-medium text-lightblue'>
             Choose Available Products
           </span>
 
-          <ProductComponent
-            componentStyle='bg-white shadow-lg rounded-lg flex gap-4 p-2 hover:scale-110 transition-all duration-200 cursor-pointer'
-            displayStyle='grid-cols-2 gap-7'
-            gutter='gap-[6rem]'
-            product={allProducts}
-            selected={selectedTemplate}
-            setSelected={setSelectedTemplate}
-          />
-
+          {allProducts?.length > 0 && (
+            <ProductComponent
+              componentStyle='bg-white mb-4 md:mb-0 shadow-lg rounded-lg flex gap-4 p-2 hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer'
+              displayStyle='grid-cols-2 gap-7'
+              gutter='gap-[6rem]'
+              product={allProducts}
+              selected={selectedTemplate}
+              setSelected={setSelectedTemplate}
+            />
+          )}
           <ButtonV2
             btnStyle='rounded-md bg-darkblue w-[20vw] p-4 mt-10'
             handleClick={handleNavigate}
