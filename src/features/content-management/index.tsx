@@ -23,6 +23,7 @@ import {
   DeleteInterestApi,
   GetInterestApi,
 } from "@/services/interest/interest.service";
+import { CreatetermsAndConditon } from "@/services/terms/service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import Modal from "@/shared/components/Modal";
 import ModalV2 from "@/shared/components/modalV2";
@@ -58,6 +59,7 @@ const contents = [
 ];
 const ContentManagement = () => {
   const [selectedTab, setSelectedTab] = useState("");
+  const [text, setText] = useState("");
   const [tipsTab, setTipsTab] = useState(true);
   const [interestTab, setInterestTab] = useState(false);
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -75,9 +77,7 @@ const ContentManagement = () => {
     refetch,
   } = useQuery("interests", GetInterestApi);
   const [data, setData] = useState(interests);
-
-  console.log(interests);
-
+  const termsMutation = useMutation(CreatetermsAndConditon);
   const postInterest = useMutation(CreateInterestApi);
   const deleteInterest = useMutation(DeleteInterestApi);
 
@@ -192,6 +192,21 @@ const ContentManagement = () => {
     setSelectedComponent(renderedConponent || null);
     setTipsTab(false);
   };
+
+  const createTerms = async () => {
+    const formData = new FormData();
+    formData.append("text", text);
+
+    try {
+      // @ts-ignore
+      const response = await termsMutation.mutateAsync(formData);
+      if (response) {
+        toast.success(response?.message);
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
   return (
     <main className='mx-7 mt-7 mb-28'>
       <SubHeaders
@@ -247,15 +262,22 @@ const ContentManagement = () => {
       >
         <div>
           <div className='flex gap-5 items-center border-b w-[290px] border-[#E7E7E7] pb-4'>
-            <div className='w-[31px] h-[31px] rounded-full bg-[#ECF7FF] flex justify-center items-center'>
+            <div
+              className='w-[31px] h-[31px] rounded-full bg-[#ECF7FF] flex justify-center items-center'
+              onClick={createTerms}
+            >
               <span className='text-darkblue'>+</span>
             </div>
             <img alt='' src={LINE} />
             {/* <span className='text-black text-opacity-70 text-sm'>Add new</span> */}
             <input
               className='text-black text-opacity-70 text-sm outline-none bg-transparent'
+              onChange={(event_: React.ChangeEvent<HTMLInputElement>) =>
+                setText(event_.target.value)
+              }
               placeholder='Add new'
               type='text'
+              value={text}
             />
           </div>
           {interestTab ? (
