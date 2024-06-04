@@ -8,3 +8,7 @@ export const GetInterestApi = async () => {
   const response = await API.get("admin/interests");
   return response?.data;
 };
+export const DeleteInterestApi = async (id: string) => {
+  const response = await API.delete(`admin/interests/${id}`);
+  return response?.data;
+};

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/alt-text */
@@ -6,9 +7,11 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { BsEnvelopeFill } from "react-icons/bs";
 import { FaBell } from "react-icons/fa";
+import { useQuery } from "react-query";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { dummyMessage } from "@/fake_data";
+import { GetAllNotificationApi } from "@/services/notification/notification.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import { MenuDropdown } from "@/shared/components/dropdown/MenuDropDown";
 import NotificationBox from "@/shared/components/noticationbox";
@@ -24,7 +27,15 @@ function Header(props: HeaderTypes) {
   const [openMessagePopup, setMessagePopUp] = useState(false);
   const [openFeedBackPopup, setFeedBackPopUp] = useState(false);
 
+  const {
+    data: notifications,
+    isLoading,
+    refetch,
+  } = useQuery("notification", GetAllNotificationApi);
+
   const navigate = useNavigate();
+
+  console.log(notifications);
 
   return (
     <div className='w-full pt-6 bg-white px-4 12 lg:px-8 relative'>
