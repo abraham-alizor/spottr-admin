@@ -6,6 +6,7 @@ import { BLUE_ARROW_LEFT } from "@/utils/Exports";
 interface InputLayoutProps {
   title: string;
   children: React.ReactNode;
+  handleClick: () => void;
 }
 const InputLayout = (props: InputLayoutProps) => (
   <div className='w-[437px] h-full bg-white py-7 px-4 border-[0.2px] border-[#BBC4D4] rounded-md'>
@@ -17,7 +18,7 @@ const InputLayout = (props: InputLayoutProps) => (
     <div className='mt-6'>
       <ButtonV2
         btnStyle='bg-darkblue w-full py-4 rounded-md'
-        handleClick={() => {}}
+        handleClick={props.handleClick}
         textStyle='text-white'
         title='Submit'
       />

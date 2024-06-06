@@ -1,5 +1,6 @@
-/* eslint-disable no-new */
 /* eslint-disable no-console */
+/* eslint-disable no-new */
+
 /* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable no-nested-ternary */
@@ -24,6 +25,7 @@ import {
   GetInterestApi,
 } from "@/services/interest/interest.service";
 import { CreatetermsAndConditon } from "@/services/terms/service";
+import { GetAlTrays } from "@/services/trays/service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import Modal from "@/shared/components/Modal";
 import ModalV2 from "@/shared/components/modalV2";
@@ -76,29 +78,18 @@ const ContentManagement = () => {
     isLoading,
     refetch,
   } = useQuery("interests", GetInterestApi);
+  const { data: adminTrays } = useQuery("trays", GetAlTrays);
   const [data, setData] = useState(interests);
   const termsMutation = useMutation(CreatetermsAndConditon);
   const postInterest = useMutation(CreateInterestApi);
   const deleteInterest = useMutation(DeleteInterestApi);
 
+  console.log(adminTrays);
+
   const parseUrlToOriginalState = (url: string) => {
     const urlString = new URL(url);
     return decodeURIComponent(urlString.pathname.slice(1));
   };
-
-  // const handleImageChange = (event: any) => {
-  //   const imageFile = event.target.files[0];
-  //   if (imageFile) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       const base64String = reader.result as string;
-  //       setSelectedImage(base64String);
-  //       // @ts-ignore
-  //       setPreviewImage(base64String);
-  //     };
-  //     reader.readAsDataURL(imageFile);
-  //   }
-  // };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];

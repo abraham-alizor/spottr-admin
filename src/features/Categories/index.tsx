@@ -28,9 +28,6 @@ function Categories() {
   const [dropdown, setDropdown] = useState(false);
   const { data: CategoriesData } = useQuery("categories", GetAllCateGoriesApi);
 
-  // eslint-disable-next-line no-console
-  console.log(CategoriesData);
-
   return (
     <main className='mx-7 mt-7 mb-40'>
       <SubHeaders placeholder='tasks' route='/dashboard' title='Categories' />
