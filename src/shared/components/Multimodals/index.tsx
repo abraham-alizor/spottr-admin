@@ -8,7 +8,6 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 
 import { cryptoLists, dropdowndata } from "@/fake_data";
-import { currencyLists } from "@/features/Settings";
 import useCopyToClipboard from "@/hooks/CopyHook";
 import { GetFiatAllCurencies } from "@/services/fiat-currencies/fiat.service";
 import ButtonV2 from "@/shared/components/buttonV2";
@@ -81,14 +80,20 @@ const TransactionsModals = ({
   const [TransferModal, setTransferModal] = useState(false);
   const [isCopied, copyToClipboard] = useCopyToClipboard();
   const [cliptokensModal, setClipTokensModal] = useState(false);
+
   const {
     data: allfiatcurrencies,
     isLoading,
     refetch,
   } = useQuery("fiat-curencies", GetFiatAllCurencies);
 
-  // eslint-disable-next-line no-console
-  console.log(allfiatcurrencies);
+  const getCurencySymbol = (currencysign: string) => {
+    const currencies = allfiatcurrencies?.find(
+      (data: any) => data?.symbol === currencysign,
+    );
+    // @ts-ignore
+    return currencies ? data.symbol : "";
+  };
 
   const handlecryptosModal = () => {
     setSetPinModal();
@@ -194,7 +199,7 @@ const TransactionsModals = ({
               </div>
               <CurrencyBox
                 close={() => setCurrencyDrop(false)}
-                data={currencyLists}
+                data={allfiatcurrencies}
                 open={currencydrop}
                 setSelected={setSelectedCurrency}
               />
@@ -208,7 +213,7 @@ const TransactionsModals = ({
                   <img alt='' src={WALLET_CARD} />
                   <span className='text-darkblue font-semibold'>Fiat</span>
                 </div>
-                <span className='text-darkblue font-medium'>N345,684,909</span>
+                <span className='text-darkblue font-medium'>{`${getCurencySymbol(selectedCurrency)}345,684,909`}</span>
               </div>
               <div
                 className='flex justify-between border-b pb-4 cursor-pointer'
@@ -333,7 +338,7 @@ const TransactionsModals = ({
                   </div>
                   <CurrencyBox
                     close={() => setCurrencyDrop(false)}
-                    data={currencyLists}
+                    data={allfiatcurrencies}
                     open={currencydrop}
                     setSelected={setSelectedCurrency}
                   />

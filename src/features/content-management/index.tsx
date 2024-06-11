@@ -115,9 +115,9 @@ const ContentManagement = () => {
 
     const formdata = new FormData();
 
-    formdata.append("name", formatAsUrl(name));
+    formdata.append("name", name);
 
-    formdata.append("description", formatAsUrl(description));
+    formdata.append("description", description);
 
     // @ts-ignore
     formdata.append("displayImage", selectedImage[0]);

@@ -10,10 +10,21 @@ function Informationals() {
   return (
     <main className='flex gap-10'>
       <BoxContainer data={faketray} Page='Page' title='Informational' />
-      <InputLayout title='Publish new info '>
+      <InputLayout handleClick={() => {}} title='Publish new info '>
         <div className='flex flex-col gap-4'>
-          <Inputs name='' placeholder='Info target page' type='text' />
-          <TextArea name='' placeholder='Text + media' />
+          <Inputs
+            name=''
+            onchange={() => {}}
+            placeholder='Info target page'
+            type='text'
+            value=''
+          />
+          <TextArea
+            name=''
+            onchange={() => {}}
+            placeholder='Text + media'
+            value=''
+          />
         </div>
       </InputLayout>
     </main>

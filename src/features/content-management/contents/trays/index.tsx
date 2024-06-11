@@ -38,7 +38,7 @@ function Trays() {
         text: initialData.text,
         page: initialData.page,
       };
-      console.log("page has been set", payload);
+
       // @ts-ignore
       const response = await createtraymutation.mutateAsync(payload);
 

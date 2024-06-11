@@ -9,7 +9,6 @@ import { BsStarFill } from "react-icons/bs";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
-import { usersLists } from "@/fake_data";
 import { GetAllUsersApi } from "@/services/users/users.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import Modal from "@/shared/components/Modal";
@@ -103,7 +102,7 @@ function UserLists() {
             <img
               alt=''
               className='w-10 h-10 rounded-full border-4 border-[#C2E0FF]'
-              src={row.original.img}
+              src={row?.original?.avatar}
             />
           </div>
         ),
@@ -112,8 +111,8 @@ function UserLists() {
         Header: "Name",
         accessor: "name",
         Cell: ({ row }: any) => (
-          <div>
-            <span className='text-[12px]'>{row.original.name}</span>
+          <div className='text-start'>
+            <span className='text-[12px]'>{row?.original?.fullName}</span>
           </div>
         ),
       },
@@ -121,11 +120,11 @@ function UserLists() {
         Header: "Username",
         accessor: "username",
         Cell: ({ row }: any) => (
-          <div>
+          <div className='text-start'>
             <span className='text-[12px] text-[#929AA7]'>
-              {row.original.username.length > 10
-                ? `${row.original.username.slice(0, 10)}...`
-                : row.original.username}
+              {row?.original?.username?.length > 10
+                ? `${row?.original?.username?.slice(0, 10)}...`
+                : row?.original?.username}
             </span>
           </div>
         ),
@@ -177,7 +176,7 @@ function UserLists() {
         Cell: ({ row }: any) => (
           <div>
             <span className='text-[12px] text-[#3670D4]'>
-              {row.original.verification}
+              {row?.original?.verified ? "verified" : "Not verified"}
             </span>
           </div>
         ),
@@ -316,7 +315,7 @@ function UserLists() {
       <div className='mt-3'>
         <TableComponent
           COLUNMS={userListsColumns}
-          data={usersLists}
+          data={usersList?.data}
           handleSelectedBox={() => {}}
           selectedbox={undefined}
         />
