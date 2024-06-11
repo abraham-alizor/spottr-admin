@@ -21,17 +21,17 @@ function CurrencyBox(props: Props) {
       leaveTo='opacity-0 scale-95'
       show={props.open}
     >
-      {props.data.map((current: any) => (
+      {props.data?.map((current: any) => (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <span
           className='cursor-pointer hover:bg-brand hover:text-white px-5'
           key={current.id}
           onClick={() => {
-            props.setSelected(current.label);
+            props.setSelected(current.code);
             props.close();
           }}
         >
-          {current.label}
+          {current.code}
         </span>
       ))}
     </Transition>

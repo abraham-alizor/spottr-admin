@@ -66,7 +66,7 @@ const CreateTask = () => {
     if (productId) {
       productRefetch();
     }
-  }, [productId]);
+  }, [productId, productRefetch]);
 
   const handleCreateTask = async () => {
     try {
