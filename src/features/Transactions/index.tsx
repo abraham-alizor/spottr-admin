@@ -2,9 +2,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from "react";
 import { Zoom } from "react-awesome-reveal";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 import { TransactionChartData } from "@/fake_data";
+import { GetFiatAllCurencies } from "@/services/fiat-currencies/fiat.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import ChartComponent from "@/shared/components/chart";
 import DropDownV2 from "@/shared/components/drop-down-2";
@@ -35,6 +37,14 @@ export const dropdownLinks = [
 function Transactions() {
   const [showDropDown, setShowDropDown] = useState(false);
   const navigate = useNavigate();
+  const {
+    data: allfiatcurrencies,
+    isLoading,
+    refetch,
+  } = useQuery("fiat-curencies", GetFiatAllCurencies);
+  // eslint-disable-next-line no-console
+  console.log(allfiatcurrencies);
+
   return (
     <main className='mx-8 mt-7 mb-28'>
       <div className='flex justify-between items-center relative'>
