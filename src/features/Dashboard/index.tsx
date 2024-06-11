@@ -7,6 +7,7 @@ import { BsBarChartFill, BsStarFill } from "react-icons/bs";
 import { useQuery } from "react-query";
 
 import { DashboardApi } from "@/services/dashboard/service";
+import { GetAllWallets } from "@/services/wallets/service";
 import DropDown from "@/shared/components/dropdown/Dropdown";
 import MainChart from "@/shared/components/mainChart";
 import Progress from "@/shared/components/progress";
@@ -15,9 +16,10 @@ import { AVATAR, BADGE } from "@/utils/Exports";
 function Dashboard() {
   const [data, setData] = useState<string>("Last 30 days");
   const { data: dashboardData, refetch } = useQuery("DASHBOARD", DashboardApi);
+  const { data: wallets } = useQuery("wallets", GetAllWallets);
 
   // eslint-disable-next-line no-console
-  console.log(dashboardData);
+  console.log(wallets);
 
   const chartData = {
     "Last 30 days": [
@@ -301,86 +303,44 @@ function Dashboard() {
           <div className='w-1/3'>
             <p className='text-brand text-base font-semibold'>Top Locations</p>
             <ol className='list-decimal flex flex-col text-brand gap-3 mt-3 ml-4'>
-              <li>Port harcourt</li>
-              <li>Abuja</li>
-              <li>Lagos</li>
-              <li>Ibadan</li>
-              <li>Benin</li>
+              {dashboardData?.topLocations !== undefined &&
+                dashboardData?.topLocations?.map((data_) => (
+                  <li>{data_.city}</li>
+                ))}
             </ol>
           </div>
           <div className='w-1/3'>
             <p className='text-brand text-base font-semibold'>Top Interests</p>
             <ol className='list-decimal flex flex-col text-brand gap-3 mt-3 ml-4'>
-              <li className='flex justify-start gap-2'>
-                <img
-                  alt=''
-                  className='aspect-auto h-8 rounded-full'
-                  src={AVATAR}
-                />
-                Outdoor
-              </li>
-              <li className='flex justify-start gap-2'>
-                <img
-                  alt=''
-                  className='aspect-auto h-8 rounded-full'
-                  src={AVATAR}
-                />
-                Cycling
-              </li>
-              <li className='flex justify-start gap-2'>
-                <img
-                  alt=''
-                  className='aspect-auto h-8 rounded-full'
-                  src={AVATAR}
-                />
-                Hiking
-              </li>
-              <li className='flex justify-start gap-2'>
-                <img
-                  alt=''
-                  className='aspect-auto h-8 rounded-full'
-                  src={AVATAR}
-                />
-                Painting
-              </li>
-              <li className='flex justify-start gap-2'>
-                <img
-                  alt=''
-                  className='aspect-auto h-8 rounded-full'
-                  src={AVATAR}
-                />
-                Swimming
-              </li>
+              {dashboardData?.topInterests !== undefined &&
+                dashboardData?.topInterests?.map((data_) => (
+                  <li className='flex justify-start gap-2'>
+                    <img
+                      alt=''
+                      className='aspect-auto h-8 rounded-full'
+                      src={data_.displayImage}
+                    />
+                    {data_.name}
+                  </li>
+                ))}
             </ol>
           </div>
           <div className='w-1/3'>
             <p className='text-brand text-base font-semibold'>Top Categories</p>
             <ol className='list-decimal flex flex-col text-brand gap-3 mt-3 ml-4'>
-              <li className='flex justify-start gap-2'>
-                <img
-                  alt=''
-                  className='aspect-auto h-8 rounded-full'
-                  src={AVATAR}
-                />
-                Household
-              </li>
-
-              <li className='flex justify-start gap-2'>
-                <img
-                  alt=''
-                  className='aspect-auto h-8 rounded-full'
-                  src={AVATAR}
-                />
-                Automotive
-              </li>
-              <li className='flex justify-start gap-2'>
-                <img
-                  alt=''
-                  className='aspect-auto h-8 rounded-full'
-                  src={AVATAR}
-                />
-                Aerospace
-              </li>
+              {dashboardData?.topCategories !== undefined &&
+                dashboardData?.topCategories?.map((data_) => (
+                  <li className='flex justify-start gap-2'>
+                    <img
+                      alt=''
+                      className='aspect-auto h-8 rounded-full'
+                      src={AVATAR}
+                    />
+                    {data_.name.length >= 8
+                      ? `${data_.name.slice(0, 8)}...`
+                      : data_.name}
+                  </li>
+                ))}
             </ol>
           </div>
         </div>
@@ -517,11 +477,14 @@ function Dashboard() {
               <div className='flex flex-col my-auto'>
                 <div className='text-lg'>Vendors</div>
                 <div className='mt-4 text-xs'>
-                  <span className='text-green-500'>45 </span>new vendor accounts
+                  <span className='text-green-500'>
+                    {dashboardData?.totalVendors}
+                  </span>
+                  new vendor accounts
                 </div>
               </div>
               <div className='justify-center px-2.5 py-9 text-lg whitespace-nowrap bg-blue-200'>
-                227k
+                {dashboardData?.totalVendors}
               </div>
             </div>
             <div className='flex gap-5 justify-between pl-8 font-semibold text-blue-900 bg-blue-50  w-[32%] mb-4'>
@@ -532,7 +495,7 @@ function Dashboard() {
                 </div>
               </div>
               <div className='justify-center px-2.5 py-9 text-lg whitespace-nowrap bg-blue-200'>
-                227k
+                {dashboardData?.totalReferrals}
               </div>
             </div>
             <div className='flex gap-5 justify-between pl-8 font-semibold text-blue-900 bg-blue-50  w-[32%] mb-4 mr-2'>
