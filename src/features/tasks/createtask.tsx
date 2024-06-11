@@ -30,11 +30,11 @@ import {
 const typedata = [
   {
     id: "1",
-    label: "Basic",
+    label: "basic",
   },
   {
     id: "2",
-    label: "Premium",
+    label: "premium",
   },
   {
     id: "3",

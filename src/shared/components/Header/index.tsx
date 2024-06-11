@@ -35,8 +35,6 @@ function Header(props: HeaderTypes) {
 
   const navigate = useNavigate();
 
-  console.log(notifications);
-
   return (
     <div className='w-full pt-6 bg-white px-4 12 lg:px-8 relative'>
       <div>

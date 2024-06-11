@@ -10,7 +10,7 @@ function Onboarding() {
   return (
     <main className='flex gap-10'>
       <BoxContainer data={faketray} Title='Title' title='Onboarding' />
-      <InputLayout handleClick={() => {}} title='Publish onboarding info  '>
+      <InputLayout title='Publish onboarding info  '>
         <div className='flex flex-col gap-4'>
           <Inputs
             name=''

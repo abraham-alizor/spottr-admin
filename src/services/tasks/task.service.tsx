@@ -8,6 +8,6 @@ export const TaskApi = async () => {
 };
 
 export const CreateTaskApi = async (data: any) => {
-  const response: TaskApiResponse = await API.post("/tasks", data);
+  const response: TaskApiResponse = await API.post("admin/tasks", data);
   return response?.data;
 };

@@ -313,12 +313,14 @@ function UserLists() {
         </div>
       </div>
       <div className='mt-3'>
-        <TableComponent
-          COLUNMS={userListsColumns}
-          data={usersList?.data}
-          handleSelectedBox={() => {}}
-          selectedbox={undefined}
-        />
+        {usersList?.data?.length > 0 && (
+          <TableComponent
+            COLUNMS={userListsColumns}
+            data={usersList?.data}
+            handleSelectedBox={() => {}}
+            selectedbox={undefined}
+          />
+        )}
       </div>
       <Modal
         edges='rounded-sm'

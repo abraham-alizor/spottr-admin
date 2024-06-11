@@ -1,7 +1,11 @@
 import { API } from "@/config";
 
 export const CreateInterestApi = async (data: any) => {
-  const response = await API.post("admin/interests", data);
+  const response = await API.post("admin/interests", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return response?.data;
 };
 export const GetInterestApi = async () => {

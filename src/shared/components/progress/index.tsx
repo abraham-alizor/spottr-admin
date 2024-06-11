@@ -3,7 +3,7 @@ import React from "react";
 // this is specially made by me
 
 interface Props {
-  totalCount: number;
+  totalCount: number | string;
   customwidth: string;
   customheight: string;
   textSize: string;
@@ -14,7 +14,8 @@ function Progress(props: Props) {
   // const percentage = (count / props.totalCount) * 100;
   const radius = 10;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (props.totalCount / 100) * circumference;
+  const offset =
+    circumference - (Number(props.totalCount ?? 0) / 100) * circumference;
   return (
     <div
       className={`relative  ${props.customwidth} ${props.customheight} ${props.styling} `}

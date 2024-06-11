@@ -4,7 +4,9 @@ import React, { useState } from "react";
 import { Zoom } from "react-awesome-reveal";
 import { BiDotsHorizontal } from "react-icons/bi";
 import { BsBarChartFill, BsStarFill } from "react-icons/bs";
+import { useQuery } from "react-query";
 
+import { DashboardApi } from "@/services/dashboard/service";
 import DropDown from "@/shared/components/dropdown/Dropdown";
 import MainChart from "@/shared/components/mainChart";
 import Progress from "@/shared/components/progress";
@@ -12,7 +14,10 @@ import { AVATAR, BADGE } from "@/utils/Exports";
 
 function Dashboard() {
   const [data, setData] = useState<string>("Last 30 days");
-  // const { data: dashboardData, refetch } = useQuery("DASHBOARD", DashboardApi);
+  const { data: dashboardData, refetch } = useQuery("DASHBOARD", DashboardApi);
+
+  // eslint-disable-next-line no-console
+  console.log(dashboardData);
 
   const chartData = {
     "Last 30 days": [
@@ -132,7 +137,9 @@ function Dashboard() {
               <div className='flex flex-col  w-full lg:w-[32.5%]'>
                 <div className='flex flex-col px-4 py-3.5 mx-auto w-full bg-white rounded-xl border border-sky-100 border-solid max-md:mt-3'>
                   <div className='flex gap-5 justify-between px-0.5 text-2xl font-bold text-blue-900 whitespace-nowrap'>
-                    <div className='self-start mt-3.5'>58,068</div>
+                    <div className='self-start mt-3.5'>
+                      {dashboardData?.totalUsers}
+                    </div>
                     <img
                       alt=''
                       className='shrink-0 rounded-xl shadow-lg shadow-white aspect-square w-[33px]'
@@ -145,7 +152,9 @@ function Dashboard() {
                       Total users
                     </div>
                     <div className='flex flex-1 gap-1.5 text-sm text-right text-green-500'>
-                      <div className='grow my-auto'>+ 34.98%</div>
+                      <div className='grow my-auto'>
+                        {dashboardData?.percentageOfNewUsersInThePast24hrs}
+                      </div>
                       <img
                         alt=''
                         className='shrink-0 w-6 aspect-square'
@@ -222,7 +231,7 @@ function Dashboard() {
                     customwidth='w-8'
                     styling='mt-3'
                     textSize='text-sm'
-                    totalCount={6}
+                    totalCount={dashboardData?.totalCorporateAccount ?? 0}
                     unit='m'
                   />
                   <div className='mt-3 text-xs whitespace-nowrap'>
@@ -240,7 +249,7 @@ function Dashboard() {
                     customwidth='w-8'
                     styling='mt-3'
                     textSize='text-sm'
-                    totalCount={6}
+                    totalCount={dashboardData?.totalVendors ?? 0}
                     unit='m'
                   />
                   <div className='mt-3 text-xs whitespace-nowrap'>
@@ -258,7 +267,7 @@ function Dashboard() {
                     customwidth='w-8'
                     styling='mt-3'
                     textSize='text-sm'
-                    totalCount={3}
+                    totalCount={dashboardData?.totalCheckIns ?? 0}
                     unit='k'
                   />
                   <div className='mt-3 text-xs whitespace-nowrap'>
@@ -276,7 +285,7 @@ function Dashboard() {
                     customwidth='w-8'
                     styling='mt-3'
                     textSize='text-sm'
-                    totalCount={20}
+                    totalCount={dashboardData?.totalAds ?? 0}
                     unit='k'
                   />
                   <div className='self-stretch mt-3 text-xs whitespace-nowrap'>
