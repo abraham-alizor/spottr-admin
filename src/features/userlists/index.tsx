@@ -6,9 +6,11 @@
 import { Transition } from "@headlessui/react";
 import React, { useMemo, useState } from "react";
 import { BsStarFill } from "react-icons/bs";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 import { usersLists } from "@/fake_data";
+import { GetAllUsersApi } from "@/services/users/users.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import Modal from "@/shared/components/Modal";
 import SubHeaders from "@/shared/components/subheaders";
@@ -50,6 +52,13 @@ export const userListsFilters = [
 function UserLists() {
   const [currentUserType, setCurrentUserType] = useState("first_type");
   const [modal, setModal] = useState(false);
+  const {
+    data: usersList,
+    isLoading,
+    refetch,
+  } = useQuery("users", GetAllUsersApi);
+
+  console.log(usersList);
 
   const usertype: any = {
     first_type: "Regular Users",

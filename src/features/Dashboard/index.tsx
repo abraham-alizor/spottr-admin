@@ -7,6 +7,7 @@ import { BsBarChartFill, BsStarFill } from "react-icons/bs";
 import { useQuery } from "react-query";
 
 import { DashboardApi } from "@/services/dashboard/service";
+import { GetFiatAllCurencies } from "@/services/fiat-currencies/fiat.service";
 import DropDown from "@/shared/components/dropdown/Dropdown";
 import MainChart from "@/shared/components/mainChart";
 import Progress from "@/shared/components/progress";
@@ -16,8 +17,13 @@ function Dashboard() {
   const [data, setData] = useState<string>("Last 30 days");
   const { data: dashboardData, refetch } = useQuery("DASHBOARD", DashboardApi);
 
+  const { data: allfiatcurrencies, isLoading } = useQuery(
+    "fiat-curencies",
+    GetFiatAllCurencies,
+  );
+
   // eslint-disable-next-line no-console
-  console.log(dashboardData);
+  console.log(allfiatcurrencies);
 
   const chartData = {
     "Last 30 days": [

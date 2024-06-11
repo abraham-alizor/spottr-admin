@@ -4,8 +4,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useState } from "react";
 import { FaCheck, FaPlus } from "react-icons/fa";
+import { useQuery } from "react-query";
 
-import { categories, dropdowndata } from "@/fake_data";
+import { dropdowndata } from "@/fake_data";
+import { GetAllCateGoriesApi } from "@/services/categories/service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import DropDownV3 from "@/shared/components/dropdownV3";
 import Modal from "@/shared/components/Modal";
@@ -24,6 +26,8 @@ function Categories() {
   const [check, setCheck] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [dropdown, setDropdown] = useState(false);
+  const { data: CategoriesData } = useQuery("categories", GetAllCateGoriesApi);
+
   return (
     <main className='mx-7 mt-7 mb-40'>
       <SubHeaders placeholder='tasks' route='/dashboard' title='Categories' />
@@ -46,19 +50,16 @@ function Categories() {
         />
       </div>
       <div className='grid grid-cols-6 max-w-[670px] mt-[6rem] gap-5 mb-9'>
-        {categories.map((data) => (
+        {CategoriesData?.map((data: any) => (
           <div
             className='border border-[#9A9FBF40] border-opacity-25 flex flex-col gap-3 bg-white items-center justify-center py-3 rounded-md'
             key={data.id}
           >
-            <img
-              alt=''
-              height={30}
-              src={data.img}
-              width={data.title === "Phones" ? 20 : 30}
-            />
+            <img alt='' height={30} src={data.displayImage} width={30} />
             <span className='text-sm text-[#061E48] font-medium'>
-              {data.title}
+              {data.name.length >= 5
+                ? `${data.name.slice(0, 5)}...`
+                : data.name}
             </span>
           </div>
         ))}

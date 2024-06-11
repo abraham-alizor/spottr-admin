@@ -1,5 +1,6 @@
-/* eslint-disable no-new */
 /* eslint-disable no-console */
+/* eslint-disable no-new */
+
 /* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable no-nested-ternary */
@@ -23,6 +24,8 @@ import {
   DeleteInterestApi,
   GetInterestApi,
 } from "@/services/interest/interest.service";
+import { CreatetermsAndConditon } from "@/services/terms/service";
+import { GetAlTrays } from "@/services/trays/service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import Modal from "@/shared/components/Modal";
 import ModalV2 from "@/shared/components/modalV2";
@@ -58,6 +61,7 @@ const contents = [
 ];
 const ContentManagement = () => {
   const [selectedTab, setSelectedTab] = useState("");
+  const [text, setText] = useState("");
   const [tipsTab, setTipsTab] = useState(true);
   const [interestTab, setInterestTab] = useState(false);
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -74,31 +78,18 @@ const ContentManagement = () => {
     isLoading,
     refetch,
   } = useQuery("interests", GetInterestApi);
+  const { data: adminTrays } = useQuery("trays", GetAlTrays);
   const [data, setData] = useState(interests);
-
-  console.log(interests);
-
+  const termsMutation = useMutation(CreatetermsAndConditon);
   const postInterest = useMutation(CreateInterestApi);
   const deleteInterest = useMutation(DeleteInterestApi);
+
+  console.log(adminTrays);
 
   const parseUrlToOriginalState = (url: string) => {
     const urlString = new URL(url);
     return decodeURIComponent(urlString.pathname.slice(1));
   };
-
-  // const handleImageChange = (event: any) => {
-  //   const imageFile = event.target.files[0];
-  //   if (imageFile) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       const base64String = reader.result as string;
-  //       setSelectedImage(base64String);
-  //       // @ts-ignore
-  //       setPreviewImage(base64String);
-  //     };
-  //     reader.readAsDataURL(imageFile);
-  //   }
-  // };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];
@@ -192,6 +183,21 @@ const ContentManagement = () => {
     setSelectedComponent(renderedConponent || null);
     setTipsTab(false);
   };
+
+  const createTerms = async () => {
+    const formData = new FormData();
+    formData.append("text", text);
+
+    try {
+      // @ts-ignore
+      const response = await termsMutation.mutateAsync(formData);
+      if (response) {
+        toast.success(response?.message);
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
   return (
     <main className='mx-7 mt-7 mb-28'>
       <SubHeaders
@@ -247,15 +253,22 @@ const ContentManagement = () => {
       >
         <div>
           <div className='flex gap-5 items-center border-b w-[290px] border-[#E7E7E7] pb-4'>
-            <div className='w-[31px] h-[31px] rounded-full bg-[#ECF7FF] flex justify-center items-center'>
+            <div
+              className='w-[31px] h-[31px] rounded-full bg-[#ECF7FF] flex justify-center items-center'
+              onClick={createTerms}
+            >
               <span className='text-darkblue'>+</span>
             </div>
             <img alt='' src={LINE} />
             {/* <span className='text-black text-opacity-70 text-sm'>Add new</span> */}
             <input
               className='text-black text-opacity-70 text-sm outline-none bg-transparent'
+              onChange={(event_: React.ChangeEvent<HTMLInputElement>) =>
+                setText(event_.target.value)
+              }
               placeholder='Add new'
               type='text'
+              value={text}
             />
           </div>
           {interestTab ? (
