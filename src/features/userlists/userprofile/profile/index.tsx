@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import { BsStarFill } from "react-icons/bs";
 import { useMutation } from "react-query";
 
-import { Adsdata, highlitedata } from "@/fake_data";
 import Actionmodal from "@/features/userlists/actionmodal";
 import { BlacklistUserById } from "@/services/users/users.service";
 import Barcharts from "@/shared/components/Barchart";
@@ -29,30 +28,77 @@ import {
   USER_VERIFIED,
 } from "@/utils/Exports";
 
-const barchartData = [
-  {
-    name: "Jan 1-2",
-    value: 10,
-  },
-  {
-    name: "Jan 2-5",
-    value: 20,
-  },
-  {
-    name: "Jan 5-8",
-    value: 15,
-  },
-  {
-    name: "Jan 8-10",
-    value: 25,
-  },
-];
 function Profile({ userId }: { userId: any }) {
   const [modal, setModal] = useState(false);
   const [thisMonthStats, setThisMonthStats] = useState(true);
   const [lastMonthStats, setLastMonthStats] = useState(false);
   const blacklistusermutation = useMutation(BlacklistUserById);
   const [blacklistuserModal, setBlacklistUserModal] = useState(false);
+
+  const highlitedata = [
+    {
+      analysis: thisMonthStats
+        ? userId?.overview?.highlightAccountReached?.thisMonthViews
+        : userId?.overview?.highlightAccountReached?.lastMonthViews,
+      tags: "Account reached",
+      percentage: "-63.8",
+    },
+    {
+      analysis: "30",
+      tags: "Top interests",
+      percentage: "8",
+    },
+    {
+      analysis: "30",
+      tags: "Top Location",
+      percentage: "8",
+    },
+    {
+      analysis: "30",
+      tags: "Purchases",
+      percentage: "8",
+    },
+    {
+      analysis: "30",
+      tags: "Spend",
+      percentage: "8",
+    },
+    {
+      analysis: "30",
+      tags: "Requests out",
+      percentage: "8",
+    },
+    {
+      analysis: "30",
+      tags: "Tasks completed",
+      percentage: "8",
+    },
+  ];
+
+  const Adsdata = [
+    {
+      id: "1",
+      analysis: thisMonthStats
+        ? userId?.overview?.adsAccountReached?.thisMonthViews
+        : userId?.overview?.adsAccountReached?.lastMonthViews,
+      tags: "Account reached",
+      percentage: "-63.8",
+    },
+    {
+      id: "2",
+      analysis: "30",
+      tags: "Account reached",
+      percentage: "-63.8",
+    },
+    {
+      id: "3",
+      analysis: thisMonthStats
+        ? userId?.overview?.profileClicks?.thisMonthVisits
+        : userId?.overview?.profileClicks?.lastMonthVisits,
+      tags: "Profile clicked",
+      percentage: "8",
+    },
+  ];
 
   const blacklistuser = async (id: string) => {
     try {
