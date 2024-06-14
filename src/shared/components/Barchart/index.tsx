@@ -22,12 +22,12 @@ function Barcharts({
     <div>
       <BarChart data={data} height={height} width={width}>
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' />
+        <XAxis dataKey='monthName' />
         <YAxis />
 
         <Tooltip />
         <Legend />
-        <Bar barSize={20} dataKey='value' fill='#274B89' />
+        <Bar barSize={20} dataKey='viewCount' fill='#274B89' />
       </BarChart>
     </div>
   );

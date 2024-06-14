@@ -1,15 +1,16 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { usertransactions } from "@/fake_data";
 import ButtonV2 from "@/shared/components/buttonV2";
 import TransactionsModals from "@/shared/components/Multimodals";
 import {
   CHECK_MARK,
   EXPORT_ICON,
   HORIZONTAL_DOTS,
+  PENDING_STATS,
   PRINT_ICON,
   ROUND_ARROW_DOWN,
 } from "@/utils/Exports";
@@ -17,9 +18,11 @@ import {
 function TransactionActivities({
   modal,
   setModal,
+  userId,
 }: {
   modal: boolean;
   setModal: any;
+  userId: any;
 }) {
   const navigate = useNavigate();
   const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
@@ -72,7 +75,7 @@ function TransactionActivities({
     <main className='flex gap-7 mt-4'>
       <div className='w-[704px] h-[608px] px-4 py-4 bg-white bg-opacity-[80%] border-[0.2px] border-[#BBC4D4] rounded-md overflow-y-scroll'>
         <div>
-          {usertransactions.map((data) => (
+          {userId?.transactions.map((data: any) => (
             <div
               className='flex justify-between border-b-2 pb-2 pt-2 hover:shadow-custom cursor-pointer hover:px-2 transition-all duration-300'
               onClick={() => setSelectedTransaction(data)}
@@ -86,7 +89,7 @@ function TransactionActivities({
               </div>
               <div className='flex flex-col items-start gap-2'>
                 <span className='text-[14px] font-semibold'>
-                  {data.username}
+                  {data?.metadata?.username}
                 </span>
                 <span className='text-[10px] font-normal text-lightgrey'>
                   Username:
@@ -94,9 +97,9 @@ function TransactionActivities({
               </div>
               <div className='flex flex-col items-start gap-2'>
                 <span className='text-[14px] font-semibold'>
-                  {data.transaction_id.length > 15
-                    ? `${data.transaction_id.slice(0, 15)}...`
-                    : data.transaction_id}
+                  {data?.metadata?.transactionId.length > 15
+                    ? `${data?.metadata?.transactionId.slice(0, 15)}...`
+                    : data?.meatadata?.transactionId}
                 </span>
                 <span className='text-[10px] font-normal text-lightgrey'>
                   Trsanction ID:
@@ -123,12 +126,22 @@ function TransactionActivities({
           <div className='w-full'>
             <div className='flex justify-between items-center'>
               <div className='flex flex-col items-start gap-2'>
-                <div className='flex gap-2 items-center'>
-                  <img alt='' src={CHECK_MARK} />
-                  <span className='text-[19.75px] text-[#39B54A] font-bold'>
-                    Sent
-                  </span>
-                </div>
+                {selectedTransaction?.status === "successful" ? (
+                  <div className='flex gap-2 items-center'>
+                    <img alt='' src={CHECK_MARK} />
+                    <span className='text-[19.75px] text-[#39B54A] font-bold'>
+                      Sent
+                    </span>
+                  </div>
+                ) : selectedTransaction?.status === "pending" ? (
+                  <div className='flex gap-2 items-center'>
+                    <img alt='' height={20} src={PENDING_STATS} width={20} />
+                    <span className='text-[19.75px] text-[#f29339] font-bold'>
+                      Pending
+                    </span>
+                  </div>
+                ) : null}
+
                 <span className='text-3xl font-semibold text-darkblue'>
                   N{selectedTransaction.amount}
                 </span>
@@ -142,7 +155,7 @@ function TransactionActivities({
                 Recipients
               </span>
               <span className='text-[14.81px] font-semibold text-darkblue'>
-                Self
+                {selectedTransaction?.metadata?.recipient}
               </span>
             </div>
             <div className='flex justify-between items-center'>
@@ -151,7 +164,7 @@ function TransactionActivities({
                   Username:
                 </span>
                 <span className='text-[14.81px] font-semibold text-darkblue'>
-                  {selectedTransaction.username}
+                  {selectedTransaction?.metadata?.username}
                 </span>
               </div>
               <div className='flex flex-col gap-2 mt-7'>
@@ -159,7 +172,10 @@ function TransactionActivities({
                   Transaction Fee
                 </span>
                 <span className='text-[14.81px] font-semibold text-darkblue'>
-                  NGN0
+                  {selectedTransaction?.currency}
+                  {selectedTransaction?.charges === null
+                    ? 0
+                    : selectedTransaction?.charges}
                 </span>
               </div>
               <div className='flex flex-col gap-2 mt-7'>
@@ -167,7 +183,7 @@ function TransactionActivities({
                   Payment method
                 </span>
                 <span className='text-[14.81px] font-semibold text-darkblue'>
-                  REFERRAL
+                  {selectedTransaction?.metadata?.transactionMethod}
                 </span>
               </div>
             </div>
@@ -176,7 +192,7 @@ function TransactionActivities({
                 Trsanction ID:
               </span>
               <span className='text-[14.81px] font-semibold text-darkblue'>
-                {selectedTransaction.transaction_id}
+                {selectedTransaction?.metadata?.transactionId}
               </span>
             </div>
             <div className='flex items-center gap-10 mt-14  justify-start '>

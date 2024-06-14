@@ -1,3 +1,6 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-unstable-nested-components */
@@ -5,11 +8,19 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Transition } from "@headlessui/react";
 import React, { useMemo, useState } from "react";
+import toast from "react-hot-toast";
 import { BsStarFill } from "react-icons/bs";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
-import { GetAllUsersApi } from "@/services/users/users.service";
+import Actionmodal from "@/features/userlists/actionmodal";
+import {
+  BlacklistUserById,
+  DeactivateUserById,
+  GetAllUsersApi,
+  SuspendUserById,
+  VerifyUserById,
+} from "@/services/users/users.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import Modal from "@/shared/components/Modal";
 import SubHeaders from "@/shared/components/subheaders";
@@ -51,6 +62,15 @@ export const userListsFilters = [
 function UserLists() {
   const [currentUserType, setCurrentUserType] = useState("first_type");
   const [modal, setModal] = useState(false);
+  const suspendusermutation = useMutation(SuspendUserById);
+  const blacklistusermutation = useMutation(BlacklistUserById);
+  const verifyusermutation = useMutation(VerifyUserById);
+  const deactivateusermutation = useMutation(DeactivateUserById);
+  const [suspenduserModal, setSuspenduserModal] = useState(false);
+  const [verifyuserModal, setVerifyuserModal] = useState(false);
+  const [blaklistuserModal, setBlaklistuserModal] = useState(false);
+  const [deactivateModal, setDeactivateModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const {
     data: usersList,
     isLoading,
@@ -64,6 +84,37 @@ function UserLists() {
     second_type: "Corporate Users",
   };
 
+  const actionstexts = suspenduserModal
+    ? " Are you sure you want to suspend this user"
+    : blaklistuserModal
+      ? " Are you sure you want to blacklist this user"
+      : verifyuserModal
+        ? " Are you sure you want to verify this user"
+        : deactivateModal
+          ? "Are you sure you want to deactivate this user"
+          : "";
+
+  const title = suspenduserModal
+    ? "suspend user"
+    : blaklistuserModal
+      ? "blacklist user"
+      : verifyuserModal
+        ? "verify user"
+        : deactivateModal
+          ? "deactivate user"
+          : "";
+
+  const closemodal = () => {
+    if (suspenduserModal) {
+      setSuspenduserModal(false);
+    } else if (verifyuserModal) {
+      setVerifyuserModal(false);
+    } else if (blaklistuserModal) {
+      setBlaklistuserModal(false);
+    } else if (deactivateModal) {
+      setDeactivateModal(false);
+    } else return null;
+  };
   const handleNextUserType = () => {
     const userKeys = Object.keys(usertype);
 
@@ -85,6 +136,76 @@ function UserLists() {
     setCurrentUserType(userKeys[previousUserType]);
   };
 
+  const suspenduser = async () => {
+    try {
+      if (selectedUser) {
+        const response = await suspendusermutation.mutateAsync(selectedUser);
+        toast.success(response?.message, {
+          duration: 10_000,
+        });
+        setSuspenduserModal(false);
+      } else {
+        toast.error("no selected user");
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+  const blacklistuser = async () => {
+    try {
+      if (selectedUser) {
+        const response = await blacklistusermutation.mutateAsync(selectedUser);
+        toast.success(response?.message, {
+          duration: 10_000,
+        });
+        setBlaklistuserModal(false);
+      } else {
+        toast.error("no selected user");
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+  const verifyuser = async () => {
+    try {
+      if (selectedUser) {
+        const response = await verifyusermutation.mutateAsync(selectedUser);
+        toast.success(response?.message, {
+          duration: 10_000,
+        });
+        setVerifyuserModal(false);
+      } else {
+        toast.error("no selected user");
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+  const deactivateuser = async () => {
+    try {
+      if (selectedUser) {
+        const response = await deactivateusermutation.mutateAsync(selectedUser);
+        toast.success(response?.message, {
+          duration: 10_000,
+        });
+        setDeactivateModal(false);
+      } else {
+        toast.error("no selected user");
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  const actions = suspenduserModal
+    ? suspenduser
+    : blaklistuserModal
+      ? blacklistuser
+      : verifyuserModal
+        ? verifyuser
+        : deactivateModal
+          ? deactivateuser
+          : null;
   const userListsColumns = useMemo(
     () => [
       {
@@ -186,8 +307,12 @@ function UserLists() {
         accessor: "status",
         Cell: ({ row }: any) => (
           <div>
-            <span className='text-[12px] font-semibold text-[#39B54A]'>
-              {row.original.status}
+            <span
+              className={`text-[12px] font-semibold text-[#39B54A] ${row.original.status === "Suspended" ? "text-branded" : row?.original.status === "Blacklisted" ? "text-black" : ""}`}
+            >
+              {row.original.status === "Suspended"
+                ? "Suspended"
+                : row.original.status}
             </span>
           </div>
         ),
@@ -220,7 +345,7 @@ function UserLists() {
 
               <Transition
                 as='div'
-                className='w-[135px] z-[50] top-5 right-0 shadow-custom absolute h-[350px] bg-white flex flex-col items-start gap-3 px-2 py-2  text-sm rounded-md'
+                className='w-[135px] z-[50] top-5 right-0 shadow-custom absolute h-[380px] bg-white flex flex-col items-start gap-3 px-2 py-2  text-sm rounded-md'
                 enter='ease-out duration-300'
                 enterFrom='opacity-0 scale-95'
                 enterTo='opacity-100 scale-100'
@@ -238,9 +363,12 @@ function UserLists() {
                 <span
                   className='border-b pb-1 hover:text-darkblue cursor-pointer'
                   onClick={() =>
-                    navigate("/userslist/user-profile", {
-                      state: { data: row?.original },
-                    })
+                    navigate(
+                      `/userslist/user-profile?idref=${row?.original?.id}`,
+                      {
+                        state: { data: row?.original },
+                      },
+                    )
                   }
                 >
                   Open profile
@@ -257,16 +385,47 @@ function UserLists() {
                 <span className='border-b pb-1 hover:text-darkblue cursor-pointer'>
                   Add to list
                 </span>
-                <span className='border-b pb-1 hover:text-darkblue cursor-pointer'>
+                <span
+                  className='border-b pb-1 hover:text-darkblue cursor-pointer'
+                  onClick={() => {
+                    setSelectedUser(row.original.id);
+                    setDeactivateModal(true);
+                    setDropDown(false);
+                  }}
+                >
+                  Deactivate user
+                </span>
+                <span
+                  className='border-b pb-1 hover:text-darkblue cursor-pointer'
+                  onClick={() => {
+                    setVerifyuserModal(true);
+                    setSelectedUser(row?.original?.id);
+                    setDropDown(false);
+                  }}
+                >
                   Verify user
                 </span>
                 <span className='border-b pb-1 hover:text-darkblue cursor-pointer'>
                   90 days
                 </span>
-                <span className='border-b pb-1 hover:text-darkblue cursor-pointer'>
+                <span
+                  className='border-b pb-1 hover:text-darkblue cursor-pointer'
+                  onClick={() => {
+                    setBlaklistuserModal(true);
+                    setSelectedUser(row?.original?.id);
+                    setDropDown(false);
+                  }}
+                >
                   Blacklist
                 </span>
-                <span className='border-b pb-1 text-branded cursor-pointer'>
+                <span
+                  className='border-b pb-1 text-branded cursor-pointer'
+                  onClick={() => {
+                    setSuspenduserModal(true);
+                    setSelectedUser(row?.original?.id);
+                    setDropDown(false);
+                  }}
+                >
                   Suspend user
                 </span>
               </Transition>
@@ -362,6 +521,18 @@ function UserLists() {
           title='Finish'
         />
       </Modal>
+      <Actionmodal
+        actionText={actionstexts}
+        handleAction={actions}
+        isClose={closemodal}
+        isOpen={
+          suspenduserModal ||
+          blaklistuserModal ||
+          verifyuserModal ||
+          deactivateModal
+        }
+        title={title}
+      />
     </main>
   );
 }

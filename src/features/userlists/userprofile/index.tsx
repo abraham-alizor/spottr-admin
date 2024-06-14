@@ -1,9 +1,14 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from "react";
+import { useQuery } from "react-query";
+import { useSearchParams } from "react-router-dom";
 
 import TransactionActivities from "@/features/userlists/transaction_act";
 import UserActivities from "@/features/userlists/user_act";
 import Profile from "@/features/userlists/userprofile/profile";
+import { GetUserById } from "@/services/users/users.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import PageHeader from "@/shared/components/pageheader";
 import SubNav from "@/shared/components/sub_nav";
@@ -26,13 +31,26 @@ const subnavLinks = [
 function UserProfile() {
   const [selected, setSelected] = useState("user-profile");
   const [modal, setModal] = useState(false);
-  // const navigate = useNavigate();
+  const [urlParams] = useSearchParams();
+  const userid = urlParams.get("idref");
+  const { data: userId, refetch: userIRefetch } = useQuery(
+    ["userId", userid],
+    () =>
+      // @ts-ignore
+      GetUserById(userid),
+  );
+
+  console.log(userId);
 
   const sections =
     selected === "user-profile" ? (
-      <Profile />
+      <Profile userId={userId?.data} />
     ) : selected === "user-transactions" ? (
-      <TransactionActivities modal={modal} setModal={setModal} />
+      <TransactionActivities
+        modal={modal}
+        setModal={setModal}
+        userId={userId?.data}
+      />
     ) : selected === "user-activities" ? (
       <UserActivities />
     ) : (

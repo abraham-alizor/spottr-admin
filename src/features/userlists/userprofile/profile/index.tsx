@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { BsStarFill } from "react-icons/bs";
-import { useLocation } from "react-router-dom";
+import { useMutation } from "react-query";
 
-import { Adsdata, highlitedata, productsListed } from "@/fake_data";
+import { Adsdata, highlitedata } from "@/fake_data";
+import Actionmodal from "@/features/userlists/actionmodal";
+import { BlacklistUserById } from "@/services/users/users.service";
 import Barcharts from "@/shared/components/Barchart";
 import ButtonV2 from "@/shared/components/buttonV2";
 import Modal from "@/shared/components/Modal";
@@ -43,9 +47,29 @@ const barchartData = [
     value: 25,
   },
 ];
-function Profile() {
+function Profile({ userId }: { userId: any }) {
   const [modal, setModal] = useState(false);
-  const data = useLocation()?.state.data;
+  const [thisMonthStats, setThisMonthStats] = useState(true);
+  const [lastMonthStats, setLastMonthStats] = useState(false);
+  const blacklistusermutation = useMutation(BlacklistUserById);
+  const [blacklistuserModal, setBlacklistUserModal] = useState(false);
+
+  const blacklistuser = async (id: string) => {
+    try {
+      if (id) {
+        const response = await blacklistusermutation.mutateAsync(id);
+        toast.success(response?.message, {
+          duration: 10_000,
+        });
+        setBlacklistUserModal(false);
+      } else {
+        toast.error("no selected user");
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   return (
     <main>
       <div className='flex justify-between items-center'>
@@ -56,13 +80,15 @@ function Profile() {
                 <img
                   alt=''
                   className='border-[3.5px]  rounded-full border-[#C2E0FF] w-14 h-14'
-                  src={data.img}
+                  src={userId?.user?.avatar}
                 />
-                <img
-                  alt=''
-                  className='absolute top-0 right-0 w-4 h-4'
-                  src={USER_VERIFIED}
-                />
+                {userId?.user?.verified ? (
+                  <img
+                    alt=''
+                    className='absolute top-0 right-0 w-4 h-4'
+                    src={USER_VERIFIED}
+                  />
+                ) : null}
               </div>
               <span className='text-[22px] font-[700] text-darkblue'>C</span>
             </div>
@@ -71,10 +97,10 @@ function Profile() {
                 <div className='flex flex-col gap-4'>
                   <div className='flex flex-col'>
                     <span className='font-[700] text-darkblue text-[22px]'>
-                      {data.name}
+                      {userId?.user?.fullname}
                     </span>
                     <span className='text-[12px] font-semibold text-lightgrey'>
-                      {data.username}
+                      {userId?.user?.username}
                     </span>
                   </div>
                   <span className='font-[700] text-[11px] text-black text-opacity-[70%]'>
@@ -100,7 +126,7 @@ function Profile() {
                     <span> 4,567 people rated</span>
                   </div>
                   <div className='w-[83px] h-[23px] text-[#701DA0] text-[8px] py-1 px-4 bg-[#701DA026] bg-opacity-[15%] rounded-sm'>
-                    <span>37H9EFEFE</span>
+                    <span>{userId?.user?.referralCode}</span>
                   </div>
                 </div>
               </div>
@@ -157,7 +183,7 @@ function Profile() {
                     Products
                   </span>
                   <span className='font-semibold text-[20px] text-darkblue'>
-                    13
+                    {userId?.user?.products.length}
                   </span>
                 </div>
               </div>
@@ -195,7 +221,7 @@ function Profile() {
                   <div className='flex gap-3 items-center'>
                     <img alt='' className='w-5 h-5' src={NIGERIA_FLAG} />
                     <span className='font-semibold text-[20px] text-darkblue'>
-                      Nigeria
+                      {userId?.user?.country}
                     </span>
                   </div>
                 </div>
@@ -229,22 +255,38 @@ function Profile() {
         <div className='w-[400px] flex flex-col items-start'>
           <div className='flex flex-col items-start gap-2'>
             <span className='text-xs font-normal text-[#3B3B3BB2] text-opacity-[70%]'>
-              {data.name.split(" ")[0]} sold 450 products in the month of March
+              {userId?.user?.firstName} sold 450 products in the month of March
               for <br /> N200,000, compared to February
             </span>
           </div>
           <div className='mr-8 mt-6'>
-            <Barcharts data={barchartData} height={175} width={398} />
+            <Barcharts
+              data={userId?.overview?.userViewsChart}
+              height={175}
+              width={398}
+            />
 
             <div className='flex gap-10'>
-              <div className='flex gap-2 items-center'>
-                <div className='rounded-full  w-[7px] h-[7px] bg-[#9EAECA]' />
+              <div className='flex gap-2 items-center cursor-pointer'>
+                <div
+                  className={`rounded-full  w-[7px] h-[7px]  ${lastMonthStats ? "bg-[#9EAECA]" : "bg-[#D6DCE8]"}`}
+                  onClick={() => {
+                    setLastMonthStats(true);
+                    setThisMonthStats(false);
+                  }}
+                />
                 <span className='text-xs font-normal text-darkblue'>
                   Last month
                 </span>
               </div>
-              <div className='flex gap-2 items-center'>
-                <div className='rounded-full w-[7px] h-[7px] bg-[#9EAECA]' />
+              <div className='flex gap-2 items-center cursor-pointer'>
+                <div
+                  className={`rounded-full w-[7px] h-[7px] ${thisMonthStats ? "bg-[#9EAECA]" : "bg-[#D6DCE8]"} `}
+                  onClick={() => {
+                    setThisMonthStats(true);
+                    setLastMonthStats(false);
+                  }}
+                />
                 <span className='text-darkblue font-normal text-xs'>
                   This month
                 </span>
@@ -264,7 +306,11 @@ function Profile() {
               <span className='text-[16px] font-semibold text-[#3B3B3BB2] text-opacity-[70%]'>
                 Profile Visit
               </span>
-              <span className='text-[45px] font-[700] text-darkblue'>495</span>
+              <span className='text-[45px] font-[700] text-darkblue'>
+                {thisMonthStats
+                  ? userId?.overview?.profileVisits?.thisMonthVisits
+                  : userId?.overview?.profileVisits?.lastMonthVisits}
+              </span>
               <div className='flex items-center gap-1'>
                 <img alt='' src={GOING_UP} />
                 <span className='text-xs text-[#3B3B3BB2] text-opacity-[70%]'>
@@ -276,7 +322,12 @@ function Profile() {
               <span className='text-[16px] font-semibold text-[#3B3B3BB2] text-opacity-[70%]'>
                 Requests in
               </span>
-              <span className='text-[45px] font-[700] text-darkblue'>38</span>
+              <span className='text-[45px] font-[700] text-darkblue'>
+                {" "}
+                {thisMonthStats
+                  ? userId?.overview?.requests?.thisMonthRequests
+                  : userId?.overview?.requests?.lastMonthRequests}
+              </span>
               <div className='flex items-center gap-1'>
                 <img alt='' src={GOING_UP} />
                 <span className='text-xs text-[#3B3B3BB2] text-opacity-[70%]'>
@@ -381,12 +432,23 @@ function Profile() {
               src={BLUE_ARROW_LEFT}
             />
           </div>
-          <div className='flex justify-between py-3 items-center border-b'>
-            <span className='text-[16px] font-[700] text-branded'>
-              Blacklist this user
-            </span>
-            <img alt='' className=' w-4 h-4' src={RED_ARROW} />
-          </div>
+          {userId?.user?.status === "Blacklisted" ? (
+            <div className='flex justify-between py-3 items-center border-b cursor-pointer'>
+              <span className='text-[16px] font-[700] text-branded'>
+                This user is {userId?.user?.status}
+              </span>
+            </div>
+          ) : (
+            <div
+              className='flex justify-between py-3 items-center border-b cursor-pointer'
+              onClick={() => setBlacklistUserModal(true)}
+            >
+              <span className='text-[16px] font-[700] text-branded'>
+                Blacklist this user
+              </span>
+              <img alt='' className=' w-4 h-4' src={RED_ARROW} />
+            </div>
+          )}
         </div>
       </div>
       <Modal
@@ -395,39 +457,56 @@ function Profile() {
         isOpen={modal}
         maxWidth='w-[599px]'
       >
-        <div className='flex flex-col gap-6 px-7'>
-          {productsListed.map((data_) => (
-            <div className='border-b-2 border-[#E7E7E7] pb-3 flex justify-between'>
-              <div className='flex gap-3 items-center'>
-                <div>
-                  <img
-                    alt=''
-                    className='w-16 h-16 rounded-full border-[4.37px] border-[#C2E0FF]'
-                    src={data_.img}
-                  />
+        {userId?.user?.products.length > 0 ? (
+          <div className='flex flex-col gap-6 px-7'>
+            {userId?.user?.products.map((data_: any) => (
+              <div className='border-b-2 border-[#E7E7E7] pb-3 flex justify-between'>
+                <div className='flex gap-3 items-center'>
+                  <div>
+                    <img
+                      alt=''
+                      className='w-16 h-16 rounded-full border-[4.37px] border-[#C2E0FF]'
+                      src={data_.img}
+                    />
+                  </div>
+                  <div className='flex flex-col items-start'>
+                    <span className='font-normal text-[20px] '>
+                      {data_.name}
+                    </span>
+                    <span className='text-[#C4C4C4] text-[16px] font-normal'>
+                      {data_.username}
+                    </span>
+                  </div>
                 </div>
-                <div className='flex flex-col items-start'>
-                  <span className='font-normal text-[20px] '>{data_.name}</span>
-                  <span className='text-[#C4C4C4] text-[16px] font-normal'>
-                    {data_.username}
-                  </span>
+                <div className='flex flex-col items-end '>
+                  <ToggleSwitch />
+                  <div className='flex items-center gap-4'>
+                    <span className='text-[14px] text-lightgrey font-semibold'>
+                      No of products:
+                    </span>
+                    <span className='text-[14px] text-lightgrey font-normal'>
+                      10
+                    </span>
+                  </div>
                 </div>
               </div>
-              <div className='flex flex-col items-end '>
-                <ToggleSwitch />
-                <div className='flex items-center gap-4'>
-                  <span className='text-[14px] text-lightgrey font-semibold'>
-                    No of products:
-                  </span>
-                  <span className='text-[14px] text-lightgrey font-normal'>
-                    10
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div>
+            <span className='text-lightgrey font-semibold text-opacity-50'>
+              No Products Available
+            </span>
+          </div>
+        )}
       </Modal>
+      <Actionmodal
+        actionText='Are you sure you want to blacklist this user'
+        handleAction={() => blacklistuser(userId?.user?.id)}
+        isClose={() => setBlacklistUserModal(false)}
+        isOpen={blacklistuserModal}
+        title='blacklist user'
+      />
     </main>
   );
 }

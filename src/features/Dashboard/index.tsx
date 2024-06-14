@@ -15,7 +15,7 @@ import { AVATAR, BADGE } from "@/utils/Exports";
 
 function Dashboard() {
   const [data, setData] = useState<string>("Last 30 days");
-  const { data: dashboardData, refetch } = useQuery("DASHBOARD", DashboardApi);
+  const { data: dashboardData } = useQuery("DASHBOARD", DashboardApi);
   const { data: wallets } = useQuery("wallets", GetAllWallets);
 
   // eslint-disable-next-line no-console

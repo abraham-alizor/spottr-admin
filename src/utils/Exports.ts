@@ -82,6 +82,7 @@ export { default as OPPORTUNITY } from "../assets/icons/opportunities.svg";
 export { default as PAINT_IMG } from "../assets/icons/paint_img.svg";
 export { default as PARTY_BACKGRD } from "../assets/icons/party_image.svg";
 export { default as PATTERN } from "../assets/icons/pattern.svg";
+export { default as PENDING_STATS } from "../assets/icons/pending.png";
 export { default as PHONE } from "../assets/icons/phone.svg";
 export { default as PHOTO_ICON } from "../assets/icons/photo_img.svg";
 export { default as POLYGON } from "../assets/icons/polygon.svg";
