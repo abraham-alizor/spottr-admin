@@ -43,7 +43,11 @@ function MainRoutes() {
     // { title: "Settings", path: "settings", component: Settings },
     { title: "performance", path: "performance", component: PerformancePage },
     { title: "create-task", path: "/tasks/create-task", component: CreateTask },
-    { title: "view-task", path: "/tasks/task-review/:id", component: ViewTask },
+    {
+      title: "view-task",
+      path: "/tasks/task-review",
+      component: ViewTask,
+    },
     {
       title: "transaction-wallet",
       path: "/transactions/wallet",

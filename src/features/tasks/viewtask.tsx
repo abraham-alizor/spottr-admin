@@ -1,7 +1,12 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-nested-ternary */
-import { useLocation } from "react-router-dom";
+
+import { useQuery } from "react-query";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 import { ParticipantsData, users_tasks } from "@/fake_data";
+import { TaskApi } from "@/services/tasks/task.service";
 import ButtonV2 from "@/shared/components/buttonV2";
 import PageHeader from "@/shared/components/pageheader";
 import ParticipantComponent from "@/shared/components/participantscomponent";
@@ -9,10 +14,15 @@ import { COIN, GRAY_DOT, MAP_PIC, SLOT_ICON } from "@/utils/Exports";
 
 const ViewTask = () => {
   const location = useLocation();
-  const getData = location.pathname.split("/").pop();
+  // const getTaskId = location.pathname.split("/").pop();
+  const [urlParams] = useSearchParams();
+  const getTaskId = urlParams.get("idref");
+  const { data: taskdata } = useQuery("tasks", TaskApi);
 
-  const taskDetailsById = users_tasks.filter(
-    (tasks) => tasks.id.toString() === getData,
+  const displaydatabyId = users_tasks.filter(
+    (taskid) =>
+      // @ts-ignore
+      taskid === getTaskId,
   );
 
   const listedParticipant = ParticipantsData.slice(0, 4);
@@ -25,7 +35,8 @@ const ViewTask = () => {
           <div>
             <img alt='' height={350} src={MAP_PIC} width={350} />
           </div>
-          {taskDetailsById.map((data) => (
+
+          {displaydatabyId.map((data) => (
             <div>
               <div className='w-[316px] h-[112px] bg-white absolute shadow-custom top-[7rem] left-4 p-2 flex flex-col gap-1'>
                 <div className='flex gap-2 border-b pb-1'>
@@ -107,7 +118,7 @@ const ViewTask = () => {
         <div className='w-full bg-white border rounded-lg pt-5 px-10'>
           <span className='text-sm text-darkblue font-medium'>Feedback</span>
           <div className='mt-8 '>
-            {taskDetailsById.map((details) => (
+            {displaydatabyId.map((details) => (
               <div className='flex flex-col gap-10'>
                 <img alt='' height={300} src={details.img} width={500} />
                 <p className='text-sm  text-lightgrey '>

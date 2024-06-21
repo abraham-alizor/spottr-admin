@@ -26,12 +26,6 @@ const TaskComponent = ({
 }: Props) => {
   const navigate = useNavigate();
 
-  // eslint-disable-next-line no-console
-  console.log(selectedStatus);
-
-  // eslint-disable-next-line no-console
-  console.log(setSelectedBox);
-
   return (
     <main className='grid grid-cols-3 gap-5 mt-5 '>
       {taskData?.map((data: Task) => (
@@ -75,7 +69,9 @@ const TaskComponent = ({
                   </div>
                   <span
                     className='text-[12px] text-lightgrey'
-                    onClick={() => navigate(`/tasks/task-review/${data.id}`)}
+                    onClick={() =>
+                      navigate(`/tasks/task-review?idref=${data.id}`)
+                    }
                   >
                     Hold for more option
                   </span>

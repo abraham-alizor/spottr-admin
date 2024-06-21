@@ -40,8 +40,6 @@ function UserProfile() {
       GetUserById(userid),
   );
 
-  console.log(userId);
-
   const sections =
     selected === "user-profile" ? (
       <Profile userId={userId?.data} />
