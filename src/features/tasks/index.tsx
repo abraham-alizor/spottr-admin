@@ -58,14 +58,15 @@ function Tasks() {
   const [selectedBoxes, setSelectedBoxes] = useState<any>([]);
   const [modal, setModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-  const filteredTasks = taskData.filter(
-    (data) => data.status === selectedStatus,
-  );
   const { data: allTasks, isLoading, refetch } = useQuery("tasks", TaskApi);
   const { data: allProducts, refetch: productRefetch } = useQuery(
     "products",
     ProductApi,
   );
+  // const filteredTasks =
+  //   allTasks === undefined
+  //     ? allTasks
+  //     : allTasks.filter((data) => data.status === selectedStatus);
 
   // const statusUpdate = users_tasks.find((data) => data.status);
   const handleStatusChange = (status: string) => {

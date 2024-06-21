@@ -8,6 +8,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
+import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
 import { dropdowndata } from "@/fake_data";
@@ -19,6 +20,7 @@ import ModalV2 from "@/shared/components/modalV2";
 import PageHeader from "@/shared/components/pageheader";
 import SuccessModal from "@/shared/components/sucessmodal";
 import NonLinearSlider from "@/shared/slider";
+import { selectUser } from "@/states/slices/authReducer";
 import {
   GRAY_DOT,
   GRAY_POLYGON,
@@ -34,11 +36,7 @@ const typedata = [
   },
   {
     id: "2",
-    label: "premium",
-  },
-  {
-    id: "3",
-    label: "VIP",
+    label: "Validate",
   },
 ];
 const CreateTask = () => {
@@ -50,7 +48,7 @@ const CreateTask = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selected1, setSelected1] = useState("");
-
+  const user = useSelector(selectUser);
   const [selected3, setSelected3] = useState("");
   const [participants, setParticipants] = useState("");
   const [duration, setDuration] = useState(0);
@@ -71,6 +69,7 @@ const CreateTask = () => {
   const handleCreateTask = async () => {
     try {
       const taskdata = {
+        userId: user?.id,
         title,
         description,
         rewardFee: 340_000,

@@ -6,6 +6,7 @@ import { BiDotsHorizontal } from "react-icons/bi";
 import { BsBarChartFill, BsStarFill } from "react-icons/bs";
 import { useQuery } from "react-query";
 
+import { ADsApi } from "@/services/ads/service";
 import { DashboardApi } from "@/services/dashboard/service";
 import { GetAllWallets } from "@/services/wallets/service";
 import DropDown from "@/shared/components/dropdown/Dropdown";
@@ -17,9 +18,10 @@ function Dashboard() {
   const [data, setData] = useState<string>("Last 30 days");
   const { data: dashboardData } = useQuery("DASHBOARD", DashboardApi);
   const { data: wallets } = useQuery("wallets", GetAllWallets);
+  const { data: AdsData } = useQuery("Ads", ADsApi);
 
   // eslint-disable-next-line no-console
-  console.log(wallets);
+  console.log(AdsData);
 
   const chartData = {
     "Last 30 days": [

@@ -6,10 +6,8 @@ import { Transition } from "@headlessui/react";
 import React, { useMemo, useState } from "react";
 import { BsStarFill } from "react-icons/bs";
 import { FaCheck, FaPlus } from "react-icons/fa";
-import { useQuery } from "react-query";
 
 import { TABLE_DATA } from "@/fake_data";
-import { GetReferalsApi } from "@/services/referals/service";
 import ActionModal from "@/shared/components/actionmodal";
 // import ReferalsTable from "@/features/referrals-system/referrals_table";
 import ButtonV2 from "@/shared/components/buttonV2";
@@ -24,14 +22,6 @@ const ReferralsSystem = () => {
   const [modal, setModal] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const {
-    data: referals,
-    isLoading,
-    refetch,
-  } = useQuery("referals", GetReferalsApi);
-
-  // eslint-disable-next-line no-console
-  console.log(referals);
 
   const usertype: any = {
     first_type: "Regular Users",
