@@ -84,8 +84,6 @@ const ContentManagement = () => {
   const postInterest = useMutation(CreateInterestApi);
   const deleteInterest = useMutation(DeleteInterestApi);
 
-  console.log(adminTrays);
-
   const parseUrlToOriginalState = (url: string) => {
     const urlString = new URL(url);
     return decodeURIComponent(urlString.pathname.slice(1));
@@ -110,16 +108,10 @@ const ContentManagement = () => {
   };
 
   const handleCreateInterest = async () => {
-    const formatAsUrl = (string_: string) =>
-      `https://example.com/${encodeURIComponent(string_)}`;
-
     const formdata = new FormData();
 
     formdata.append("name", name);
 
-    formdata.append("description", description);
-
-    // @ts-ignore
     formdata.append("displayImage", selectedImage[0]);
     try {
       const response = await postInterest.mutateAsync(formdata);

@@ -6,8 +6,9 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { Transition } from "@headlessui/react";
-import React, { useMemo, useState } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import moment from "moment";
+import React, { Fragment, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { BsStarFill } from "react-icons/bs";
 import { useMutation, useQuery } from "react-query";
@@ -32,6 +33,7 @@ import {
   BLUE_ARROW_DOWN,
   THREE_DOTS,
 } from "@/utils/Exports";
+import { formatCurrency } from "@/utils/functions";
 
 export const userListsFilters = [
   {
@@ -255,7 +257,9 @@ function UserLists() {
         accessor: "acct_no",
         Cell: ({ row }: any) => (
           <div>
-            <span className='text-[12px] '>{row.original.acct_no}</span>
+            <span className='text-[12px] '>
+              {row.original.acct_no || "N/A"}
+            </span>
           </div>
         ),
       },
@@ -264,16 +268,20 @@ function UserLists() {
         accessor: "bank",
         Cell: ({ row }: any) => (
           <div>
-            <span className='text-[12px] '>{row.original.bank}</span>
+            <span className='text-[12px] '>{row.original.bank || "N/A"}</span>
           </div>
         ),
       },
       {
-        Header: "Amount W",
+        Header: "Amount",
         accessor: "amount",
         Cell: ({ row }: any) => (
           <div>
-            <span className='text-[12px] '>₦ {row.original.amount}</span>
+            <span className='text-[12px] '>
+              {formatCurrency({ iso: "en-ng", slug: "NGN" }).format(
+                row.original.amount || 0,
+              )}
+            </span>
           </div>
         ),
       },
@@ -319,13 +327,11 @@ function UserLists() {
       },
       {
         Header: "Date",
-        accessor: "data",
-        Cell: ({ row }: any) => (
-          <div>
-            <span className='text-[12px] font-semibold text-lightgrey'>
-              {row.original.data}
-            </span>
-          </div>
+
+        Cell: ({ cell: { row } }: any) => (
+          <span className='text-xs'>
+            {moment(row.original.createdAt).format("MMM Do YYYY | hh:mm a")}
+          </span>
         ),
       },
       {
@@ -335,100 +341,159 @@ function UserLists() {
           const [dropdown, setDropDown] = useState(false);
           const navigate = useNavigate();
           return (
-            <div className='relative'>
-              <img
-                alt=''
-                className='w-5 h-5 cursor-pointer'
-                onClick={() => setDropDown((previous) => !previous)}
-                src={THREE_DOTS}
-              />
-
-              <Transition
-                as='div'
-                className='w-[135px] z-[50] top-5 right-0 shadow-custom absolute h-[380px] bg-white flex flex-col items-start gap-3 px-2 py-2  text-sm rounded-md'
-                enter='ease-out duration-300'
-                enterFrom='opacity-0 scale-95'
-                enterTo='opacity-100 scale-100'
-                leave='ease-in duration-200'
-                leaveFrom='opacity-100 scale-100'
-                leaveTo='opacity-0 scale-95'
-                show={dropdown}
-              >
-                <span className='border-b pb-1 hover:text-darkblue cursor-pointer'>
-                  Pin
-                </span>
-                <span className='border-b pb-1 hover:text-darkblue cursor-pointer'>
-                  Send message
-                </span>
-                <span
-                  className='border-b pb-1 hover:text-darkblue cursor-pointer'
-                  onClick={() =>
-                    navigate(
-                      `/userslist/user-profile?idref=${row?.original?.id}`,
-                      {
-                        state: { data: row?.original },
-                      },
-                    )
-                  }
+            <div className=' max-w-56 text-right'>
+              <Menu as='div' className='relative inline-block text-left'>
+                <div>
+                  <Menu.Button className='inline-flex w-full justify-center items-center rounded-md px-4 py-2 text-sm font-medium text-black hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+                    <img
+                      alt=''
+                      className='w-5 h-5 cursor-pointer'
+                      src={THREE_DOTS}
+                    />
+                  </Menu.Button>
+                </div>
+                <Transition
+                  as={Fragment}
+                  enter='transition ease-out duration-100'
+                  enterFrom='transform opacity-0 scale-95'
+                  enterTo='transform opacity-100 scale-100'
+                  leave='transition ease-in duration-75'
+                  leaveFrom='transform opacity-100 scale-100'
+                  leaveTo='transform opacity-0 scale-95'
                 >
-                  Open profile
-                </span>
-                <span
-                  className='border-b pb-1 hover:text-darkblue cursor-pointer'
-                  onClick={() => {
-                    setModal(true);
-                    setDropDown(false);
-                  }}
-                >
-                  Assign referral code
-                </span>
-                <span className='border-b pb-1 hover:text-darkblue cursor-pointer'>
-                  Add to list
-                </span>
-                <span
-                  className='border-b pb-1 hover:text-darkblue cursor-pointer'
-                  onClick={() => {
-                    setSelectedUser(row.original.id);
-                    setDeactivateModal(true);
-                    setDropDown(false);
-                  }}
-                >
-                  Deactivate user
-                </span>
-                <span
-                  className='border-b pb-1 hover:text-darkblue cursor-pointer'
-                  onClick={() => {
-                    setVerifyuserModal(true);
-                    setSelectedUser(row?.original?.id);
-                    setDropDown(false);
-                  }}
-                >
-                  Verify user
-                </span>
-                <span className='border-b pb-1 hover:text-darkblue cursor-pointer'>
-                  90 days
-                </span>
-                <span
-                  className='border-b pb-1 hover:text-darkblue cursor-pointer'
-                  onClick={() => {
-                    setBlaklistuserModal(true);
-                    setSelectedUser(row?.original?.id);
-                    setDropDown(false);
-                  }}
-                >
-                  Blacklist
-                </span>
-                <span
-                  className='border-b pb-1 text-branded cursor-pointer'
-                  onClick={() => {
-                    setSuspenduserModal(true);
-                    setSelectedUser(row?.original?.id);
-                    setDropDown(false);
-                  }}
-                >
-                  Suspend user
-                </span>
-              </Transition>
+                  <Menu.Items className='absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50'>
+                    <div className='px-1 py-1 '>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? "bg-brand text-white" : "text-gray-900"
+                            } group flex w-full flex-col  items-start gap-3 rounded-md px-2 py-2 text-sm  font-bold`}
+                            onClick={() =>
+                              navigate(
+                                `/userslist/user-profile?idref=${row?.original?.id}`,
+                                {
+                                  state: { data: row?.original },
+                                },
+                              )
+                            }
+                            type='button'
+                          >
+                            Open profile
+                          </button>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? "bg-brand text-white" : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            onClick={() => {
+                              setModal(true);
+                              setDropDown(false);
+                            }}
+                            type='button'
+                          >
+                            Assign referral code
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                    <div className='px-1 py-1'>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? "bg-brand text-white" : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            onClick={() => navigate("#")}
+                            type='button'
+                          >
+                            Add to list
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                    <div className='px-1 py-1'>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? "bg-brand text-white" : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            onClick={() => {
+                              setSelectedUser(row.original.id);
+                              setDeactivateModal(true);
+                              setDropDown(false);
+                            }}
+                            type='button'
+                          >
+                            Deactivate user
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                    <div className='px-1 py-1'>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? "bg-brand text-white" : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            onClick={() => {
+                              setVerifyuserModal(true);
+                              setSelectedUser(row?.original?.id);
+                              setDropDown(false);
+                            }}
+                            type='button'
+                          >
+                            Verify user
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                    <div className='px-1 py-1'>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? "bg-brand text-white" : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            onClick={() => {
+                              setBlaklistuserModal(true);
+                              setSelectedUser(row?.original?.id);
+                              setDropDown(false);
+                            }}
+                            type='button'
+                          >
+                            Blacklist User
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                    <div className='px-1 py-1'>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? "bg-brand text-white" : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            onClick={() => {
+                              setSuspenduserModal(true);
+                              setSelectedUser(row?.original?.id);
+                              setDropDown(false);
+                            }}
+                            type='button'
+                          >
+                            Suspend user
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
             </div>
           );
         },
