@@ -3,6 +3,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Transition } from "@headlessui/react";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 import Corporate from "@/features/Settings/corporate";
@@ -10,6 +12,8 @@ import DashboardAnalytics from "@/features/Settings/dashboard-analytics";
 import DetailsBox from "@/features/Settings/details_box";
 import PasswordBox from "@/features/Settings/password_box";
 import TransactionPin from "@/features/Settings/transaction_pin";
+import { GetFiatAllCurencies } from "@/services/fiat-currencies/fiat.service";
+import { SettingsApi } from "@/services/settings/service";
 import CurrencyBox from "@/shared/components/currencybox";
 import ToggleSwitch from "@/shared/components/toggle_switch";
 import { BLUE_ARROW_DOWN, BLUE_ARROW_LEFT, GO_BACK } from "@/utils/Exports";
@@ -41,9 +45,55 @@ function Settings() {
   const [showDashboardAnalytics, setShowDashboardAnalytics] = useState(false);
 
   const [SelectedCurrency, setSelectedCurrency] = useState("NGN");
+  const [pushNotifications, setPushNotication] = useState(false);
+  const [allowBiometrics, setAllowBiometrics] = useState(false);
+  const [emailNotifications, setEmailNotifications] = useState(false);
+  const [sounds, setSounds] = useState(false);
+  const [hideAmount, setHideAmount] = useState(false);
 
   const handleSpanClick = (component: string) => {
     setSelectedComponent(component);
+  };
+
+  const {
+    data: currencies,
+    isLoading,
+    refetch,
+  } = useQuery("currencies", GetFiatAllCurencies);
+
+  const settingsMutation = useMutation(SettingsApi);
+
+  const handleSettings = async (updatedSettings: any) => {
+    try {
+      const settingsData = {
+        currency: SelectedCurrency,
+        allowBiometrics,
+        pushNotifications,
+        emailNotifications,
+        hideAmount,
+        sounds,
+        ...updatedSettings,
+      };
+
+      const response = await settingsMutation.mutateAsync(settingsData);
+      if (response) {
+        toast.success(response?.message);
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  const handleToggle =
+    (setter: React.Dispatch<React.SetStateAction<boolean>>, key: string) =>
+    (event: React.ChangeEvent<HTMLInputElement>, value: boolean) => {
+      setter(value);
+      handleSettings({ [key]: value });
+    };
+
+  const handleCurrencyChange = (currency: string) => {
+    setSelectedCurrency(currency);
+    handleSettings(currency);
   };
   return (
     <main className=' h-full  mt-6 mb-[20rem]'>
@@ -131,9 +181,9 @@ function Settings() {
                       </div>
                       <CurrencyBox
                         close={() => setMenu(false)}
-                        data={currencyLists}
+                        data={currencies}
                         open={menu}
-                        setSelected={setSelectedCurrency}
+                        setSelected={handleCurrencyChange}
                       />
                     </div>
                     <div className='flex flex-col gap-8 mt-3 border-b pb-3'>
@@ -141,13 +191,25 @@ function Settings() {
                         <span className='text-sm text-darkblue font-medium'>
                           Push Notifications
                         </span>
-                        <ToggleSwitch />
+                        <ToggleSwitch
+                          checked={pushNotifications}
+                          onchange={handleToggle(
+                            setPushNotication,
+                            "pushNotifications",
+                          )}
+                        />
                       </div>
                       <div className='flex justify-between'>
                         <span className='text-sm text-darkblue font-medium'>
                           Email Notifications
                         </span>
-                        <ToggleSwitch />
+                        <ToggleSwitch
+                          checked={emailNotifications}
+                          onchange={handleToggle(
+                            setEmailNotifications,
+                            "emailNotifications",
+                          )}
+                        />
                       </div>
                     </div>
                     <div className='flex flex-col gap-8 mt-3 border-b pb-3'>
@@ -155,7 +217,10 @@ function Settings() {
                         <span className='text-sm text-darkblue font-medium'>
                           Sounds
                         </span>
-                        <ToggleSwitch />
+                        <ToggleSwitch
+                          checked={sounds}
+                          onchange={handleToggle(setSounds, "sounds")}
+                        />
                       </div>
                       <div className='flex justify-between items-center cursor-pointer'>
                         <span className='text-sm text-darkblue font-medium'>
@@ -247,7 +312,13 @@ function Settings() {
                     <span className='font-medium opacity-30 text-brand'>
                       Allow Biometrics
                     </span>
-                    <ToggleSwitch />
+                    <ToggleSwitch
+                      checked={allowBiometrics}
+                      onchange={handleToggle(
+                        setAllowBiometrics,
+                        "allowBiometrics",
+                      )}
+                    />
                   </div>
                   <div className='flex flex-col gap-5 mt-3 border-b pb-3'>
                     <span className='font-medium text-[10px] '>Data</span>
