@@ -84,16 +84,6 @@ const ContentManagement = () => {
   const postInterest = useMutation(CreateInterestApi);
   const deleteInterest = useMutation(DeleteInterestApi);
 
-
-  console.log(adminTrays);
-
-
-  const parseUrlToOriginalState = (url: string) => {
-    const urlString = new URL(url);
-    return decodeURIComponent(urlString.pathname.slice(1));
-  };
-
-
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];
 
@@ -113,7 +103,6 @@ const ContentManagement = () => {
   };
 
   const handleCreateInterest = async () => {
-
     // const formatAsUrl = (string_: string) =>
     //   `https://example.com/${encodeURIComponent(string_)}`;
 
