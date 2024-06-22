@@ -533,7 +533,7 @@ function UserLists() {
             <span className='text-lightgrey'>Auto respond</span>
             <img alt='' src={ARROW_DOWN} />
           </div>
-          <ToggleSwitch />
+          <ToggleSwitch checked onchange={() => {}} />
         </div>
       </div>
       <div className='mt-3'>

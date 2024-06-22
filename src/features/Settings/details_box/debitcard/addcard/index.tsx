@@ -30,7 +30,7 @@ function AddCard() {
             <span className='text-xs text-darkblue font-normal'>
               Set default
             </span>
-            <ToggleSwitch />
+            <ToggleSwitch checked onchange={() => {}} />
           </div>
         </div>
       </div>

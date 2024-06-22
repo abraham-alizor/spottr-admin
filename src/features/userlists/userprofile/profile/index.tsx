@@ -525,7 +525,7 @@ function Profile({ userId }: { userId: any }) {
                   </div>
                 </div>
                 <div className='flex flex-col items-end '>
-                  <ToggleSwitch />
+                  <ToggleSwitch checked onchange={() => {}} />
                   <div className='flex items-center gap-4'>
                     <span className='text-[14px] text-lightgrey font-semibold'>
                       No of products:
