@@ -79,7 +79,7 @@ function BanksDetails() {
               </span>
               <div className='flex items-center'>
                 <span className='text-xs text-darkblue'>Set default</span>
-                <ToggleSwitch />
+                <ToggleSwitch checked onchange={() => {}} />
               </div>
             </div>
           </div>
